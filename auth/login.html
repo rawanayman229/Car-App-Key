@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Admin Login</title>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../assets/bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <!-- Login  CSS -->
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="text-center w-100">
+            <h2 class="mb-4 fw-bold login-title">Super Admin Login</h2>
+            <div class="login-card mx-auto">
+<form id="loginForm" novalidate>
+
+    <div class="mb-3">
+        <input type="text" id="username" class="form-control" placeholder="User Name">
+        <small class="text-danger d-none" id="usernameError"></small>
+    </div>
+
+    <div class="mb-3">
+        <input type="password" id="password" class="form-control" placeholder="Password">
+        <small class="text-danger d-none" id="passwordError"></small>
+    </div>
+
+    <button id="loginBtn" type="submit" class="btn btn-primary w-100">
+        Login
+    </button>
+
+</form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global JS -->
+    <script src="../assets/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Login JS -->
+    <script src="login.js"></script>
+</body>
+</html>
