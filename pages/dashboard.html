@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Link same CSS -->
+  <style>
+    body { background: transparent; padding: 20px; } /* Dashboard specific tweak */
+  </style>
+</head>
+<body>
+
+  <!-- Stat Cards Row -->
+  <div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+      <div class="stat-card">
+        <div class="info">
+          <small>Total Companies</small>
+          <h3>248</h3>
+          <span class="trend text-success">+12% from last month</span>
+        </div>
+        <div class="icon-box"><i class="fas fa-city"></i></div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="stat-card">
+        <div class="info">
+          <small>Active Companies</small>
+          <h3>186</h3>
+          <span class="trend text-success">+8% from last month</span>
+        </div>
+        <div class="icon-box"><i class="fas fa-building"></i></div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="stat-card">
+        <div class="info">
+          <small>Total Jobs</small>
+          <h3>1,842</h3>
+          <span class="trend text-success">+23% from last month</span>
+        </div>
+        <div class="icon-box"><i class="fas fa-briefcase"></i></div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+      <div class="stat-card">
+        <div class="info">
+          <small>Total Revenue</small>
+          <h3>$94,320</h3>
+          <span class="trend text-success">+18% from last month</span>
+        </div>
+        <div class="icon-box"><i class="fas fa-dollar-sign"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Row -->
+  <div class="row g-3 mb-4">
+    <div class="col-lg-7">
+      <div class="card-box">
+        <h6>Jobs & Revenue Trend</h6>
+        <div id="lineChart"></div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="card-box">
+        <h6>Company Status Distribution</h6>
+        <div id="pieChart"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Activity Row -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card-box">
+        <h6>Recent Activity</h6>
+        <div class="activity-list">
+          <!-- Item 1 -->
+          <div class="activity-item">
+            <div class="activity-info">
+              <div class="status-dot bg-success"></div>
+              <div class="activity-text">
+                <strong>ABC Locksmith</strong>
+                <span>New job completed</span>
+              </div>
+            </div>
+            <div class="activity-time">2 hours ago</div>
+          </div>
+          <!-- Item 2 -->
+          <div class="activity-item">
+            <div class="activity-info">
+              <div class="status-dot bg-primary"></div>
+              <div class="activity-text">
+                <strong>QuickLock Services</strong>
+                <span>Company registered</span>
+              </div>
+            </div>
+            <div class="activity-time">4 hours ago</div>
+          </div>
+          <!-- Item 3 -->
+          <div class="activity-item">
+            <div class="activity-info">
+              <div class="status-dot bg-warning"></div>
+              <div class="activity-text">
+                <strong>SafeKey Inc</strong>
+                <span>Key code requested</span>
+              </div>
+            </div>
+            <div class="activity-time">5 hours ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS for charts -->
+  <script src="../assets/js/apexcharts.min.js"></script>
+  <script src="../assets/js/script.js"></script>
+</body>
+</html>

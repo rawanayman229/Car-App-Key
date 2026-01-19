@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Key Management</title>
+
+  <!-- CSS Links-->
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/apexcharts.css">
+  <link rel="stylesheet" href="/assets/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+
+<!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== Sidebar (Desktop) ===== -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-header">
+
+    <!-- Logo -->
+    <div class="logo">
+      <h5>LockSmith<br>Platform</h5>
+      <p>Admin Portal</p>
+    </div>
+
+    <button class="btn d-md-none text-muted" id="closeSidebar">
+      <i class="fas fa-times"></i>
+    </button>
+
+  </div>
+
+  <!--SideBAr Navigation Links -->
+<ul class="menu">
+
+  <li class="active"><a href="pages/dashboard.html" target="contentFrame">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-columns-gap" viewBox="0 0 16 16">
+  <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+</svg>Dashboard</a>
+</li>
+
+  <li>
+  <a href="pages/users.html" target="contentFrame"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+  <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+  </svg>Users Management</a>
+  </li>
+
+  <li>
+  <a href="pages/companies.html" target="contentFrame"><i class="fa-regular fa-building"></i>Companies</a>
+  </li>
+
+  <li><a href="pages/jobs.html" target="contentFrame">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suitcase-lg" viewBox="0 0 16 16">
+  <path d="M5 2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2h3.5A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5H14a.5.5 0 0 1-1 0H3a.5.5 0 0 1-1 0h-.5A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2zm1 0h4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1M1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H3V3zM15 12.5v-9a.5.5 0 0 0-.5-.5H13v10h1.5a.5.5 0 0 0 .5-.5m-3 .5V3H4v10z"/>
+  </svg> Jobs</a>
+  </li>
+
+  <li>
+  <a href="pages/requests.html" target="contentFrame"><i class="fas fa-key"></i> 
+  Key Code Requests</a>
+  </li>
+
+  <li><a href="pages/reports.html" target="contentFrame"><i class="fa-solid fa-chart-column"></i>
+  Reports</a>
+  </li>
+
+
+  <li>
+  <a href="pages/payments.html" target="contentFrame"><i class="fa-regular fa-credit-card"></i>
+  Payments Audit</a>
+  </li>
+
+  <li>
+  <a href="pages/calls.html" target="contentFrame">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone" viewBox="0 0 16 16">
+  <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+  <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
+</svg> Call Logs</a>
+</li>
+
+  </ul>
+</aside>
+</aside>
+
+<!-- ===== Main Wrapper ===== -->
+<div class="main-wrapper" id="mainWrapper">
+
+<!-- NavBar -->
+  <nav class="navbar navbar-light fixed-top px-3">
+
+    <!-- Left Side -->
+    <div class="d-flex align-items-center gap-3">
+
+      <!-- 1- Sidebar Toggle Button in mobile & tab screens -->
+      <button class="btn  d-lg-none" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <!-- 2- Title -->
+      <h2 class="d-none d-sm-inline">Platform Admin Dashboard</h2>
+    </div>
+
+    <!-- Right Side -->
+    <div class="d-flex align-items-center gap-3">
+
+      <!-- 1-Notifications -->
+      <div class="position-relative me-2">
+        <i class="fa-regular fa-bell text-muted"></i>
+        <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+      </div>
+
+      <!-- 2- Profile -->
+      <div class="profile d-flex justify-content-center align-items-center gap-2">
+
+        <div class="text-end d-none d-sm-block">
+          <h4 class="small fw-bold lh-1">Admin User</h4>
+          <p class="text-muted">admin@locksmith.com</p>
+        </div>
+        
+          <i class="fa-regular fa-user"></i>
+
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ===== Content (Changable Pages) ===== -->
+<main class="content">
+    <iframe name="contentFrame" src="pages/dashboard.html" class="content-frame"></iframe>
+  </main>
+</div>
+
+<!-- JS Files -->
+<script src="/assets/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/js/script.js"></script>
+</body>
+</html>
