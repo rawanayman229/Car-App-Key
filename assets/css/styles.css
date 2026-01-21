@@ -147,31 +147,13 @@
 
 /* Start Content */
   .content {
-    padding-top: 80px; 
-    }
-
-/* Pages switching  */
-  .page {
-    display: none;
-    animation: fade 0.3s ease;    }
-
-  .page.active {
-    display: block;
+    padding: 100px 24px 24px;
     }
 
 /* End Content */
 
 
 /*  ===== 1- Dashboard Page =====*/
-  #dashboard {
-    background: transparent;
-    padding: 20px;
-    }
-
-  #users {
-    background: transparent;
-    padding: 20px;
-    }
 
 /* Status Cards */
   .stat-card {
@@ -297,7 +279,8 @@
 
 /* ==== End Of Dashboard Page==== */
 
-/* Start Of Users Mang. Page */
+
+/* Start Of Users Mang. & Page Same At Companies Page */
 
 /* Header */
   .page-title {
@@ -315,8 +298,8 @@
     color: var(--light-color);
 }
 
-/* Add User Button */
-  .create-user-btn {
+/* Add  Button */
+  .add-user-btn , .add-company-btn {
     background-color: var(--primary-color);
     color: #ffffff;
     border-radius: 10px;
@@ -327,8 +310,8 @@
     border: none;
 }
 
-/* Users Stat Cards */
-  .user-stat-card {
+/* Stat Cards */
+  .data-card {
     background: #ffffff;
     border: 0.8px solid #E5E7EB;
     border-radius: 16px;
@@ -337,7 +320,7 @@
     height: 100%;
 }
 
-  .user-stat-card .label {
+  .data-card .label {
     display: block;
     font-size: 14px;
     font-weight: 400;
@@ -346,7 +329,7 @@
     margin-bottom: 6px;
 }
 
-  .user-stat-card h3 {
+  .data-card h3 {
     font-size: 18px;
     font-weight: 600;
     line-height: 28px;
@@ -354,7 +337,7 @@
 }
 
 /* Filters & Search bar */
-  .users-filters {
+  .filters {
     background: #ffffff;
     border: 0.8px solid #E5E7EB;
     border-radius: 16px;
@@ -477,22 +460,23 @@
     }
 
   /* Name & Email Style */
-  .user-info .user-name {
-    display: block;
-    font-weight: 400;
-    line-height: 20px;
-    color: var(--title-color);
-    font-size: 14px;
+  .user-info .user-name ,
+  .company-info .company-name , .activity-info , .company-email,
+  .data{
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    color: var(--title-color) !important;
+    font-size: 16px !important;
   }
 
-  .user-info .user-email {
+  .user-info .user-email ,
+  .company-info .company-date , .company-number{
     display: block;
-    color: var(--light-color);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
+    color: var(--light-color) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    line-height: 16px !important;
   }
-
   
   /* Role Badges */
   .badge-role-admin {
@@ -532,6 +516,23 @@
     font-weight: 400; 
   }
 
+  /* Company Page Status in Table */
+  .badge-status-pending {
+    background-color: #FEF9C2; 
+    color: #A65F00; 
+    border-radius: 12px; 
+    padding: 6px 12px; 
+    font-weight: 400; 
+  }
+
+  .badge-status-suspended {
+    background-color: #FFE2E2; 
+    color: #C10007; 
+    border-radius: 12px; 
+    padding: 6px 12px; 
+    font-weight: 400; 
+  }
+
    /* Action Icons */
   .action-btns { 
     display: flex; 
@@ -552,23 +553,168 @@
     display: none; }
 
     /* Add User Modal  */
-  /* .custom-input {
+  .modal-header {
+      color: var(--title-color);
+      font-weight: 600;
+      font-style: SemiBold;
+      font-size: 18px;
+      line-height: 28px;
+      letter-spacing: 0px;
+      border: none;
+    }
+
+  .custom-input {
     height: 48px;
     border-radius: 10px !important;
     border: 1px solid #E5E7EB !important;
     font-size: 14px;
-}
+    }
+
   .custom-input::placeholder { 
-    color: #9CA3AF; 
+    color: var(--light-color); 
+    opacity: 0.5;
   }
+
   .form-label { 
     font-size: 14px; 
-    color: #374151; 
+    font-weight: 500;
+    color: var(--title-color); 
   }
 
-  .create-user-btn { cursor: pointer; } */
+  .modal-footer {
+    border: none;
+  }
+
+  #cancelBtn {
+    background-color: transparent;
+    border : 0.8px solid #E5E7EB;
+    border-radius: 10px;
+    width: 195px;
+    color: var(--title-color);
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  #cancelBtn:hover {
+    background-color: #E5E7EB;
+      }
+
+  #saveUserBtn{
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: #ffff;
+    width: 195px;
+  }
+
+  #saveUserBtn:hover {
+    background-color: #1447E6;
+  }
+  .create-user-btn { 
+    cursor: pointer; 
+  }
 
 /* End Of Users Mang. Page */
+
+/* Start Of Add Company Page */
+  .form-section-card {
+    background: #fff;
+    border: 0.8px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+  .form-section-card  i {
+    color: var(--primary-color);
+  }
+
+  .section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--title-color);
+    margin-bottom: 20px;
+}
+
+  .form-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--title-color);
+    margin-bottom: 6px;
+}
+
+  .required::after {
+    content: " *";
+    color: #FB2C36;
+}
+
+  .custom-input, .form-control {
+    border: 0.8px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+}
+
+  .custom-input:focus, .form-control:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: #2563eb;
+}
+
+  /* Icon Input Styling */
+  .input-group-custom {
+    position: relative;
+}
+
+  .input-group-custom i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+  .input-group-custom input {
+    padding-left: 38px;
+}
+
+  /* Alert Styling */
+  .alert-primary-soft {
+    background-color: #BEDBFF;
+    border: none;
+    color: #1C398E;
+    font-size: 14px;
+    border-radius: 10px;
+}
+
+  /* Footer Card */
+  .form-footer-card {
+    background: #fff;
+    border: 0.8px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 15px 24px;
+}
+
+  .btn-cancel {
+    background: #fff;
+    border: 0.8px solid #E5E7EB;
+    color: var(--light-color);
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+  .btn-primary-custom {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+  .btn-primary-custom:hover {
+    background: #1d4ed8;
+    color: #fff;
+}
+/* End Of Add Company Page */
 
 /* --- Mobile Responsive--- */
   @media (max-width: 992px) {
