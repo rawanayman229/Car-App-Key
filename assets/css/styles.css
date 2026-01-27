@@ -474,7 +474,7 @@
   .company-info .company-date , .company-number,
   .job-date  {
     display: block;
-    color: var(--light-color) !important;
+    color: var(--title-color) !important;
     font-size: 12px !important;
     font-weight: 400 !important;
     line-height: 16px !important;

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jobs Management</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/all.min.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+    <!-- ... (Sidebar, Nav HTML) ... -->
+
+    <div class="main-wrapper" id="mainWrapper">
+        <main class="content">
+             <!-- Filter -->
+             <div class="filters mb-4">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="customSearch" placeholder="Search jobs..." />
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table id="jobsTable" class="table w-100">
+                    <thead>
+                        <tr>
+                            <th>Job ID</th>
+                            <th>Customer</th>
+                            <th>Company</th>
+                            <th>Service</th>
+                            <th>Location</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/script.js"></script>
+
+    <!-- PAGE SPECIFIC SCRIPT -->
+    <script>
+        const MOCK_JOBS = [
+             { id: "1001", date: "2024-02-01", customer: "Alice Doe", company: "ABC Locksmith", service: "Car Unlock", location: "New York", amount: 150, status: "Completed" },
+             { id: "1002", date: "2024-02-02", customer: "Bob Smith", company: "QuickLock", service: "Key Programming", location: "LA", amount: 200, status: "In Progress" },
+             { id: "1003", date: "2024-02-03", customer: "Charlie Day", company: "SafeKey", service: "Ignition Repair", location: "Chicago", amount: 350, status: "Pending" },
+             { id: "1004", date: "2024-02-04", customer: "David Lee", company: "Master Locks", service: "Car Unlock", location: "Houston", amount: 120, status: "Cancelled" }
+        ];
+
+        $(document).ready(function() {
+            window.initDataTable(
+                '#jobsTable',
+                MOCK_JOBS, 
+                [
+                    { 
+                        data: 'id',
+                        render: (d, t, r) => window.renderDoubleLine(`#${r.id}`, r.date, 'job')
+                    },
+                    { data: 'customer' },
+                    { data: 'company' },
+                    { data: 'service' },
+                    { data: 'location' },
+                    { 
+                        data: 'amount', 
+                        render: (d) => `$${d}` 
+                    },
+                    { 
+                        data: 'status', 
+                        render: (d) => window.renderStatusBadge(d)
+                    },
+                    { 
+                        data: null, 
+                        orderable: false, 
+                        render: () => window.renderActions()
+                    }
+                ]
+            );
+        });
+    </script>
+</body>
+</html>
