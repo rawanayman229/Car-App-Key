@@ -1,4 +1,4 @@
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("toggleSidebar");
   const closeBtn = document.getElementById("closeSidebar");
   const overlay = document.getElementById("sidebarOverlay");
@@ -26,7 +26,7 @@
   if (overlay) overlay.onclick = () => body.classList.remove("sidebar-open");
   if (closeBtn) closeBtn.onclick = () => body.classList.remove("sidebar-open");
 
-  //======== Start Of Dahsboard Page=========
+  //======== Start Of Dashboard Page=========
 
   // --- APEX CHARTS (Dashboard Only) ---
   const lineEl = document.querySelector("#lineChart");
@@ -56,8 +56,7 @@
   }
 });
 
-//======== End Of Dahsboard Page=========
-
+//======== End Of Dashboard Page=========
 
 // GLOBAL HELPER FUNCTIONS (Available to all pages)
 
@@ -73,7 +72,7 @@ window.renderDoubleLine = (line1, line2, classPrefix) => {
 
 // Renders: Colored Badges based on status text
 window.renderStatusBadge = (status) => {
-  let className = "badge-status-inactive"; 
+  let className = "badge-status-inactive";
   const s = (status || "").toLowerCase();
 
   if (s === "active" || s === "completed") className = "badge-status-active";
@@ -87,22 +86,29 @@ window.renderStatusBadge = (status) => {
   return `<span class="badge ${className}">${status}</span>`;
 };
 
-// Renders: Action Buttons
-window.renderActions = () => {
+window.renderActions = (actions = []) => {
   return `
-        <div class="action-btns">
-            <i class="fa-solid fa-pen" title="Edit"></i>
-            <i class="fa-solid fa-trash-can" title="Delete"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-        </div>
-    `;
+    <div class="action-btns">
+      ${actions
+        .map(
+          (action) => `
+            <i 
+              class="${action.icon}" 
+              title="${action.title || ""}" 
+              onclick="${action.onClick || ""}">
+            </i>
+          `,
+        )
+        .join("")}
+    </div>
+  `;
 };
 
-// GLOBAL DATATABLE FUNCTION
+// GLOBAL Data-table FUNCTION
 /**
- * @param {string} tableId 
- * @param {Array|String} dataOrUrl 
- * @param {Array} columnsConfig 
+ * @param {string} tableId
+ * @param {Array|String} dataOrUrl
+ * @param {Array} columnsConfig
  * @param {Object} filters
  */
 window.initDataTable = function (
@@ -113,13 +119,12 @@ window.initDataTable = function (
 ) {
   if (!$(tableId).length) return;
 
-  
   const isServerSide = typeof dataOrUrl === "string";
 
   const table = $(tableId).DataTable({
     processing: true,
     serverSide: isServerSide,
-    data: isServerSide ? null : dataOrUrl, 
+    data: isServerSide ? null : dataOrUrl,
     ajax: isServerSide ? dataOrUrl : null,
     columns: columnsConfig,
     pageLength: 7,

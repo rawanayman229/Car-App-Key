@@ -1,46 +1,245 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jobs Management</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/all.min.css" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-</head>
-<body>
-    <!-- ... (Sidebar, Nav HTML) ... -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+    />
+  </head>
+  <body>
+    <!-- Start Of Static Section (Side & Nav BAr) -->
 
+    <!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar (Desktop) ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <!-- Logo -->
+        <div class="logo">
+          <h5>LockSmith<br />Platform</h5>
+          <p>Admin Portal</p>
+        </div>
+
+        <!-- Closed button -->
+        <button class="btn d-md-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!--SideBAr Navigation Links -->
+      <ul class="menu">
+        <li data-page="dashboard" class="active">
+          <a href="dashboard.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-columns-gap"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"
+              />
+            </svg>
+            Dashboard</a
+          >
+        </li>
+
+        <li data-page="users">
+          <a href="users.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-people"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"
+              />
+            </svg>
+            Users Management</a
+          >
+        </li>
+
+        <li data-page="companies">
+          <a href="companies.html"
+            ><i class="fa-regular fa-building"></i>Companies</a
+          >
+        </li>
+
+        <li data-page="jobs">
+          <a href="jobs.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-suitcase-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M5 2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2h3.5A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5H14a.5.5 0 0 1-1 0H3a.5.5 0 0 1-1 0h-.5A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2zm1 0h4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1M1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H3V3zM15 12.5v-9a.5.5 0 0 0-.5-.5H13v10h1.5a.5.5 0 0 0 .5-.5m-3 .5V3H4v10z"
+              />
+            </svg>
+            Jobs</a
+          >
+        </li>
+
+        <li data-page="requests">
+          <a href="requests.html">
+            <i class="fas fa-key"></i> Key Code Requests</a
+          >
+        </li>
+
+        <li data-page="reports">
+          <a href="reports.html">
+            <i class="fa-solid fa-chart-column"></i> Reports</a
+          >
+        </li>
+
+        <li data-page="payments">
+          <a href="payments.html">
+            <i class="fa-regular fa-credit-card"></i> Payments Audit</a
+          >
+        </li>
+
+        <li data-page="calls">
+          <a href="calls.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-phone"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"
+              />
+              <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+            </svg>
+            Call Logs</a
+          >
+        </li>
+      </ul>
+    </aside>
+    <!-- End OF Sidebar -->
+
+    <!-- ===== Main Wrapper (Nav + Content) ===== -->
     <div class="main-wrapper" id="mainWrapper">
-        <main class="content">
-             <!-- Filter -->
-             <div class="filters mb-4">
-                <div class="search-box">
-                    <i class="fas fa-search"></i>
-                    <input type="text" id="customSearch" placeholder="Search jobs..." />
-                </div>
+      <!-- NavBar -->
+      <nav class="navbar navbar-light fixed-top px-3">
+        <!-- Left Side -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- 1- Sidebar Toggle Button in mobile & tab screens -->
+          <button class="btn d-lg-none" id="toggleSidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- 2- Title -->
+          <h2 class="d-none d-sm-inline">Platform Admin Dashboard</h2>
+        </div>
+
+        <!-- Right Side -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- 1-Notifications -->
+          <div class="position-relative me-2">
+            <i class="fa-regular fa-bell text-muted"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+            ></span>
+          </div>
+
+          <!-- 2- Profile -->
+          <div
+            class="profile d-flex justify-content-center align-items-center gap-2"
+          >
+            <div class="text-end d-none d-sm-block">
+              <h4 class="small fw-bold lh-1">Admin User</h4>
+              <p class="text-muted">admin@locksmith.com</p>
             </div>
 
-            <!-- Table -->
-            <div class="table-container">
-                <table id="jobsTable" class="table w-100">
-                    <thead>
-                        <tr>
-                            <th>Job ID</th>
-                            <th>Customer</th>
-                            <th>Company</th>
-                            <th>Service</th>
-                            <th>Location</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+            <i class="fa-regular fa-user"></i>
+          </div>
+        </div>
+      </nav>
+      <!-- End Of Navbar -->
+
+      <!--End Of Static Section (Side & Nav BAr) -->
+
+      <!-- ===== Content (Changed Pages) ===== -->
+
+      <!-- ===== Jobs Management Page ===== -->
+      <main class="content">
+        <!-- Header  -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h1 class="page-title">Jobs</h1>
+            <p class="page-subtitle">Monitor all jobs sent to companies</p>
+          </div>
+
+          <!-- Add Job button  -->
+          <a href="createJob.html" class="btn add-job-btn">
+            <i class="fas fa-plus me-2"></i>
+            Add Job
+          </a>
+        </div>
+        <!-- End of Header  -->
+
+        <!-- Search and Filter  -->
+        <div class="filters mb-4">
+          <div class="row g-3 align-items-center">
+            <!-- Search -->
+            <div class="col-lg-10">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input
+                  type="text"
+                  id="customSearch"
+                  placeholder="Search companies..."
+                />
+              </div>
             </div>
-        </main>
+            <!-- More Filters -->
+            <div class="col-lg-2">
+              <button class="filter-btn w-100">
+                <i class="fas fa-filter"></i>
+                Filter
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- End Of Search and Filter  -->
+
+        <!-- Table -->
+        <div class="table-container">
+          <table id="jobsTable" class="table w-100">
+            <thead>
+              <tr>
+                <th>Job ID</th>
+                <th>Customer</th>
+                <th>Company</th>
+                <th>Service</th>
+                <th>Location</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </main>
     </div>
 
     <!-- JS Files -->
@@ -52,42 +251,124 @@
 
     <!-- PAGE SPECIFIC SCRIPT -->
     <script>
-        const MOCK_JOBS = [
-             { id: "1001", date: "2024-02-01", customer: "Alice Doe", company: "ABC Locksmith", service: "Car Unlock", location: "New York", amount: 150, status: "Completed" },
-             { id: "1002", date: "2024-02-02", customer: "Bob Smith", company: "QuickLock", service: "Key Programming", location: "LA", amount: 200, status: "In Progress" },
-             { id: "1003", date: "2024-02-03", customer: "Charlie Day", company: "SafeKey", service: "Ignition Repair", location: "Chicago", amount: 350, status: "Pending" },
-             { id: "1004", date: "2024-02-04", customer: "David Lee", company: "Master Locks", service: "Car Unlock", location: "Houston", amount: 120, status: "Cancelled" }
-        ];
+      let jobsTable;
 
-        $(document).ready(function() {
-            window.initDataTable(
-                '#jobsTable',
-                MOCK_JOBS, 
-                [
-                    { 
-                        data: 'id',
-                        render: (d, t, r) => window.renderDoubleLine(`#${r.id}`, r.date, 'job')
-                    },
-                    { data: 'customer' },
-                    { data: 'company' },
-                    { data: 'service' },
-                    { data: 'location' },
-                    { 
-                        data: 'amount', 
-                        render: (d) => `$${d}` 
-                    },
-                    { 
-                        data: 'status', 
-                        render: (d) => window.renderStatusBadge(d)
-                    },
-                    { 
-                        data: null, 
-                        orderable: false, 
-                        render: () => window.renderActions()
-                    }
-                ]
-            );
-        });
+      const MOCK_JOBS = [
+        {
+          id: "1001",
+          date: "2024-02-01",
+          customer: "Alice Doe",
+          company: "ABC Locksmith",
+          service: "Car Unlock",
+          location: "New York",
+          amount: 150,
+          status: "Completed",
+        },
+        {
+          id: "1002",
+          date: "2024-02-02",
+          customer: "Bob Smith",
+          company: "QuickLock",
+          service: "Key Programming",
+          location: "LA",
+          amount: 200,
+          status: "In Progress",
+        },
+        {
+          id: "1003",
+          date: "2024-02-03",
+          customer: "Charlie Day",
+          company: "SafeKey",
+          service: "Ignition Repair",
+          location: "Chicago",
+          amount: 350,
+          status: "Pending",
+        },
+        {
+          id: "1004",
+          date: "2024-02-04",
+          customer: "David Lee",
+          company: "Master Locks",
+          service: "Car Unlock",
+          location: "Houston",
+          amount: 120,
+          status: "Cancelled",
+        },
+        {
+          id: "1004",
+          date: "2024-02-04",
+          customer: "David Lee",
+          company: "Master Locks",
+          service: "Car Unlock",
+          location: "Houston",
+          amount: 120,
+          status: "Cancelled",
+        },
+        {
+          id: "1004",
+          date: "2024-02-04",
+          customer: "David Lee",
+          company: "Master Locks",
+          service: "Car Unlock",
+          location: "Houston",
+          amount: 120,
+          status: "Cancelled",
+        },
+        {
+          id: "1004",
+          date: "2024-02-04",
+          customer: "David Lee",
+          company: "Master Locks",
+          service: "Car Unlock",
+          location: "Houston",
+          amount: 120,
+          status: "Cancelled",
+        },
+        {
+          id: "1004",
+          date: "2024-02-04",
+          customer: "David Lee",
+          company: "Master Locks",
+          service: "Car Unlock",
+          location: "Houston",
+          amount: 120,
+          status: "Cancelled",
+        },
+      ];
+      //   Jobs Actions Column
+      const JobsActions = (row) => [
+        {
+          icon: "fa-solid fa-ellipsis-vertical",
+          title: "More Actions",
+        },
+      ];
+
+      $(document).ready(function () {
+        window.initDataTable("#jobsTable", MOCK_JOBS, [
+          {
+            data: "id",
+            render: (d, t, r) =>
+              window.renderDoubleLine(`#${r.id}`, r.date, "job"),
+          },
+          { data: "customer" },
+          { data: "company" },
+          { data: "service" },
+          { data: "location" },
+          {
+            data: "amount",
+            render: (d) => `$${d}`,
+          },
+          {
+            data: "status",
+            render: (d) => window.renderStatusBadge(d),
+          },
+          {
+            data: null,
+            orderable: false,
+            render: (d, t, row) => window.renderActions(JobsActions(row)),
+          },
+        ]);
+      });
     </script>
-</body>
+  </body>
 </html>

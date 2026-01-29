@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Companies Management</title>
+    <title>Add New Job Management</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/assets/css/all.min.css" />
     <link rel="stylesheet" href="/assets/css/styles.css" />
@@ -177,92 +177,113 @@
 
       <!--End Of Static Section (Side & Nav BAr) -->
 
-      <!-- ===== Content (Change Pages) ===== -->
+      <!-- ===== Content (Changed Pages) ===== -->
 
-      <!-- ===== Companies Management Page ===== -->
+      <!-- ===== Add Job  Page ===== -->
       <main class="content">
         <!-- Header  -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <div>
-            <h1 class="page-title">Companies Management</h1>
-            <p class="page-subtitle">
-              Manage all companies and their coin balances
-            </p>
-          </div>
-
-          <!-- Add Company button  -->
-          <a href="createCompany.html" class="btn add-company-btn">
-            <i class="fas fa-plus me-2"></i>
-            Add Company
-          </a>
-        </div>
-        <!-- End of Header  -->
-
-        <!-- Companies  Cards -->
-        <div class="row g-4 mb-4">
-          <div class="col-sm-6 col-xl-3">
-            <div class="data-card">
-              <span class="label">Total Companies</span>
-              <h3>8</h3>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-xl-3">
-            <div class="data-card">
-              <span class="label">Active</span>
-              <h3>5</h3>
-            </div>
-          </div>
-
-          <div class="col-sm-6 col-xl-3">
-            <div class="data-card">
-              <span class="label">Suspended</span>
-              <h3>2</h3>
+        <div class="mb-4">
+          <div class="d-flex align-items-center gap-3">
+            <a href="jobs.html" class="text-muted fs-4"><i class="fas fa-arrow-left"></i></a>
+            <div>
+              <h1 class="page-title">Jobs</h1>
+              <p class="page-subtitle">
+                Monitor all jobs sent to companies
+              </p>
             </div>
           </div>
         </div>
-        <!-- End Of Company  Cards -->
 
-        <!-- Search and Filter  -->
-        <div class="filters mb-4">
-          <div class="row g-3 align-items-center">
-            <!-- Search -->
-            <div class="col-lg-10">
-              <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input
-                  type="text"
-                  id="customSearch"
-                  placeholder="Search companies..."
-                />
+        <!-- Add Job Steps -->
+        <div class="container job-form my-5">
+        <!-- Tabs Section -->
+        <div class="jobs-subnav">
+        <div class="jobs-tabs">
+        <a href="/" class="jobs-tab active">
+        <i class="fas fa-plus"></i> Create New Job
+        </a>
+        <a href="#" class="jobs-tab">
+        Active Jobs
+        </a>
+    </div>
+    </div>
+
+          <!-- Steps Header -->
+          <div class="steps steps-header d-flex align-items-center mb-4">
+            <div class="step active">
+              <div class="circle">1</div>
+              <p>Service Type</p>
+            </div>
+            <div class="line"></div>
+            <div class="step">
+              <div class="circle">2</div>
+              <p>Customer & Asset</p>
+            </div>
+            <div class="line"></div>
+            <div class="step">
+              <div class="circle">3</div>
+              <p>Pricing Details</p>
+            </div>
+            <div class="line"></div>
+            <div class="step">
+              <div class="circle">4</div>
+              <p>Assign Company</p>
+            </div>
+          </div>
+
+          <!-- Step 1 -->
+          <div class="job-step active" data-step="1">
+            <h3>Service Type & Priority</h3>
+            <p>Select or enter the type of service required for this job</p>
+
+            <div class="serve-type mb-3">
+              <label for="serviceInput" class="form-label"
+                >Enter a new service type</label
+              >
+              <input
+                type="text"
+                id="serviceInput"
+                class="form-control"
+                placeholder="Enter service type"
+                required
+              />
+              <div class="error-text" id="serviceError" style="display: none">
+                This field is required.
               </div>
             </div>
-            <!-- More Filters -->
-            <div class="col-lg-2">
-              <button class="filter-btn w-100">
-                <i class="fas fa-filter"></i>
-                Filter
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- End Of Search and Filter  -->
 
-        <!-- Data Table -->
-        <div class="table-container">
-          <table id="companiesTable" class="table w-100">
-            <thead>
-              <tr>
-                <th>Company Name</th>
-                <th>Contact</th>
-                <th>Location</th>
-                <th>Jobs</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
+            <label class="form-label mb-2">Priority Level</label>
+            <div class="priority-wrapper mb-3">
+              <div class="priority-card active" data-priority="normal">
+                <div class="priority-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                  <p>Normal</p>
+                  <small>Standard pricing</small>
+                </div>
+              </div>
+              <div class="priority-card" data-priority="urgent">
+                <div class="priority-icon urgent">
+                  <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                  <p>Urgent</p>
+                  <small>+25% premium</small>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="nextStep">
+              Continue to Customer & Asset
+            </button>
+          </div>
+
+          <!-- Step 2 Placeholder -->
+          <div class="job-step" data-step="2">
+            <h3>Step 2 - Customer & Asset</h3>
+            <p>Content for step 2 here...</p>
+            <button class="btn btn-secondary" id="prevStep">Back</button>
+            <button class="btn btn-primary" id="nextStep2">Next</button>
+          </div>
         </div>
       </main>
     </div>
@@ -273,119 +294,5 @@
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/script.js"></script>
-
-    <!-- PAGE SPECIFIC SCRIPT -->
-    <script>
-      let companiesTable;
-
-      const MOCK_COMPANIES = [
-        {
-          name: "ABC Locksmith",
-          date: "2024-01-15",
-          email: "contact@abclock.com",
-          phone: "(555) 123-4567",
-          city: "New York, NY",
-          jobs: 145,
-          status: "Active",
-        },
-        {
-          name: "QuickLock Services",
-          date: "2024-02-20",
-          email: "info@quicklock.com",
-          phone: "(555) 234-5678",
-          city: "Los Angeles, CA",
-          jobs: 98,
-          status: "Active",
-        },
-        {
-          name: "Master Locks Co",
-          date: "2023-11-05",
-          email: "service@master.com",
-          phone: "(555) 456-7890",
-          city: "Houston, TX",
-          jobs: 112,
-          status: "Suspended",
-        },
-        {
-          name: "City Locksmith",
-          date: "2025-01-02",
-          email: "help@citylock.com",
-          phone: "(555) 678-9012",
-          city: "Philadelphia, PA",
-          jobs: 45,
-          status: "Pending",
-        },
-        {
-          name: "City Locksmith",
-          date: "2025-01-02",
-          email: "help@citylock.com",
-          phone: "(555) 678-9012",
-          city: "Philadelphia, PA",
-          jobs: 45,
-          status: "Pending",
-        },
-        {
-          name: "City Locksmith",
-          date: "2025-01-02",
-          email: "help@citylock.com",
-          phone: "(555) 678-9012",
-          city: "Philadelphia, PA",
-          jobs: 45,
-          status: "Pending",
-        },
-        {
-          name: "City Locksmith",
-          date: "2025-01-02",
-          email: "help@citylock.com",
-          phone: "(555) 678-9012",
-          city: "Philadelphia, PA",
-          jobs: 45,
-          status: "Pending",
-        },
-        {
-          name: "City Locksmith",
-          date: "2025-01-02",
-          email: "help@citylock.com",
-          phone: "(555) 678-9012",
-          city: "Philadelphia, PA",
-          jobs: 45,
-          status: "Pending",
-        },
-      ];
-
-      //   Company Actions Column
-      const companyActions = (row) => [
-        {
-          icon: "fa-solid fa-ellipsis-vertical",
-          title: "More Actions",
-        },
-      ];
-
-      $(document).ready(function () {
-        window.initDataTable("#companiesTable", MOCK_COMPANIES, [
-          {
-            data: "name",
-            render: (d, t, r) =>
-              window.renderDoubleLine(r.name, `Joined ${r.date}`, "company"),
-          },
-          {
-            data: "email",
-            render: (d, t, r) =>
-              window.renderDoubleLine(r.email, r.phone, "company"),
-          },
-          { data: "city" },
-          { data: "jobs" },
-          {
-            data: "status",
-            render: (d) => window.renderStatusBadge(d),
-          },
-          {
-            data: null,
-            orderable: false,
-            render: (d, t, row) => window.renderActions(companyActions(row)),
-          },
-        ]);
-      });
-    </script>
   </body>
 </html>

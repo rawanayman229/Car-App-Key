@@ -1,6 +1,6 @@
-    <!doctype html>
-    <html lang="en">
-    <head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Users Management</title>
@@ -450,6 +450,30 @@
         },
       ];
 
+      // Users Actions Column
+      const userActions = (row) => [
+        {
+          icon: "fa-solid fa-key",
+          title: "Key",
+          onClick: `generateKey('${row.email}')`,
+        },
+        {
+          icon: "fa-solid fa-pen",
+          title: "Edit",
+          onClick: `editUser('${row.email}')`,
+        },
+        {
+          icon: "fa-solid fa-trash-can",
+          title: "Delete",
+          onClick: `deleteUser('${row.email}')`,
+        },
+        {
+          icon: "fa-solid fa-ellipsis-vertical",
+          title: "More Actions",
+          onClick: `moreActions('${row.email}')`,
+        },
+      ];
+
       $(document).ready(function () {
         // Call global init function
         usersTable = window.initDataTable(
@@ -473,12 +497,13 @@
             {
               data: null,
               orderable: false,
-              render: () => window.renderActions(),
+              render: (d, t, row) => window.renderActions(userActions(row)),
             },
           ],
           { "#roleFilter": 1 },
         );
       });
+
       // Add User Modal
       $(".add-user-btn").on("click", function () {
         $("#createUserModal").modal("show");
