@@ -394,7 +394,6 @@
     cursor: pointer;
 }
 
-  
   .select-box i {
     position: absolute;
     right: 18px;
@@ -420,7 +419,7 @@
     transition: 0.2s;
 }
 
-/* Datatable  */
+/* Data-table  */
   .table-container {
     border: 0.8px solid #E5E7EB;
     border-radius: 16px;
@@ -797,7 +796,7 @@
     bottom: 0;
     width: 100%;
     height: 3px;
-    background: #2563eb;
+    background: #155DFC;
     border-radius: 4px;
 }
 
@@ -814,34 +813,54 @@
 }
 
   .steps {
-    position: relative;
-}
+    gap: 12px;
+  }
+
   .step {
     text-align: center;
-    width: 100px;
-    color: #4A5565 ;
-}
+    width: 120px;
+    color: #667085;
+  }
+
+  .step p{
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
   .step .circle {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background: #E5E7EB;
-    color: #4A5565;
+    color: #667085;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
+    font-weight: 600;
 }
-  .step.active .circle {
+
+  .step.active .circle,
+  .step.completed .circle {
     background: #155DFC;
     color: #fff;
-}
+  }
+
+  .step.completed p {
+  color: #155DFC;
+  font-weight: 500;
+  }
 
   .line {
     flex: 1;
     height: 2px;
     background: #E5E7EB;
+    margin-top: -20px;
 }
+
+  .line.active { 
+    background: #155DFC;
+  }
 
   /* Step 1 Styles */
   .job-step h3 {
@@ -859,6 +878,11 @@
     font-weight: 500 !important;
   }
 
+  .error-text {
+    font-size: 13px;
+    color: #dc2626;
+    margin-top: 8px;
+  }
   .serve-type{
     background-color: #F9FAFB;
     border: 0.8px solid #E5E7EB;
@@ -866,77 +890,84 @@
     padding: 20px;
     }
   
-  .priority-wrapper {
-    display: flex;
-    gap: 16px;
-  }
-
-  .priority-card , .selectExistingBtn ,
-  .createNewBtn{
-    flex: 1;
-    border: 0.8px solid #E5E7EB;
-    border-radius: 10px;
-    padding: 16px;
-    display: flex;
-    gap: 12px;
-    cursor: pointer;
-}
-  .priority-icon {
-    display: flex;
-    width: 40px;
+  .serve-type{ 
+    background-color: #F9FAFB; 
+    border: 0.8px solid #E5E7EB; 
+    border-radius: 10px;  
+    padding: 20px; 
+  }  
+  .priority-wrapper {  
+    display: flex;  
+    gap: 16px; 
+  } 
+  .priority-card , .selectExistingBtn , .createNewBtn{  
+    flex: 1;  
+    border: 0.8px solid #E5E7EB;  
+    border-radius: 10px;  
+    padding: 16px;  
+    display: flex; 
+    gap: 12px;  
+    cursor: pointer; 
+  } 
+  .priority-icon { 
+    display: flex; 
+    width: 40px; 
     height: 40px;
-    background-color: #155DFC;
-    color: #ffff;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-  }
+    background-color: #155DFC; 
+    color: #ffff; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    position: relative; 
+    flex-shrink: 0; } 
 
-/* Active  */
-  .priority-card.active .priority-icon {
-    border-color: #2563eb;
+    /* Active */ 
+    .priority-card.active .priority-icon { 
+      border-color: #2563eb; 
+    } 
+    .priority-card.active .priority-icon::after { 
+      background: #2563eb; 
+    } 
+
+    /* Urgent */ 
+    .priority-icon.urgent { 
+      display: flex; 
+      width: 40px; 
+      height: 40px; 
+      color: #ffff; 
+      align-items: center; 
+      justify-content: center; 
+      border-radius: 50%; 
+      position: relative; 
+      flex-shrink: 0; 
+      background-color: #D1D5DC; 
+    } 
+    .priority-card.active { 
+      border-color: #155DFC; 
+      background: #EFF6FF;
+    } 
+    .priority-card p { 
+      margin: 0; 
+      font-size: 14px; 
+      color: #4A5565; 
+      font-weight: 400; 
+    } 
+    .back-btn { 
+      border: 0.8px solid #D1D5DC; 
+      border-radius: 10px; 
+      color: #364153; 
+      font-weight: 500;
+      font-size: 16px; 
 }
-
-  .priority-card.active .priority-icon::after {
-    background: #2563eb;
-}
-
-/* Urgent */
-  .priority-icon.urgent {
-    display: flex;
-    width: 40px;
-    height: 40px;
-    color: #ffff;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    position: relative;
-    flex-shrink: 0;
-    background-color: #D1D5DC;
-    }
-
-  .priority-card.active {
-    border-color: #155DFC;
-    background: #EFF6FF;
-    }
-  .priority-card p {
-    margin: 0;
-    font-size: 14px;
-    color: #4A5565;
-    font-weight: 400;
-  }
-  
-  .back-btn {
-    border: 0.8px solid #D1D5DC;
-    border-radius: 10px;
-    color: #364153;
-    font-weight: 500;
-    font-size: 16px;
-  }
 
   /* Step 2 Styles */
+  .step2 {
+    background-color: #FFFFFF;
+    border : 0.8px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 10px;
+  }
   .cust-details-container {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -950,132 +981,235 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
   .cust-header i {
-    color: var(--primary-color);
-    font-size: 20px;
+    font-size: 22px;
+    color: #155DFC;
 }
 
-  .cust-header h4 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #101828;
-    margin: 0;
-}
-
-/* Toggle Buttons */
   .cust-toggle {
     display: flex;
     gap: 16px;
-    margin-bottom: 24px;
 }
 
   .cust-btn {
     flex: 1;
-    height: 48px;
-    border-radius: 12px;
-    border: 1.5px solid var(--primary-color);
-    background: #eff6ff;
-    color: var(--primary-color);
+    height: 52px;
+    border-radius: 14px;
+    background-color: #ffffff;
+    color: #364153;
+    border: 0.8px solid #D1D5DC;
     font-weight: 500;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    transition: 0.2s ease;
-}
-
-  .cust-btn.outline {
-    background: #fff;
-    border-color: #d0d5dd;
-    color: #344054;
 }
 
   .cust-btn.active {
     background: #eff6ff;
-    border-color: var(--primary-color);
-    color: var(--primary-color);
+    border-color: #155DFC;
+    color: #155DFC;
 }
 
-  .cust-btn:hover {
-    background: #e0ecff;
-}
-
-/* Content */
-  .cust-label {
-    font-size: 14px;
+  .asset-btn {
+    flex: 1;
+    height: 52px;
+    border-radius: 14px;
+    background-color: #ffffff;
+    color: #364153;
+    border: 0.8px solid #D1D5DC;
     font-weight: 500;
-    color: #344054;
-    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
-/* Scroll Area in customers select */
-.customers-scroll{
+  .asset-btn.active {
+    background: #eff6ff;
+    border-color: #155DFC;
+    color: #155DFC;
+}
+
+  /* Customers list */
+  .customers-scroll {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-height: 350px;
+    max-height: 320px;
     overflow-y: auto;
-    padding: 4px;
-    border-radius: 8px;
 }
 
-/* Scrollbar styling for a "pretty" look */
-.customers-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-.customers-scroll::-webkit-scrollbar-track {
-    background: transparent;
-}
-.customers-scroll::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 10px;
-}
-.customers-scroll::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
-}
-
-/* Customer Card */
   .customer-card {
     border: 1px solid #e5e7eb;
     border-radius: 14px;
     padding: 16px 18px;
     cursor: pointer;
-    transition: 0.2s ease;
-    background: #fff;
+    transition: 0.2s;
+}
+
+  .customer-card:hover {
+    border-color: #155DFC;
+    background: #f9fbff;
+}
+
+  .customer-card.active {
+    border-color: #155DFC;
+    background: #eef4ff;
 }
 
   .customer-card strong {
     font-size: 16px;
-    font-weight: 600;
     color: #101828;
 }
 
   .customer-card div {
     font-size: 14px;
     color: #667085;
-    margin-top: 4px;
+} 
+
+  /* Step3  */
+  .price-cards {
+    background-color: #ffffff ; 
+    border: 0.8px solid #E5E7EB ; 
+    border-radius: 10px ;  
+    padding: 20px ; 
+  }
+
+  .requirement-card {
+    display: flex;
+    gap: 5px;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s ease;
+  }
+  .requirement-card h6 , .requirement-card i {
+    color: #101828;
+    padding: 10px;
+  }
+  .requirement-card.active {
+    border-color: #0d6efd;
+    background-color: #f1f7ff;
+  }
+
+  .payment-card {
+    background-color: #ffffff; 
+    border: 0.8px solid #E5E7EB; 
+    border-radius: 10px;  
+    padding: 20px; 
 }
 
-  .customer-card:hover {
-    border-color: var(--primary-color);
-    background: #f9fbff;
+  .payment-card.active {
+    border-color: #155DFC;
+    background: #f1f7ff;
+  }
+
+  /* Step 4  */
+  .summary-card {
+    background-color: #EFF6FF;
+    border: 0.8px solid #BEDBFF;
+    border-radius: 10px;
+  }
+
+  .badge-normal {
+    background-color: #DBEAFE;
+    color: #1447E6;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 400;
+    font-size: 12px;
+    border: none;
+  }
+
+  .card-container {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
 }
 
-  .customer-card.active {
-    border-color: var(--primary-color);
-    background: #eef4ff;
+  .company-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    transition: all 0.2s ease;
 }
 
-/* Error */
-  .error-text {
-    margin-top: 10px;
-    font-size: 13px;
-    color: #dc2626;
+  .company-card:hover {
+    border-color: #0d6efd;
 }
 
+  .company-card.active {
+    background-color: #f1f7ff;
+    border-color: #0d6efd;
+}
+
+  .company-content {
+    width: 100%;
+}
+
+  .company-name {
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+  .company-meta {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+  .label {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+  .value {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+  /* Modal */
+  .success-circle {
+    width: 90px;
+    height: 90px;
+    background: #e8fff1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #16a34a;
+    font-size: 36px;
+}
+
+  .info-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+  .info-card .icon {
+    font-size: 20px;
+    color: #6b7280;
+}
+
+  .pricing-card {
+    background: #f1f7ff;
+    border: 1px solid #cfe0ff;
+    border-radius: 16px;
+    padding: 20px;
+}
 
 /* End Of Add Job Page */
 
