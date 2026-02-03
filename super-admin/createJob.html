@@ -108,8 +108,9 @@
         </li>
 
         <li data-page="payments">
-        <a href="payment.html">
-        <i class="fa-regular fa-credit-card"></i> Payments Audit</a>
+          <a href="payment.html">
+            <i class="fa-regular fa-credit-card"></i> Payments Audit</a
+          >
         </li>
 
         <li data-page="calls">
@@ -183,625 +184,757 @@
         <!-- Header  -->
         <div class="mb-4">
           <div class="d-flex align-items-center gap-3">
-            <a href="jobs.html" class="text-muted fs-4"><i class="fas fa-arrow-left"></i></a>
+            <a href="jobs.html" class="text-muted fs-4"
+              ><i class="fas fa-arrow-left"></i
+            ></a>
             <div>
               <h1 class="page-title">Jobs</h1>
-              <p class="page-subtitle">
-                Monitor all jobs sent to companies
-              </p>
+              <p class="page-subtitle">Monitor all jobs sent to companies</p>
             </div>
           </div>
         </div>
 
         <!-- Add Job Steps -->
         <div class="container job-form my-5">
-        <!-- Tabs Section -->
-        <div class="jobs-subnav">
-        <div class="jobs-tabs">
-        <a href="/" class="jobs-tab active">
-        <i class="fas fa-plus"></i> Create New Job
-        </a>
-        <a href="#" class="jobs-tab">
-        Active Jobs
-        </a>
-    </div>
-        </div>
-
-    <!-- Steps Header -->
-    <div class="steps steps-header d-flex align-items-center mb-5" id="stepsHeader">
-    <div class="step active completed" data-step="1">
-    <div class="circle">1</div>
-    <p>Service Type</p>
-    </div>
-    <div class="line active"></div>
-
-    <div class="step" data-step="2">
-    <div class="circle">2</div>
-    <p>Customer & Asset</p>
-    </div>
-    <div class="line"></div>
-
-    <div class="step" data-step="3">
-    <div class="circle">3</div>
-    <p>Pricing Details</p>
-    </div>
-    <div class="line"></div>
-
-    <div class="step" data-step="4">
-    <div class="circle">4</div>
-    <p>Assign Company</p>
-    </div>
-    </div>
-
-    <!-- ================= STEP 1 ================= -->
-  <div class="job-step active" data-step="1">
-  <h3>Service Type & Priority</h3>
-  <p>Select or enter the type of service required for this job</p>
-
-  <div class="serve-type mb-4">
-    <label class="form-label">How would you like to enter the service type?</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Enter a new service type"
-    />
-  </div>
-
-    <div class="mb-4">
-    <label class="form-label">Service Type <span class="required"></span></label>
-    <input
-      type="text"
-      id="serviceInput"
-      class="form-control"
-    />
-    <div class="error-text d-none" id="serviceError">
-      This field is required
-    </div>
-    </div>
-
-    <label class="form-label mb-2">Priority Level</label>
-    <div class="priority-wrapper mb-3">
-    <div class="priority-card active" data-priority="normal">
-    <div class="priority-icon">
-      <i class="fas fa-clock"></i>
-    </div>
-    <div>
-      <p>Normal</p>
-      <small>Standard pricing</small>
-    </div>
-    </div>
-
-  <div class="priority-card" data-priority="urgent">
-    <div class="priority-icon urgent">
-      <i class="fas fa-bolt"></i>
-    </div>
-    <div>
-      <p>Urgent</p>
-      <small>+25% premium</small>
-    </div>
-  </div>
-</div>
-
-<!-- Hidden input to store selected priority -->
-<input type="hidden" id="priorityInput" value="normal">
-
-
-  <div class="text-end">
-    <button class="btn btn-primary px-4" id="nextBtn">
-      Continue to Customer & Asset
-    </button>
-  </div>
-    </div>
-    <!-- =================END OF STEP 1 ================= -->
-
-    <!-- ================= STEP 2 ================= -->
-    <div class="job-step" data-step="2">
-    <h3>Customer & Asset Information</h3>
-    <p>Enter or select customer details and asset information</p>
-
-  <!-- First Section (Customers)-->
-  <div class="step2">
-    <div class="cust-header mb-4">
-    <i class="fas fa-user"></i>
-    <h3 class="mb-0">Customer Details</h3>
-    </div>
-
-    <!-- Toggle Buttons -->
-    <div class="cust-toggle mb-4">
-      <button class="cust-btn active" id="selectExistingBtn">
-        <i class="fas fa-search"></i> Select Existing
-      </button>
-      <button class="cust-btn " id="createNewBtn">
-        <i class="fas fa-plus"></i> Create New
-      </button>
-    </div>
-
-    <!-- ================= SELECT EXISTING ================= -->
-    <div id="selectExistingSection">
-      <label class="cust-label">
-        Select Customer <span class="required"></span>
-      </label>
-  
-      <div class="customers-scroll">
-  
-        <div class="customer-card" data-id="1">
-          <strong>John Smith</strong>
-          <div>(555) 123-4567 · john.smith@email.com</div>
-        </div>
-  
-        <div class="customer-card" data-id="2">
-          <strong>Sarah Johnson</strong>
-          <div>(555) 234-5678 · sarah.j@email.com</div>
-        </div>
-  
-        <div class="customer-card" data-id="3">
-          <strong>Mike Wilson</strong>
-          <div>(555) 345-6789 · mwilson@email.com</div>
-        </div>
-      </div>
-  
-      <div class="error-text d-none" id="customerSelectError">
-        Please select a customer
-      </div>
-    </div>
-    <!-- ================= CREATE NEW ================= -->
-    <div id="createNewSection" class="d-none">
-  
-      <div class="mb-4">
-        <label class="form-label">
-          Full Name <span class="required"></span>
-        </label>
-        <input type="text" class="form-control" id="newName" placeholder="Enter customer name">
-      </div>
-  
-      <div class="row mb-4">
-        <div class="col-md-6">
-          <label class="form-label">
-            Phone <span class="required"></span>
-          </label>
-          <input type="text" class="form-control" id="newPhone" placeholder="(555) 123-4567">
-        </div>
-  
-        <div class="col-md-6">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-control" id="newEmail" placeholder="customer@email.com">
-        </div>
-      </div>
-  
-      <div class="mb-4">
-        <label class="form-label">Address</label>
-        <input type="text" class="form-control" id="newAddress" placeholder="123 Main St, City, State ZIP">
-      </div>
-  
-      <div class="error-text d-none" id="createCustomerError">
-        Please fill required fields
-      </div>
-    </div>
-  </div>
-    
-    <!-- ================= ASSET SECTION ================= -->
-    <div class="step2 mt-5">
-
-    <div class="cust-header mb-4">
-      <i class="fas fa-cube"></i>
-      <h3 class="mb-0">Asset / Item Details</h3>
-    </div>
-
-    <div class="cust-toggle mb-4">
-      <button class="asset-btn active" id="vehicleBtn">
-        <i class="fas fa-car"></i> Vehicle
-      </button>
-      <button class="asset-btn outline" id="otherItemBtn">
-        <i class="fas fa-cube"></i> Other Item
-      </button>
-    </div>
-
-    <!-- ================= VEHICLE FORM ================= -->
-    <div id="vehicleForm">
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label>Make <span class="required"></span></label>
-          <input type="text" class="form-control" placeholder="Toyota">
-        </div>
-        <div class="col-md-6">
-          <label>Model <span class="required"></span></label>
-          <input type="text" class="form-control" placeholder="Camry">
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label>Year <span class="required"></span></label>
-          <input type="number" class="form-control" placeholder="2020">
-        </div>
-        <div class="col-md-6">
-          <label>Color</label>
-          <input type="text" class="form-control" placeholder="Silver">
-        </div>
-        <div class="col-md-12">
-          <label>VIN</label>
-          <input type="text" class="form-control" placeholder="1HGBH41JXMN109186">
-        </div>
-      </div>
-    </div>
-
-    <!-- ================= OTHER ITEM FORM ================= -->
-    <div id="otherItemForm" class="d-none">
-
-      <div class="mb-3">
-        <label>Item Type <span class="required"></span></label>
-        <input type="text" class="form-control" placeholder="e.g., Safe, Door, Cabinet, Lock System">
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label>Make</label>
-          <input type="text" class="form-control" placeholder="e.g., Yale, Medeco">
-        </div>
-        <div class="col-md-6">
-          <label>Model</label>
-          <input type="text" class="form-control" placeholder="e.g., Pro Series">
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <label>Year</label>
-          <input type="number" class="form-control" placeholder="2020">
-        </div>
-        <div class="col-md-6">
-          <label>Color</label>
-          <input type="text" class="form-control" placeholder="Silver">
-        </div>
-        <div class="col-md-12">
-          <label>Serial Number / ID</label>
-          <input type="text" class="form-control" placeholder="SN123456789">
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label>Location</label>
-        <input type="text" class="form-control" placeholder="e.g., Front Door, Living Room, Office">
-      </div>
-
-      <div class="mb-3">
-        <label>Description / Specifications</label>
-        <textarea class="form-control" rows="3" placeholder="Enter additional details, specifications, condition, or special requirements..."></textarea>
-      </div>
-    </div>
-
-    <!-- Validation -->
-    <div class="error-text d-none" id="assetError">
-    Please fill required asset fields
-    </div>
-
-    </div>
-
-  <!-- ================= NAV ================= -->
-    <div class="d-flex justify-content-between mt-5">
-    <button class="btn back-btn"  id="backBtn">Back</button>
-    <button class="btn btn-primary" id="step2NextBtn">
-      Continue to Pricing
-    </button>
-    </div>
-    </div>
-    <!-- ================= END OF STEP 2 ================= -->
-    
-    <!-- ================= STEP 3 ================= -->
-    <div class="job-step" data-step="3">
-    <h3>Pricing & Payment Details</h3>
-    <p>Configure service costs and payment structure</p>
-
-  <!-- ===== Service Pricing ===== -->
-  <div class="price-cards mb-4">
-    <div>
-      <h5 class="mb-3">
-        <i class="fas fa-dollar-sign text-primary me-2"></i>
-        Service Pricing
-      </h5>
-
-      <label class="form-label">
-        Base Service Price <span class="required"></span>
-      </label>
-
-      <input
-        type="number"
-        class="form-control"
-        id="basePrice"
-        placeholder="100"
-      />
-
-      <div class="error-text d-none" id="priceError">
-        Base price is required
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Additional Requirements ===== -->
-<div class="price-cards mb-4">
-  <h5 class="mb-3">Additional Requirements</h5>
-
-  <div class="row g-3">
-    <div class="col-md-12">
-      <div class="requirement-card" data-requirement="key">
-        <i class="fas fa-key mb-2"></i>
-        <h6>Key Required</h6>
-      </div>
-    </div>
-
-    <div class="col-md-12">
-      <div class="requirement-card" data-requirement="code">
-        <i class="fas fa-hashtag mb-2"></i>
-        <h6>Code / Programming Required</h6>
-      </div>
-    </div>
-  </div>
-
-  <!-- Hidden values -->
-  <input type="hidden" id="keyRequired" value="false">
-  <input type="hidden" id="codeRequired" value="false">
-</div>
-
-  <!-- ===== Payment Responsibility ===== -->
-  <div class="price-cards mb-4">
-    <div>
-      <h5 class="mb-3">Payment Responsibility for Additional Costs</h5>
-
-      <div class="row g-3">
-        <div class="col-md-6">
-          <div class="payment-card" data-payer="technician">
-            <h6>Technician Pays</h6>
-            <small>Technician covers key/code costs</small>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <div class="payment-card active" data-payer="company">
-            <h6>Company Pays</h6>
-            <small>Company covers key/code costs</small>
-          </div>
-        </div>
-      </div>
-
-      <div class="error-text d-none mt-2" id="payerError">
-        Please select who pays additional costs
-      </div>
-
-      <input type="hidden" id="paymentPayer" value="company">
-    </div>
-  </div>
-
-  <!-- ===== NAV ===== -->
-  <div class="d-flex justify-content-between mt-5">
-    <button class="btn back-btn" id="step3BackBtn">Back</button>
-    <button class="btn btn-primary" id="step3NextBtn">
-      Continue to Assignment
-    </button>
-  </div>
-    </div>
-    <!-- =================END  STEP 3 ================= -->
-
-    <!-- ================= STEP 4 ================= -->
-    <div class="job-step" data-step="4">
-    <h3>Assign to Company</h3>
-    <p>Select a company to handle this service request</p>
-
-    <!-- ===== Job Summary ===== -->
-    <div class="summary-card mb-4 p-4">
-    <div class="row">
-      <h6>Job Summary</h6>
-      <div class="col-md-6">
-      <p class="text-muted mb-1">Service Type:</p>
-      <strong id="summaryService">Key Replacement</strong>
-    </div>
-    <div class="col-md-6">
-      <p class="text-muted mb-1">Priority:</p>
-      <span class="badge-normal" id="summaryPriority">NORMAL</span>
-    </div>
-    <div class="col-md-6 mt-3">
-      <p class="text-muted mb-1">Customer:</p>
-      <strong id="summaryCustomer">John Smith</strong>
-    </div>
-    <div class="col-md-6 mt-3">
-      <p class="text-muted mb-1">Total Cost:</p>
-      <strong id="summaryCost">$100.00</strong>
-      </div>
-      </div>
-      </div>
-
-  <!-- ===== Companies List ===== -->
-  <div class="card-container">
-  <div class="d-flex align-items-center gap-2 mb-3">
-    <i class="fa-regular fa-building text-primary"></i>
-    <h5 class="mb-0">Select Company</h5>
-    </div>
-
-    <div class="company-list">
-    <!-- COMPANY -->
-    <div class="company-card active" data-company="QuickLock Services">
-      <div class="company-content">
-        <h6 class="company-name">QuickLock Services</h6>
-
-        <div class="company-meta">
-          <div>
-            <span class="label">Rating:</span><br>
-            <span class="value">
-              <i class="fa-solid fa-star text-warning"></i> 4.8
-            </span>
-          </div>
-
-          <div>
-            <span class="label">Response:</span><br>
-            <span class="value">15 min</span>
-          </div>
-
-          <div>
-            <span class="label">Jobs:</span><br>
-            <span class="value">342</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMPANY -->
-    <div class="company-card" data-company="Premier Locksmith Co.">
-      <div class="company-content">
-        <h6 class="company-name">Premier Locksmith Co.</h6>
-
-        <div class="company-meta">
-          <div>
-            <span class="label">Rating:</span><br>
-            <span class="value">
-              <i class="fa-solid fa-star text-warning"></i> 4.9
-            </span>
-          </div>
-
-          <div>
-            <span class="label">Response:</span><br>
-            <span class="value">20 min</span>
-          </div>
-
-          <div>
-            <span class="label">Jobs:</span><br>
-            <span class="value">527</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- COMPANY -->
-    <div class="company-card" data-company="City Lock & Key">
-      <div class="company-content">
-        <h6 class="company-name">City Lock & Key</h6>
-
-        <div class="company-meta">
-          <div>
-            <span class="label">Rating:</span><br>
-            <span class="value">
-              <i class="fa-solid fa-star text-warning"></i> 4.7
-            </span>
-          </div>
-
-          <div>
-            <span class="label">Response:</span><br>
-            <span class="value">25 min</span>
-          </div>
-
-          <div>
-            <span class="label">Jobs:</span><br>
-            <span class="value">289</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
-    </div>
-
-  <input type="hidden" id="selectedCompany" value="QuickLock Services">
-
-  <!-- ===== NAV ===== -->
-  <div class="d-flex justify-content-between mt-5">
-    <button class="btn back-btn" id="step4BackBtn">Back</button>
-    <button class="btn btn-primary px-4" id="assignJobBtn">
-    Assign Job to Company
-    </button>
-    </div>
-    </div>
-    
-    <!-- Modal For Step 4 -->
-    <div class="modal fade" id="assignSuccessModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered modal-md">
-    <div class="modal-content p-4 border-0 rounded-4">
-
-      <!-- Header -->
-      <h4 class="fw-bold mb-4">Job Assignment Status</h4>
-
-      <!-- Success Icon -->
-      <div class="d-flex justify-content-center mb-3">
-        <div class="success-circle">
-          <i class="fa-solid fa-check"></i>
-        </div>
-      </div>
-
-      <!-- Status Text -->
-      <h5 class="fw-bold text-center mb-2">Job Accepted!</h5>
-      <p class="text-muted text-center mb-4">
-        <span id="modalCompany"></span> has accepted the job assignment.
-      </p>
-
-      <!-- Info Card -->
-      <div class="info-card mb-4">
-        <div class="d-flex align-items-start gap-3 mb-3">
-          <i class="fa-regular fa-calendar icon"></i>
-          <div>
-            <strong>Available From</strong>
-            <div class="text-muted">Today, 2:30 PM</div>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-start gap-3">
-          <i class="fa-regular fa-comment icon"></i>
-          <div>
-            <strong>Company Notes</strong>
-            <div class="text-muted">
-              "Technician will arrive within 30 minutes. Customer will be contacted shortly."
+          <!-- Tabs Section -->
+          <div class="jobs-subnav">
+            <div class="jobs-tabs">
+            <button class="jobs-tab" type="button">
+              <i class="fas fa-plus"></i> Create New Job
+            </button>
+            <button class="jobs-tab" type="button">
+              Active Jobs 
+            </button>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Pricing Summary -->
-      <div class="pricing-card mb-4">
-        <h5 class="fw-bold mb-3">Pricing Summary</h5>
+          <!-- Steps Header -->
+          <div
+            class="steps steps-header d-flex align-items-center mb-5"
+            id="stepsHeader"
+          >
+            <div class="step active completed" data-step="1">
+              <div class="circle">1</div>
+              <p>Service Type</p>
+            </div>
+            <div class="line active"></div>
 
-        <div class="d-flex justify-content-between">
-          <span>Base Service Price:</span>
-          <strong>$100.00</strong>
-        </div>
-        <hr>
+            <div class="step" data-step="2">
+              <div class="circle">2</div>
+              <p>Customer & Asset</p>
+            </div>
+            <div class="line"></div>
 
-        <div class="d-flex justify-content-between">
-          <span>Service Cost:</span>
-          <strong>$100.00</strong>
-        </div>
-        <hr>
+            <div class="step" data-step="3">
+              <div class="circle">3</div>
+              <p>Pricing Details</p>
+            </div>
+            <div class="line"></div>
 
-        <div class="d-flex justify-content-between fs-5">
-          <strong>Total Cost:</strong>
-          <strong class="text-primary">$100.00</strong>
-        </div>
-
-        <hr>
-
-        <div class="mt-3">
-          <strong>Revenue Split:</strong>
-
-          <div class="d-flex justify-content-between mt-2">
-            <span>Technician Share (70%):</span>
-            <strong class="text-success">$70.00</strong>
+            <div class="step" data-step="4">
+              <div class="circle">4</div>
+              <p>Assign Company</p>
+            </div>
           </div>
 
-          <div class="d-flex justify-content-between">
-            <span>Company Share (30%):</span>
-            <strong class="text-primary">$30.00</strong>
+          <!-- ================= STEP 1 ================= -->
+          <div class="job-step active" data-step="1">
+            <h3>Service Type & Priority</h3>
+            <p>Select or enter the type of service required for this job</p>
+
+            <div class="serve-type mb-4">
+              <label class="form-label"
+                >How would you like to enter the service type?</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter a new service type"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label"
+                >Service Type <span class="required"></span
+              ></label>
+              <input type="text" id="serviceInput" class="form-control" />
+              <div class="error-text d-none" id="serviceError">
+                This field is required
+              </div>
+            </div>
+
+            <label class="form-label mb-2">Priority Level</label>
+            <div class="priority-wrapper mb-3">
+              <div class="priority-card active" data-priority="normal">
+                <div class="priority-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                  <p>Normal</p>
+                  <small>Standard pricing</small>
+                </div>
+              </div>
+
+              <div class="priority-card" data-priority="urgent">
+                <div class="priority-icon urgent">
+                  <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                  <p>Urgent</p>
+                  <small>+25% premium</small>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hidden input to store selected priority -->
+            <input type="hidden" id="priorityInput" value="normal" />
+
+            <div class="text-end">
+              <button class="btn btn-primary px-4" id="nextBtn">
+                Continue to Customer & Asset
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
+          <!-- =================END OF STEP 1 ================= -->
 
-      <!-- Action Button -->
-      <a  href="jobs.html" class="btn btn-primary w-100 py-3 fs-5" id="completeJobBtn">
-        Complete Job Creation
-      </a>
-    </div>
-    </div>
-    </div>
-    <!-- =================END Of STEP 4 ================= -->
+          <!-- ================= STEP 2 ================= -->
+          <div class="job-step" data-step="2">
+            <h3>Customer & Asset Information</h3>
+            <p>Enter or select customer details and asset information</p>
 
+            <!-- First Section (Customers)-->
+            <div class="step2">
+              <div class="cust-header mb-4">
+                <i class="fas fa-user"></i>
+                <h3 class="mb-0">Customer Details</h3>
+              </div>
+
+              <!-- Toggle Buttons -->
+              <div class="cust-toggle mb-4">
+                <button class="cust-btn active" id="selectExistingBtn">
+                  <i class="fas fa-search"></i> Select Existing
+                </button>
+                <button class="cust-btn" id="createNewBtn">
+                  <i class="fas fa-plus"></i> Create New
+                </button>
+              </div>
+
+              <!-- ================= SELECT EXISTING ================= -->
+              <div id="selectExistingSection">
+                <label class="cust-label">
+                  Select Customer <span class="required"></span>
+                </label>
+
+                <div class="customers-scroll">
+                  <div class="customer-card" data-id="1">
+                    <strong>John Smith</strong>
+                    <div>(555) 123-4567 · john.smith@email.com</div>
+                  </div>
+
+                  <div class="customer-card" data-id="2">
+                    <strong>Sarah Johnson</strong>
+                    <div>(555) 234-5678 · sarah.j@email.com</div>
+                  </div>
+
+                  <div class="customer-card" data-id="3">
+                    <strong>Mike Wilson</strong>
+                    <div>(555) 345-6789 · mwilson@email.com</div>
+                  </div>
+                </div>
+
+                <div class="error-text d-none" id="customerSelectError">
+                  Please select a customer
+                </div>
+              </div>
+              <!-- ================= CREATE NEW ================= -->
+              <div id="createNewSection" class="d-none">
+                <div class="mb-4">
+                  <label class="form-label">
+                    Full Name <span class="required"></span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newName"
+                    placeholder="Enter customer name"
+                  />
+                </div>
+
+                <div class="row mb-4">
+                  <div class="col-md-6">
+                    <label class="form-label">
+                      Phone <span class="required"></span>
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="newPhone"
+                      placeholder="(555) 123-4567"
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="newEmail"
+                      placeholder="customer@email.com"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label">Address</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newAddress"
+                    placeholder="123 Main St, City, State ZIP"
+                  />
+                </div>
+
+                <div class="error-text d-none" id="createCustomerError">
+                  Please fill required fields
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= ASSET SECTION ================= -->
+            <div class="step2 mt-5">
+              <div class="cust-header mb-4">
+                <i class="fas fa-cube"></i>
+                <h3 class="mb-0">Asset / Item Details</h3>
+              </div>
+
+              <div class="cust-toggle mb-4">
+                <button class="asset-btn active" id="vehicleBtn">
+                  <i class="fas fa-car"></i> Vehicle
+                </button>
+                <button class="asset-btn outline" id="otherItemBtn">
+                  <i class="fas fa-cube"></i> Other Item
+                </button>
+              </div>
+
+              <!-- ================= VEHICLE FORM ================= -->
+              <div id="vehicleForm">
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label>Make <span class="required"></span></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Toyota"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Model <span class="required"></span></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Camry"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label>Year <span class="required"></span></label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="2020"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Color</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Silver"
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <label>VIN</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="1HGBH41JXMN109186"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- ================= OTHER ITEM FORM ================= -->
+              <div id="otherItemForm" class="d-none">
+                <div class="mb-3">
+                  <label>Item Type <span class="required"></span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g., Safe, Door, Cabinet, Lock System"
+                  />
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label>Make</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="e.g., Yale, Medeco"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Model</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="e.g., Pro Series"
+                    />
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <div class="col-md-6">
+                    <label>Year</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      placeholder="2020"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label>Color</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Silver"
+                    />
+                  </div>
+                  <div class="col-md-12">
+                    <label>Serial Number / ID</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="SN123456789"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label>Location</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g., Front Door, Living Room, Office"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label>Description / Specifications</label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    placeholder="Enter additional details, specifications, condition, or special requirements..."
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Validation -->
+              <div class="error-text d-none" id="assetError">
+                Please fill required asset fields
+              </div>
+            </div>
+
+            <!-- ================= NAV ================= -->
+            <div class="d-flex justify-content-between mt-5">
+              <button class="btn back-btn" id="backBtn">Back</button>
+              <button class="btn btn-primary" id="step2NextBtn">
+                Continue to Pricing
+              </button>
+            </div>
+          </div>
+          <!-- ================= END OF STEP 2 ================= -->
+
+          <!-- ================= STEP 3 ================= -->
+          <div class="job-step" data-step="3">
+            <h3>Pricing & Payment Details</h3>
+            <p>Configure service costs and payment structure</p>
+
+            <!-- ===== Service Pricing ===== -->
+            <div class="price-cards mb-4">
+              <div>
+                <h5 class="mb-3">
+                  <i class="fas fa-dollar-sign text-primary me-2"></i>
+                  Service Pricing
+                </h5>
+
+                <label class="form-label">
+                  Base Service Price <span class="required"></span>
+                </label>
+
+                <input
+                  type="number"
+                  class="form-control"
+                  id="basePrice"
+                  placeholder="100"
+                />
+
+                <div class="error-text d-none" id="priceError">
+                  Base price is required
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Additional Requirements ===== -->
+            <div class="price-cards mb-4">
+              <h5 class="mb-3">Additional Requirements</h5>
+
+              <div class="row g-3">
+                <div class="col-md-12">
+                  <div class="requirement-card" data-requirement="key">
+                    <i class="fas fa-key mb-2"></i>
+                    <h6>Key Required</h6>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="requirement-card" data-requirement="code">
+                    <i class="fas fa-hashtag mb-2"></i>
+                    <h6>Code / Programming Required</h6>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hidden values -->
+              <input type="hidden" id="keyRequired" value="false" />
+              <input type="hidden" id="codeRequired" value="false" />
+            </div>
+
+            <!-- ===== Payment Responsibility ===== -->
+            <div class="price-cards mb-4">
+              <div>
+                <h5 class="mb-3">
+                  Payment Responsibility for Additional Costs
+                </h5>
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="payment-card" data-payer="technician">
+                      <h6>Technician Pays</h6>
+                      <small>Technician covers key/code costs</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="payment-card active" data-payer="company">
+                      <h6>Company Pays</h6>
+                      <small>Company covers key/code costs</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="error-text d-none mt-2" id="payerError">
+                  Please select who pays additional costs
+                </div>
+
+                <input type="hidden" id="paymentPayer" value="company" />
+              </div>
+            </div>
+
+            <!-- ===== NAV ===== -->
+            <div class="d-flex justify-content-between mt-5">
+              <button class="btn back-btn" id="step3BackBtn">Back</button>
+              <button class="btn btn-primary" id="step3NextBtn">
+                Continue to Assignment
+              </button>
+            </div>
+          </div>
+          <!-- =================END  STEP 3 ================= -->
+
+          <!-- ================= STEP 4 ================= -->
+          <div class="job-step" data-step="4">
+            <h3>Assign to Company</h3>
+            <p>Select a company to handle this service request</p>
+
+            <!-- ===== Job Summary ===== -->
+            <div class="summary-card mb-4 p-4">
+              <div class="row">
+                <h6>Job Summary</h6>
+                <div class="col-md-6">
+                  <p class="text-muted mb-1">Service Type:</p>
+                  <strong id="summaryService">Key Replacement</strong>
+                </div>
+                <div class="col-md-6">
+                  <p class="text-muted mb-1">Priority:</p>
+                  <span class="badge-normal" id="summaryPriority">NORMAL</span>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <p class="text-muted mb-1">Customer:</p>
+                  <strong id="summaryCustomer">John Smith</strong>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <p class="text-muted mb-1">Total Cost:</p>
+                  <strong id="summaryCost">$100.00</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- ===== Companies List ===== -->
+            <div class="card-container">
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <i class="fa-regular fa-building text-primary"></i>
+                <h5 class="mb-0">Select Company</h5>
+              </div>
+
+              <div class="company-list">
+                <!-- COMPANY -->
+                <div
+                  class="company-card active"
+                  data-company="QuickLock Services"
+                >
+                  <div class="company-content">
+                    <h6 class="company-name">QuickLock Services</h6>
+
+                    <div class="company-meta">
+                      <div>
+                        <span class="label">Rating:</span><br />
+                        <span class="value">
+                          <i class="fa-solid fa-star text-warning"></i> 4.8
+                        </span>
+                      </div>
+
+                      <div>
+                        <span class="label">Response:</span><br />
+                        <span class="value">15 min</span>
+                      </div>
+
+                      <div>
+                        <span class="label">Jobs:</span><br />
+                        <span class="value">342</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- COMPANY -->
+                <div class="company-card" data-company="Premier Locksmith Co.">
+                  <div class="company-content">
+                    <h6 class="company-name">Premier Locksmith Co.</h6>
+
+                    <div class="company-meta">
+                      <div>
+                        <span class="label">Rating:</span><br />
+                        <span class="value">
+                          <i class="fa-solid fa-star text-warning"></i> 4.9
+                        </span>
+                      </div>
+
+                      <div>
+                        <span class="label">Response:</span><br />
+                        <span class="value">20 min</span>
+                      </div>
+
+                      <div>
+                        <span class="label">Jobs:</span><br />
+                        <span class="value">527</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- COMPANY -->
+                <div class="company-card" data-company="City Lock & Key">
+                  <div class="company-content">
+                    <h6 class="company-name">City Lock & Key</h6>
+
+                    <div class="company-meta">
+                      <div>
+                        <span class="label">Rating:</span><br />
+                        <span class="value">
+                          <i class="fa-solid fa-star text-warning"></i> 4.7
+                        </span>
+                      </div>
+
+                      <div>
+                        <span class="label">Response:</span><br />
+                        <span class="value">25 min</span>
+                      </div>
+
+                      <div>
+                        <span class="label">Jobs:</span><br />
+                        <span class="value">289</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <input
+              type="hidden"
+              id="selectedCompany"
+              value="QuickLock Services"
+            />
+
+            <!-- ===== NAV ===== -->
+            <div class="d-flex justify-content-between mt-5">
+              <button class="btn back-btn" id="step4BackBtn">Back</button>
+              <button class="btn btn-primary px-4" id="assignJobBtn">
+                Assign Job to Company
+              </button>
+            </div>
+          </div>
+
+          <!-- Modal For Step 4 -->
+          <div class="modal fade" id="assignSuccessModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+              <div class="modal-content p-4 border-0 rounded-4">
+                <!-- Header -->
+                <h4 class="fw-bold mb-4">Job Assignment Status</h4>
+
+                <!-- Success Icon -->
+                <div class="d-flex justify-content-center mb-3">
+                  <div class="success-circle">
+                    <i class="fa-solid fa-check"></i>
+                  </div>
+                </div>
+
+                <!-- Status Text -->
+                <h5 class="fw-bold text-center mb-2">Job Accepted!</h5>
+                <p class="text-muted text-center mb-4">
+                  <span id="modalCompany"></span> has accepted the job
+                  assignment.
+                </p>
+
+                <!-- Info Card -->
+                <div class="info-card mb-4">
+                  <div class="d-flex align-items-start gap-3 mb-3">
+                    <i class="fa-regular fa-calendar icon"></i>
+                    <div>
+                      <strong>Available From</strong>
+                      <div class="text-muted">Today, 2:30 PM</div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-start gap-3">
+                    <i class="fa-regular fa-comment icon"></i>
+                    <div>
+                      <strong>Company Notes</strong>
+                      <div class="text-muted">
+                        "Technician will arrive within 30 minutes. Customer will
+                        be contacted shortly."
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pricing Summary -->
+                <div class="pricing-card mb-4">
+                  <h5 class="fw-bold mb-3">Pricing Summary</h5>
+
+                  <div class="d-flex justify-content-between">
+                    <span>Base Service Price:</span>
+                    <strong>$100.00</strong>
+                  </div>
+                  <hr />
+
+                  <div class="d-flex justify-content-between">
+                    <span>Service Cost:</span>
+                    <strong>$100.00</strong>
+                  </div>
+                  <hr />
+
+                  <div class="d-flex justify-content-between fs-5">
+                    <strong>Total Cost:</strong>
+                    <strong class="text-primary">$100.00</strong>
+                  </div>
+
+                  <hr />
+
+                  <div class="mt-3">
+                    <strong>Revenue Split:</strong>
+
+                    <div class="d-flex justify-content-between mt-2">
+                      <span>Technician Share (70%):</span>
+                      <strong class="text-success">$70.00</strong>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                      <span>Company Share (30%):</span>
+                      <strong class="text-primary">$30.00</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Action Button -->
+                <a
+                  href="jobs.html"
+                  class="btn btn-primary w-100 py-3 fs-5"
+                  id="completeJobBtn"
+                >
+                  Complete Job Creation
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- =================END Of STEP 4 ================= -->
+
+          <!-- Start OF Active Jobs Section -->
+          <div id="activeJobsSection" class="d-none mt-4">
+            <!-- Header & Filters -->
+            <div
+              class="d-flex flex-column justify-content-start align-items-start align-items-md-left mb-4 gap-3"
+            >
+              <h4 class="fw-bold mb-0">Active Jobs</h4>
+
+              <!-- Filter Buttons (Pill Style) -->
+              <div class="job-filters d-flex flex-wrap gap-2">
+                <button class="btn btn-filter active" data-filter="all">
+                  All Jobs
+                </button>
+                <button class="btn btn-filter" data-filter="pending">
+                  Pending
+                </button>
+                <button class="btn btn-filter" data-filter="in-progress">
+                  In Progress
+                </button>
+                <button class="btn btn-filter" data-filter="completed">
+                  Completed
+                </button>
+                <button class="btn btn-filter" data-filter="rejected">
+                  Rejected
+                </button>
+              </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+              <table id="activeJobsTable" class="table w-100">
+                <thead>
+                  <tr>
+                    <th>Job ID</th>
+                    <th>Service Type</th>
+                    <th>Customer</th>
+                    <th>Asset</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Company</th>
+                    <th>Total Cost</th>
+                    <th>Created</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Data populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- End OF Active Jobs Section -->
         </div>
-        </main>
-        </div>
+      </main>
+    </div>
 
     <!-- JS Files -->
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -810,317 +943,530 @@
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/script.js"></script>
 
-  <!-- Custom Script -->
-  <script>
-  const nextBtn = document.getElementById("nextBtn");
-  const backBtn = document.getElementById("backBtn");
-  const serviceInput = document.getElementById("serviceInput");
-  const serviceError = document.getElementById("serviceError");
+    <!-- Custom Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // 1. GLOBAL VARIABLES & SELECTORS
+        const steps = document.querySelectorAll(".step");
+        const lines = document.querySelectorAll(".line");
+        const jobSteps = document.querySelectorAll(".job-step");
 
-  const steps = document.querySelectorAll(".step");
-  const lines = document.querySelectorAll(".line");
-  const jobSteps = document.querySelectorAll(".job-step");
+        // Inputs & Errors
+        const serviceInput = document.getElementById("serviceInput");
+        const serviceError = document.getElementById("serviceError");
+        const priorityInput = document.getElementById("priorityInput");
 
-  const selectExistingBtn = document.getElementById("selectExistingBtn");
-  const createNewBtn = document.getElementById("createNewBtn");
+        // Step 2 Elements (Customer)
+        const selectExistingBtn = document.getElementById("selectExistingBtn");
+        const createNewBtn = document.getElementById("createNewBtn");
+        const selectExistingSection = document.getElementById(
+          "selectExistingSection",
+        );
+        const createNewSection = document.getElementById("createNewSection");
+        const customerCards = document.querySelectorAll(".customer-card");
+        const newName = document.getElementById("newName");
+        const newPhone = document.getElementById("newPhone");
 
-  const selectExistingSection = document.getElementById("selectExistingSection");
-  const createNewSection = document.getElementById("createNewSection");
+        // Step 2 Elements (Asset)
+        const vehicleBtn = document.getElementById("vehicleBtn");
+        const otherItemBtn = document.getElementById("otherItemBtn");
+        const vehicleForm = document.getElementById("vehicleForm");
+        const otherItemForm = document.getElementById("otherItemForm");
 
-  const customerCards = document.querySelectorAll(".customer-card");
+        // Step 2 Errors
+        const customerSelectError = document.getElementById(
+          "customerSelectError",
+        );
+        const createCustomerError = document.getElementById(
+          "createCustomerError",
+        );
+        const assetError = document.getElementById("assetError");
 
-  const customerSelectError = document.getElementById("customerSelectError");
-  const createCustomerError = document.getElementById("createCustomerError");
+        // Step 3 Elements
+        const basePrice = document.getElementById("basePrice");
+        const priceError = document.getElementById("priceError");
+        const payerError = document.getElementById("payerError");
+        const paymentPayerInput = document.getElementById("paymentPayer");
 
-  let selectedCustomer = null;
-  let mode = "select";
+        // State Variables
+        let selectedCustomer = null;
+        let mode = "select";
 
-  function goToStep(stepNumber) {
-    jobSteps.forEach(step => step.classList.remove("active"));
-    document.querySelector(`.job-step[data-step="${stepNumber}"]`)
-      .classList.add("active");
+        // 2. NAVIGATION LOGIC (GoToStep)
+        window.goToStep = function (stepNumber) {
+          // 1. Handle Form Content visibility
+          jobSteps.forEach((step) => {
+            step.classList.remove("active");
+            step.classList.add("d-none");
+          });
 
-    steps.forEach((step, index) => {
-      const stepIndex = index + 1;
-      step.classList.remove("active", "completed");
+          const targetStep = document.querySelector(
+            `.job-step[data-step="${stepNumber}"]`,
+          );
+          if (targetStep) {
+            targetStep.classList.add("active");
+            targetStep.classList.remove("d-none");
+          }
 
-      if (stepIndex < stepNumber) {
-        step.classList.add("completed");
-        if (lines[index]) lines[index].classList.add("active");
-      } 
-      else if (stepIndex === stepNumber) {
-        step.classList.add("active");
-      } 
-      else {
-        if (lines[index - 1]) lines[index - 1].classList.remove("active");
-      }
-    });
-  }
+          // 2. Handle Progress Bar (Circles & Lines)
+          steps.forEach((step, index) => {
+            const stepIndex = index + 1;
+            step.classList.remove("active", "completed");
 
-  // Step 1
-  // NEXT (with validation)
-  if (nextBtn) {
-  nextBtn.addEventListener("click", () => {
-    if (serviceInput.value.trim() === "") {
-      serviceError.classList.remove("d-none");
-      serviceInput.classList.add("is-invalid");
-      return;
-    }
+            // Previous steps are completed
+            if (stepIndex < stepNumber) {
+              step.classList.add("completed");
+              if (lines[index]) lines[index].classList.add("active");
+            }
+            // Current step is active
+            else if (stepIndex === stepNumber) {
+              step.classList.add("active");
+              // Ensure line before current step is active
+              if (index > 0 && lines[index - 1])
+                lines[index - 1].classList.add("active");
+              // Ensure line after current step is inactive
+              if (lines[index]) lines[index].classList.remove("active");
+            }
+            // Future steps
+            else {
+              if (lines[index]) lines[index].classList.remove("active");
+              if (lines[index - 1]) lines[index - 1].classList.remove("active");
+            }
+          });
+        };
 
-    serviceError.classList.add("d-none");
-    serviceInput.classList.remove("is-invalid");
-    goToStep(2);
-  });
-}
+        // 3. STEP 1 LOGIC & VALIDATION
 
-  // BACK
-  backBtn.addEventListener("click", () => {
-    goToStep(1);
-  });
+        // Priority Cards Click
+        const priorityCards = document.querySelectorAll(".priority-card");
+        priorityCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            priorityCards.forEach((c) => c.classList.remove("active"));
+            card.classList.add("active");
+            priorityInput.value = card.dataset.priority;
+          });
+        });
 
-  // Priority select
-  document.addEventListener("DOMContentLoaded", function () {
-  const priorityCards = document.querySelectorAll(".priority-card");
-  const priorityInput = document.getElementById("priorityInput");
+        // Step 1 Next Button
+        document.getElementById("nextBtn").addEventListener("click", () => {
+          if (serviceInput.value.trim() === "") {
+            serviceError.classList.remove("d-none");
+            serviceInput.classList.add("is-invalid");
+            return;
+          }
+          serviceError.classList.add("d-none");
+          serviceInput.classList.remove("is-invalid");
+          goToStep(2);
+        });
 
-  priorityCards.forEach(card => {
-    card.addEventListener("click", () => {
+        // 4. STEP 2 LOGIC & VALIDATION
+        // Customer Toggle
+        selectExistingBtn.onclick = () => {
+          mode = "select";
+          selectExistingBtn.classList.add("active");
+          createNewBtn.classList.remove("active", "outline");
+          createNewBtn.classList.add("outline");
+          selectExistingSection.classList.remove("d-none");
+          createNewSection.classList.add("d-none");
+        };
 
-      // Remove active from all
-      priorityCards.forEach(c => c.classList.remove("active"));
+        createNewBtn.onclick = () => {
+          mode = "create";
+          createNewBtn.classList.add("active");
+          createNewBtn.classList.remove("outline");
+          selectExistingBtn.classList.remove("active");
+          selectExistingSection.classList.add("d-none");
+          createNewSection.classList.remove("d-none");
+        };
 
-      // Add active to clicked one
-      card.classList.add("active");
+        // Customer Card Selection
+        customerCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            customerCards.forEach((c) => c.classList.remove("active"));
+            card.classList.add("active");
+            selectedCustomer = card.dataset.id;
+            customerSelectError.classList.add("d-none");
+          });
+        });
 
-      // Save selected priority
-      const selectedPriority = card.dataset.priority;
-      priorityInput.value = selectedPriority;
+        // Asset Toggle
+        vehicleBtn.onclick = () => {
+          vehicleBtn.classList.add("active");
+          otherItemBtn.classList.remove("active");
+          otherItemBtn.classList.add("outline");
+          vehicleForm.classList.remove("d-none");
+          otherItemForm.classList.add("d-none");
+        };
 
-      console.log("Selected Priority:", selectedPriority);
-    });
-  });
-  });
+        otherItemBtn.onclick = () => {
+          otherItemBtn.classList.add("active");
+          otherItemBtn.classList.remove("outline");
+          vehicleBtn.classList.remove("active");
+          otherItemForm.classList.remove("d-none");
+          vehicleForm.classList.add("d-none");
+        };
 
-  // Step 2
-  // Toggle buttons
-  selectExistingBtn.onclick = () => {
-    mode = "select";
-    selectExistingBtn.classList.add("active");
-    createNewBtn.classList.remove("active", "outline");
-    createNewBtn.classList.add("outline");
+        // Step 2 Back
+        document
+          .getElementById("backBtn")
+          .addEventListener("click", () => goToStep(1));
 
-    selectExistingSection.classList.remove("d-none");
-    createNewSection.classList.add("d-none");
-  };
+        // Step 2 Next (With VALIDATION)
+        document
+          .getElementById("step2NextBtn")
+          .addEventListener("click", () => {
+            let isValid = true;
 
-  createNewBtn.onclick = () => {
-    mode = "create";
-    createNewBtn.classList.add("active");
-    createNewBtn.classList.remove("outline");
-    selectExistingBtn.classList.remove("active");
+            // Reset errors
+            customerSelectError.classList.add("d-none");
+            createCustomerError.classList.add("d-none");
+            assetError.classList.add("d-none");
 
-    selectExistingSection.classList.add("d-none");
-    createNewSection.classList.remove("d-none");
-  };
+            /* --- CUSTOMER VALIDATION --- */
+            if (mode === "select") {
+              if (!selectedCustomer) {
+                customerSelectError.classList.remove("d-none");
+                isValid = false;
+              }
+            }
 
-  // Select customer
-  customerCards.forEach(card => {
-    card.addEventListener("click", () => {
-      customerCards.forEach(c => c.classList.remove("active"));
-      card.classList.add("active");
-      selectedCustomer = card.dataset.id;
-      customerSelectError.classList.add("d-none");
-    });
-  });
+            if (mode === "create") {
+              if (!newName.value.trim() || !newPhone.value.trim()) {
+                createCustomerError.classList.remove("d-none");
+                isValid = false;
+              }
+            }
 
-   /* ================= ASSET TOGGLE ================= */
-  const vehicleBtn = document.getElementById("vehicleBtn");
-  const otherItemBtn = document.getElementById("otherItemBtn");
-  const vehicleForm = document.getElementById("vehicleForm");
-  const otherItemForm = document.getElementById("otherItemForm");
+            /* --- ASSET VALIDATION --- */
+            const isVehicleActive = !vehicleForm.classList.contains("d-none");
+            const isOtherItemActive =
+              !otherItemForm.classList.contains("d-none");
 
-  vehicleBtn.onclick = () => {
-    vehicleBtn.classList.add("active");
-    otherItemBtn.classList.remove("active");
-    otherItemBtn.classList.add("outline");
+            if (isVehicleActive) {
+              // Look for inputs inside vehicle form
+              const make = vehicleForm
+                .querySelector('input[placeholder="Toyota"]')
+                .value.trim();
+              const model = vehicleForm
+                .querySelector('input[placeholder="Camry"]')
+                .value.trim();
+              const year = vehicleForm
+                .querySelector('input[placeholder="2020"]')
+                .value.trim();
 
-    vehicleForm.classList.remove("d-none");
-    otherItemForm.classList.add("d-none");
-  };
+              if (!make || !model || !year) {
+                assetError.classList.remove("d-none");
+                isValid = false;
+              }
+            }
 
-  otherItemBtn.onclick = () => {
-    otherItemBtn.classList.add("active");
-    otherItemBtn.classList.remove("outline");
-    vehicleBtn.classList.remove("active");
+            if (isOtherItemActive) {
+              const itemType = otherItemForm
+                .querySelector('input[placeholder^="e.g., Safe"]')
+                .value.trim();
+              if (!itemType) {
+                assetError.classList.remove("d-none");
+                isValid = false;
+              }
+            }
 
-    otherItemForm.classList.remove("d-none");
-    vehicleForm.classList.add("d-none");
-  };
+            if (!isValid) return;
+            goToStep(3);
+          });
 
-  step2NextBtn.addEventListener("click", () => {
-  let isValid = true;
+        // 5. STEP 3 LOGIC & VALIDATION
 
-  // Reset errors
-  customerSelectError.classList.add("d-none");
-  createCustomerError.classList.add("d-none");
-  assetError.classList.add("d-none");
+        // Requirement Cards
+        const requirementCards = document.querySelectorAll(".requirement-card");
+        const keyRequiredInput = document.getElementById("keyRequired");
+        const codeRequiredInput = document.getElementById("codeRequired");
 
-  // reset errors
-  customerSelectError.classList.add("d-none");
-  createCustomerError.classList.add("d-none");
-  document.getElementById("assetError").classList.add("d-none");
+        requirementCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            card.classList.toggle("active");
+            const type = card.dataset.requirement;
+            if (type === "key")
+              keyRequiredInput.value = card.classList.contains("active");
+            if (type === "code")
+              codeRequiredInput.value = card.classList.contains("active");
+          });
+        });
 
-  /* ================= CUSTOMER VALIDATION ================= */
+        // Payment Cards
+        const paymentCards = document.querySelectorAll(".payment-card");
+        paymentCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            paymentCards.forEach((c) => c.classList.remove("active"));
+            card.classList.add("active");
+            paymentPayerInput.value = card.dataset.payer;
+            payerError.classList.add("d-none");
+          });
+        });
 
-  if (mode === "select") {
-    // ONLY validate existing customer
-    if (!selectedCustomer) {
-      customerSelectError.classList.remove("d-none");
-      isValid = false;
-    }
-  }
+        // Step 3 Back
+        document
+          .getElementById("step3BackBtn")
+          .addEventListener("click", () => goToStep(2));
 
-  if (mode === "create") {
-    // ONLY validate create customer inputs
-    const name = newName.value.trim();
-    const phone = newPhone.value.trim();
+        // Step 3 Next (With VALIDATION)
+        document
+          .getElementById("step3NextBtn")
+          .addEventListener("click", () => {
+            let isValid = true;
+            priceError.classList.add("d-none");
+            payerError.classList.add("d-none");
 
-    if (!name || !phone) {
-      createCustomerError.classList.remove("d-none");
-      isValid = false;
-    }
-  }
+            if (basePrice.value.trim() === "" || Number(basePrice.value) <= 0) {
+              priceError.classList.remove("d-none");
+              isValid = false;
+            }
 
-  
-  
-  /* ================= ASSET VALIDATION ================= */
+            if (!paymentPayerInput.value) {
+              payerError.classList.remove("d-none");
+              isValid = false;
+            }
 
-  const isVehicleActive = !vehicleForm.classList.contains("d-none");
-  const isOtherItemActive = !otherItemForm.classList.contains("d-none");
+            if (!isValid) return;
+            goToStep(4);
+          });
 
-  if (isVehicleActive) {
-    const make = vehicleForm.querySelector('input[placeholder="Toyota"]').value.trim();
-    const model = vehicleForm.querySelector('input[placeholder="Camry"]').value.trim();
-    const year = vehicleForm.querySelector('input[placeholder="2020"]').value.trim();
+        // 6. STEP 4 LOGIC
 
-    if (!make || !model || !year) {
-      assetError.classList.remove("d-none");
-      isValid = false;
-    }
-  }
+        // Company Selection
+        const companyCards = document.querySelectorAll(".company-card");
+        companyCards.forEach((card) => {
+          card.addEventListener("click", () => {
+            companyCards.forEach((c) => c.classList.remove("active"));
+            card.classList.add("active");
+            document.getElementById("selectedCompany").value =
+              card.dataset.company;
+          });
+        });
 
-  if (isOtherItemActive) {
-    const itemType = otherItemForm.querySelector(
-      'input[placeholder^="e.g., Safe"]'
-    ).value.trim();
+        // Step 4 Back
+        document
+          .getElementById("step4BackBtn")
+          .addEventListener("click", () => goToStep(3));
 
-    if (!itemType) {
-      assetError.classList.remove("d-none");
-      isValid = false;
-    }
-  }
-  
-  if (!isValid) return;
-    goToStep(3);
-  });
-  
-  // Step 3
-  const step3NextBtn = document.getElementById("step3NextBtn");
-  const step3BackBtn = document.getElementById("step3BackBtn");
+        // Assign Job Modal
+        document
+          .getElementById("assignJobBtn")
+          .addEventListener("click", () => {
+            const company = document.getElementById("selectedCompany").value;
+            document.getElementById("modalCompany").innerText = company;
+            const modal = new bootstrap.Modal(
+              document.getElementById("assignSuccessModal"),
+            );
+            modal.show();
+          });
+      });
+      // End DOMContentLoaded
 
-  const basePrice = document.getElementById("basePrice");
-  const priceError = document.getElementById("priceError");
-  const payerError = document.getElementById("payerError");
+      // 7. JQUERY: DATA-TABLES & TAB SWITCHING
+      $(document).ready(function () {
+        // --- Mock Data ---
+        const MOCK_JOBS = [
+          {
+            id: "JOB-1001",
+            service: "Car Key Programming",
+            customer: "John Smith",
+            asset: "2020 Toyota Camry",
+            priority: "URGENT",
+            status: "In Progress",
+            company: "QuickLock Services",
+            cost: 187.5,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1002",
+            service: "Lock Installation",
+            customer: "Sarah Johnson",
+            asset: "Residential Door",
+            priority: "NORMAL",
+            status: "Pending",
+            company: "Premier Locksmith Co.",
+            cost: 150.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1003",
+            service: "Emergency Lockout",
+            customer: "Mike Wilson",
+            asset: "2018 Honda Accord",
+            priority: "URGENT",
+            status: "Completed",
+            company: "City Lock & Key",
+            cost: 125.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1004",
+            service: "Safe Opening",
+            customer: "Emily Davis",
+            asset: "Commercial Safe",
+            priority: "NORMAL",
+            status: "Rejected",
+            company: "<span class='text-muted'>Not assigned</span>",
+            cost: 200.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1005",
+            service: "House Lockout",
+            customer: "Alice Brown",
+            asset: "Front Door",
+            priority: "NORMAL",
+            status: "Pending",
+            company: "City Lock & Key",
+            cost: 95.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1006",
+            service: "Ignition Repair",
+            customer: "Bob White",
+            asset: "2015 Ford F-150",
+            priority: "URGENT",
+            status: "Completed",
+            company: "QuickLock Services",
+            cost: 210.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1007",
+            service: "Key Duplication",
+            customer: "Charlie Green",
+            asset: "2019 Honda Civic",
+            priority: "NORMAL",
+            status: "Completed",
+            company: "Premier Locksmith Co.",
+            cost: 80.0,
+            created: "10:30 AM",
+          },
+          {
+            id: "JOB-1008",
+            service: "Commercial Lock Change",
+            customer: "David Black",
+            asset: "Office Entrance",
+            priority: "URGENT",
+            status: "In Progress",
+            company: "QuickLock Services",
+            cost: 450.0,
+            created: "10:30 AM",
+          },
+        ];
 
-  const requirementCards = document.querySelectorAll(".requirement-card");
-  const keyRequiredInput = document.getElementById("keyRequired");
-  const codeRequiredInput = document.getElementById("codeRequired");
+        // --- 2. Define Columns ---
+        const jobColumns = [
+          {
+            data: "id",
+            render: (d) => `<span class="fw-bold text-dark">${d}</span>`,
+          },
+          {
+            data: "service",
+            render: (d) => `<span class="fw-medium">${d}</span>`,
+          },
+          { data: "customer" },
+          {
+            data: "asset",
+            render: (d) => `<span class="text-muted small">${d}</span>`,
+          },
+          {
+            data: "priority",
+            render: (d) => window.renderStatusBadge(d),
+          },
+          {
+            data: "status",
+            render: (d) => window.renderStatusBadge(d),
+          },
+          { data: "company" },
+          { data: "cost", render: (d) => `$${d.toFixed(2)}` },
+          {
+            data: "created",
+            render: (d) => `<small class="text-muted">${d}</small>`,
+          },
+        ];
 
-  const paymentCards = document.querySelectorAll(".payment-card");
-  const paymentPayerInput = document.getElementById("paymentPayer");
+        // --- 3. Initialize using Global window.initDataTable ---
+        const activeJobsDT = window.initDataTable(
+          "#activeJobsTable",
+          MOCK_JOBS,
+          jobColumns,
+        );
 
-// Payment toggle
-  paymentCards.forEach(card => {
-  card.addEventListener("click", () => {
-    paymentCards.forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-    paymentPayerInput.value = card.dataset.payer;
-    payerError.classList.add("d-none");
-  });
-  });
+        // --- 4. Custom Filter Button Logic ---
+          $(".job-filters .btn-filter").on("click", function () {
+          // 1. Update UI Buttons
+          $(".job-filters .btn-filter").removeClass("active");
+          $(this).addClass("active");
 
-  requirementCards.forEach(card => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("active");
+          // 2. Get Filter Value
+          let filter = $(this).data("filter").toLowerCase();
 
-    const type = card.dataset.requirement;
+          if (filter === "in-progress") {
+            filter = "in progress";
+          }
 
-    if (type === "key") {
-      keyRequiredInput.value = card.classList.contains("active");
-    }
+          // 3. Reset Search Engine (Important!)
+          $.fn.dataTable.ext.search = [];
 
-    if (type === "code") {
-      codeRequiredInput.value = card.classList.contains("active");
-    }
+          // 4. Apply New Filter
+          if (filter !== "all") {
+            $.fn.dataTable.ext.search.push((settings, data) => {
+              const statusText = data[5]
+                .replace(/<[^>]+>/g, "")
+                .toLowerCase()
+                .trim();
 
-  });
-});
+              return statusText === filter;
+            });
+          }
 
-  // BACK → Step 2
-  step3BackBtn.addEventListener("click", () => {
-  goToStep(2);
-  });
+          // 5. Redraw Table
+          activeJobsDT.draw();
+        });
 
-  // NEXT → Step 4 (with validation)
-  step3NextBtn.addEventListener("click", () => {
-  let isValid = true;
 
-  priceError.classList.add("d-none");
-  payerError.classList.add("d-none");
+        // --- 5. Tab Switching Logic ---
 
-  if (basePrice.value.trim() === "" || Number(basePrice.value) <= 0) {
-    priceError.classList.remove("d-none");
-    isValid = false;
-  }
+        // Switch to "Active Jobs"
+        $(".jobs-tab:nth-child(2)").on("click", function (e) {
+          e.preventDefault();
 
-  if (!paymentPayerInput.value) {
-    payerError.classList.remove("d-none");
-    isValid = false;
-  }
+          // UI Updates
+          $(".job-form .steps-header").addClass("d-none");
+          $(".job-form .job-step").addClass("d-none");
+          $("#activeJobsSection").removeClass("d-none");
 
-  if (!isValid) return;
+          // Tab Styling
+          $(".jobs-tab").removeClass("active");
+          $(this).addClass("active");
 
-  goToStep(4);
-});
+          // Adjust Table Columns
+          activeJobsDT.columns.adjust().draw();
+        });
 
-// ================= STEP 4 =================
-  const companyCards = document.querySelectorAll(".company-card");
-  const selectedCompanyInput = document.getElementById("selectedCompany");
-  const assignJobBtn = document.getElementById("assignJobBtn");
-  const step4BackBtn = document.getElementById("step4BackBtn");
+        // Switch to "Create New Job"
+        $(".jobs-tab:nth-child(1)").on("click", function (e) {
+          e.preventDefault();
 
-  companyCards.forEach(card => {
-  card.addEventListener("click", () => {
-    companyCards.forEach(c => c.classList.remove("active"));
-    card.classList.add("active");
-    selectedCompanyInput.value = card.dataset.company;
-  });
-  });
+          // UI Updates
+          $("#activeJobsSection").addClass("d-none");
+          $(".job-form .steps-header").removeClass("d-none");
 
-  step4BackBtn?.addEventListener("click", () => {
-  goToStep(3);
-  });
-  assignJobBtn?.addEventListener("click", () => {
-  const company = selectedCompanyInput.value;
-  document.getElementById("modalCompany").innerText = company;
+          // Restore Active Step
+          let currentStep = $(".job-step.active");
+          if (currentStep.length === 0) {
+            currentStep = $('.job-step[data-step="1"]');
+            currentStep.addClass("active");
+          }
+          currentStep.removeClass("d-none");
 
-  const modal = new bootstrap.Modal(
-    document.getElementById("assignSuccessModal")
-  );
-  modal.show();
-  });
-
-  </script>
-
+          // Tab Styling
+          $(".jobs-tab").removeClass("active");
+          $(this).addClass("active");
+        });
+      });
+    </script>
   </body>
 </html>

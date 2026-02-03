@@ -559,12 +559,26 @@
     padding: 6px 12px; 
     font-weight: 400; 
   }
-  .badge-status-cancelled {
+  .badge-status-cancelled , .badge-status-rejected {
     background-color: #FFE2E2; 
     color: #C10007; 
     border-radius: 12px; 
     padding: 6px 12px; 
     font-weight: 400; 
+  }
+  .badge-priority-urgent{
+    background-color: #FFEDD4;
+    color: #CA3500;
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+  }
+  .badge-priority-normal {
+    background-color: #F3F4F6;
+    color: #4A5565;
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
   }
 
    /* Action Icons */
@@ -1211,6 +1225,112 @@
     padding: 20px;
 }
 
+/* --- Active Jobs Custom Styles --- */
+
+/* Filter Buttons */
+  .btn-filter {
+    background-color: #F3F4F6;
+    color: #364153;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .btn-filter:hover {
+    background-color: #E5E7EB;
+    color: #1F2937;
+  }
+
+  .btn-filter.active {
+    background-color: var(--primary-color);
+    color: #ffffff; 
+  }
+
+/* Table Text Styles */
+#activeJobsTable td {
+  padding: 16px 12px;
+  font-size: 14px;
+  color: #1F2937;
+}
+
+.job-id-text {
+  font-weight: 600;
+  color: #111827;
+}
+
+.cost-text {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* Status Badges  */
+.badge-soft {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* In Progress */
+.badge-soft-primary {
+  background-color: #DBEAFE;
+  color: #1E40AF;
+}
+
+/* Pending  */
+.badge-soft-warning {
+  background-color: #FEF3C7;
+  color: #92400E;
+}
+
+/* Completed  */
+.badge-soft-success {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+/* Rejected */
+.badge-soft-danger {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Priority Badges */
+  .badge-priority {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  .badge-priority-urgent {
+    background-color: #FFEDD5; 
+    color: #C2410C;
+  }
+
+  .badge-priority-normal {
+    background-color: #F3F4F6;
+    color: #4B5563;
+  }
+
+  /* Date Icon text */
+  .date-cell {
+    color: #6B7280;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .jobs-tab {
+    border: none;
+    background-color: transparent ;
+  }
 /* End Of Add Job Page */
 
 

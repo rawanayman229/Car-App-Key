@@ -1,0 +1,424 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add New Job Management</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
+    <!-- Custom Page Styles -->
+    <style>
+      /* Icon Container Styling */
+      .icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+
+      /* Custom Colors  */
+      .bg-purple-subtle {
+        background-color: #faf5ff;
+        color: #9810fa;
+      }
+      .bg-orange-subtle {
+        background-color: #fff7ed;
+        color: #f54900;
+      }
+      .bg-green-subtle {
+        background-color: #f0fdf4;
+        color: #00a63e;
+      }
+      .bg-blue-subtle {
+        background-color: #eff6ff;
+        color: #155dfc;
+      }
+      .bg-gray-subtle {
+        background-color: #f9fafb;
+        color: #4a5565;
+      }
+
+      /* Typography tweaks */
+      .label-text {
+        color: #6a7282;
+        font-size: 13px;
+        margin-bottom: 2px;
+        display: block;
+      }
+      .value-text {
+        color: #101828;
+        font-weight: 400;
+        font-size: 15px;
+      }
+
+      /* Info Cards */
+      .detail-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        background: white;
+        margin-bottom: 24px;
+      }
+
+      .info-box-gray {
+        background-color: #f9fafb;
+        border-radius: 12px;
+        padding: 16px;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Start Of Static Section (Side & Nav BAr) -->
+
+    <!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar (Desktop) ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <!-- Logo -->
+        <div class="logo">
+          <h5>LockSmith<br />Platform</h5>
+          <p>Admin Portal</p>
+        </div>
+
+        <!-- Closed button -->
+        <button class="btn d-md-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!--SideBAr Navigation Links -->
+      <ul class="menu">
+        <li data-page="dashboard" class="active">
+          <a href="../index.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-columns-gap"
+              viewBox="0 0 16 16">
+              <path
+                d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"
+              />
+            </svg>
+            Dashboard</a>
+        </li>
+
+        <li data-page="users">
+          <a href="users.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-people"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"
+              />
+            </svg>
+            Users Management</a
+          >
+        </li>
+
+        <li data-page="companies">
+          <a href="companies.html"
+            ><i class="fa-regular fa-building"></i>Companies</a>
+        </li>
+
+        <li data-page="jobs">
+          <a href="jobs.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-suitcase-lg"
+              viewBox="0 0 16 16">
+              <path
+                d="M5 2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2h3.5A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5H14a.5.5 0 0 1-1 0H3a.5.5 0 0 1-1 0h-.5A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2zm1 0h4a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1M1.5 3a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5H3V3zM15 12.5v-9a.5.5 0 0 0-.5-.5H13v10h1.5a.5.5 0 0 0 .5-.5m-3 .5V3H4v10z"
+              />
+            </svg>
+            Jobs</a>
+        </li>
+
+        <li data-page="requests">
+          <a href="requests.html">
+            <i class="fas fa-key"></i> Key Code Requests</a>
+        </li>
+
+        <li data-page="reports">
+          <a href="reports.html">
+            <i class="fa-solid fa-chart-column"></i> Reports</a>
+        </li>
+
+        <li data-page="payments">
+          <a href="payment.html">
+            <i class="fa-regular fa-credit-card"></i> Payments Audit</a>
+        </li>
+
+        <li data-page="calls">
+          <a href="calls.html">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-phone"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"
+              />
+              <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+            </svg>
+            Call Logs</a
+          >
+        </li>
+      </ul>
+    </aside>
+    <!-- End OF Sidebar -->
+
+    <!-- ===== Main Wrapper (Nav + Content) ===== -->
+    <div class="main-wrapper" id="mainWrapper">
+      <!-- NavBar -->
+      <nav class="navbar navbar-light fixed-top px-3">
+        <!-- Left Side -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- 1- Sidebar Toggle Button in mobile & tab screens -->
+          <button class="btn d-lg-none" id="toggleSidebar">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- 2- Title -->
+          <h2 class="d-none d-sm-inline">Platform Admin Dashboard</h2>
+        </div>
+
+        <!-- Right Side -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- 1-Notifications -->
+          <div class="position-relative me-2">
+            <i class="fa-regular fa-bell text-muted"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"
+            ></span>
+          </div>
+
+          <!-- 2- Profile -->
+          <div
+            class="profile d-flex justify-content-center align-items-center gap-2"
+          >
+            <div class="text-end d-none d-sm-block">
+              <h4 class="small fw-bold lh-1">Admin User</h4>
+              <p class="text-muted">admin@locksmith.com</p>
+            </div>
+
+            <i class="fa-regular fa-user"></i>
+          </div>
+        </div>
+      </nav>
+      <!-- End Of Navbar -->
+
+      <!--End Of Static Section (Side & Nav BAr) -->
+
+      <!-- ===== Content (Changed Pages) ===== -->
+      <!-- ===== Content (Job Details) ===== -->
+      <main class="content">
+        <!-- 1. Header Section -->
+        <div
+          class="d-flex justify-content-between align-items-start align-items-md-center mb-4"
+        >
+          <div class="d-flex align-items-center gap-3">
+            <a href="jobs.html" class="text-muted fs-4">
+              <i class="fas fa-arrow-left"></i>
+            </a>
+            <div>
+              <h1 class="page-title mb-0">Job Details</h1>
+              <p class="text-muted mb-0">JOB-2024-00142</p>
+            </div>
+          </div>
+          <!-- Status Badge -->
+          <span
+            class="badge bg-primary-subtle text-primary border border-primary-subtle rounded-pill px-3 py-2 fs-6"
+          >
+            In Progress
+          </span>
+        </div>
+
+        <!-- 2. Job Information Card -->
+        <div class="detail-card p-4">
+          <h5 class="fw-bold mb-4 border-bottom pb-2">Job Information</h5>
+
+          <!-- Grid Row 1 -->
+          <div class="row g-4 mb-4">
+            <!-- Job ID -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-blue-subtle">
+                  <i class="fas fa-suitcase"></i>
+                </div>
+                <div>
+                  <span class="label-text">Job ID</span>
+                  <span class="value-text">JOB-2024-00142</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Asset ID -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-purple-subtle">
+                  <i class="fa-regular fa-building"></i>
+                </div>
+                <div>
+                  <span class="label-text">Asset ID</span>
+                  <span class="value-text">ASSET-8721</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dispatcher ID -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-green-subtle">
+                  <i class="fa-regular fa-user"></i>
+                </div>
+                <div>
+                  <span class="label-text">Platform Dispatcher ID</span>
+                  <span class="value-text">DISP-5043</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Company ID -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-orange-subtle">
+                  <i class="fa-regular fa-building"></i>
+                </div>
+                <div>
+                  <span class="label-text">Company ID</span>
+                  <span class="value-text">COMP-1892</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Technician ID -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-blue-subtle">
+                  <i class="fas fa-wrench"></i>
+                </div>
+                <div>
+                  <span class="label-text">Technician ID</span>
+                  <span class="value-text">TECH-3451</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description Row -->
+          <div class="row mb-4">
+            <div class="col-12">
+              <div class="d-flex align-items-start gap-3">
+                <div class="icon-box bg-gray-subtle">
+                  <i class="fa-regular fa-file-lines"></i>
+                </div>
+                <div>
+                  <span class="label-text">Description</span>
+                  <p class="value-text mb-0" style="line-height: 1.6">
+                    HVAC system maintenance and filter replacement. Customer
+                    reported unusual noise <br> from the main unit. Requires
+                    inspection of compressor and refrigerant levels.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gray Boxes (Needs Key / Code) -->
+          <div class="row g-4 pb-5 border-bottom pb-2">
+            <div class="col-md-6">
+              <div class="info-box-gray d-flex align-items-center gap-3">
+                <i class="fas fa-key text-muted fs-5"></i>
+                <div>
+                  <span class="label-text">Needs Key</span>
+                  <span class="value-text">Yes</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box-gray d-flex align-items-center gap-3">
+                <i class="fas fa-lock text-muted fs-5"></i>
+                <div>
+                  <span class="label-text">Needs Code</span>
+                  <span class="value-text">No</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Dates -->
+          <div class="row pt-3  g-4">
+            <div class="col-md-6">
+              <span class="label-text">Created At</span>
+              <span class="value-text fw-normal">Jan 15, 2024, 11:30 AM</span>
+            </div>
+            <div class="col-md-6">
+              <span class="label-text">Last Updated</span>
+              <span class="value-text fw-normal">Jan 19, 2024, 04:22 PM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Pricing Details Card -->
+        <div class="detail-card p-4 ">
+          <h5 class="fw-bold mb-4 border-bottom pb-2">Pricing Details</h5>
+
+          <div class="row g-4">
+            <!-- Base Price -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-gray-subtle">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div>
+                  <span class="label-text">Base Price</span>
+                  <span class="value-text fs-4 fw-bold">$185.00</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Final Price -->
+            <div class="col-md-6">
+              <div class="d-flex align-items-center gap-3">
+                <div class="icon-box bg-green-subtle">
+                  <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div>
+                  <span class="label-text">Final Price</span>
+                  <span class="value-text fs-4 fw-bold">$247.50</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    </body>
+    </html>
