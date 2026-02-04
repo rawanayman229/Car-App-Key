@@ -200,7 +200,7 @@
         <div class="filters mb-4">
           <div class="row g-3 align-items-center">
             <!-- Search -->
-            <div class="col-lg-10">
+            <div class="col-lg-12">
               <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input
@@ -210,13 +210,7 @@
                 />
               </div>
             </div>
-            <!-- More Filters -->
-            <div class="col-lg-2">
-              <button class="filter-btn w-100">
-                <i class="fas fa-filter"></i>
-                Filter
-              </button>
-            </div>
+
           </div>
         </div>
         <!-- End Of Search and Filter  -->
@@ -338,8 +332,8 @@
       //   Jobs Actions Column
       const JobsActions = (row) => [
         {
-          icon: "fa-solid fa-ellipsis-vertical",
-          title: "More Actions",
+          icon: "fa-regular fa-eye me-2 ",
+          title: "Details",
         },
       ];
 
@@ -368,27 +362,9 @@
             render: (data, type, row) => {
               return `
                 <div >
-                  <button class="btn btn-link text-muted p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <i class="fa-solid fa-ellipsis-vertical fs-5"></i>
-                  </button>
-                  <ul class="dropdown-menu dropdown-menu-end shadow border-0">
-                    <li>
                       <a class="dropdown-item" href="jobDetails.html?id=${row.id}">
-                        <i class="fa-regular fa-eye me-2 text-primary"></i>Details
+                        <i class="fa-regular fa-eye me-2 "></i>Details
                       </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="fa-regular fa-pen-to-square me-2 text-warning"></i>Edit
-                      </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li>
-                      <a class="dropdown-item text-danger" href="#">
-                        <i class="fa-regular fa-trash-can me-2"></i>Delete
-                      </a>
-                    </li>
-                  </ul>
                 </div>
               `;
             },
