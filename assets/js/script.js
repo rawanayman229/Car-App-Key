@@ -158,3 +158,27 @@ window.initDataTable = function (
 
   return table;
 };
+
+// GLOBAL Form Validation Function (User Profile in Sidebar)
+document.addEventListener("DOMContentLoaded", () => {
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    if (!location.pathname.endsWith("index.html")) {
+      window.location.href = "index.html";
+    }
+    return;
+  }
+
+  const userData = JSON.parse(user);
+
+  // Inject user info in sidebar
+  const sidebarUsername = document.getElementById("sidebarUsername");
+  const sidebarEmail = document.getElementById("sidebarEmail");
+  const userAvatar = document.getElementById("userAvatar");
+
+  if (sidebarUsername) sidebarUsername.textContent = userData.username;
+  if (sidebarEmail) sidebarEmail.textContent = userData.email;
+  if (userAvatar)
+    userAvatar.textContent = userData.username.charAt(0).toUpperCase();
+});
