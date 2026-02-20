@@ -151,87 +151,29 @@ body {
 }
 
 /* Sidebar Overlay for mobile */
-.sidebar-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.4);
-  z-index: 1050;
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    z-index: 1050;
 }
 
 /* End Of Sidebar */
 
 /* Main Wrapper */
-.main-wrapper {
-  margin-left: var(--sidebar-width);
-  margin-top: 20px;
-  padding: 0 20px 20px 20px;
-  min-height: 100vh;
-  transition: margin-left 0.3s ease;
+  .main-wrapper {
+    margin-left: var(--sidebar-width);
+    margin-top: 20px;
+    padding: 0 20px 20px 20px;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease;
 }
-
 
 /*  ===== 1- Dashboard Page =====*/
-
-/* Status Cards */
-.stat-card {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 0.8px solid #E5E7EB;
-  padding: 20px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  height: 100%;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
-}
-
-.stat-card:hover {
-  transform: translateY(-4px);
-  transition: 0.3s ease;
-}
-
-/* Text */
-.stat-card .info .title {
-  font-size: 14px;
-  color: var(--light-color);
-  line-height: 20px;
-  margin-bottom: 6px;
-  font-weight: 400;
-}
-
-.stat-card .info h3 {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--title-color);
-  margin: 0 0 8px;
-  line-height: 32px;
-}
-
-.stat-card .trend {
-  font-size: 14px;
-  font-weight: 700;
-  color: #10B981;
-  line-height: 20px;
-}
-
-/* Icon */
-.icon-box {
-  width: 12px;
-  height: 18px;
-  border-radius: 10px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #EFF6FF;
-  color: var(--primary-color);
-}
-
 /* Chart Row */
 .card-box {
   background: #fff;
@@ -241,7 +183,6 @@ body {
   height: 100%;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
 }
-
 .card-box h6 {
   font-size: 18px;
   font-weight: 600;
@@ -249,60 +190,7 @@ body {
   margin-bottom: 20px;
   line-height: 28px;
 }
-
-/* Recent Activity Row */
-.activity-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  border-bottom: 0.8px solid #E5E7EB;
-}
-
-.activity-item:last-child {
-  border-bottom: none;
-}
-
-.activity-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.activity-text strong {
-  display: block;
-  font-size: 14px;
-  font-weight: 400;
-  color: var(--title-color);
-  line-height: 20px;
-}
-
-.activity-text span {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  color: var(--light-color);
-}
-
-.activity-time {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 16px;
-  color: var(--light-color);
-}
-
 /* ==== End Of Dashboard Page==== */
-
-
-/* Start Of Users , Companies , Jobs all same styles*/
-
 /* Header */
 .page-title {
   font-size: 30px;

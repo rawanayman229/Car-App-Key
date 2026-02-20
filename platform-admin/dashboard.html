@@ -3,14 +3,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LockAccess Pro - Admin</title>
+    <title>Admin Dashboard</title>
 
     <!-- CSS Links-->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/apexcharts.css" />
     <link rel="stylesheet" href="../assets/css/all.min.css" />
     <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
   </head>
+
+  <!-- Internal Styles -->
+  <style>
+    /* Status Cards */
+    .stat-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 0.8px solid #e5e7eb;
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      height: 100%;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      transition: 0.3s ease;
+    }
+    /* Icon Of status cards*/
+    .icon-box {
+      background-color: #f0fdf4;
+      width: 12px;
+      height: 18px;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff6ff;
+      color: #00a63e;
+    }
+
+    /*  Text */
+    .stat-card .info h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--title-color);
+      margin: 0 0 8px;
+      line-height: 32px;
+    }
+
+    .stat-card p {
+      font-size: 20px;
+      font-weight: 600;
+      color: #00a63e;
+    }
+    .stat-card span {
+      font-size: 13px;
+      color: #6a7282;
+    }
+     /* Active Jobs Table */
+    #activeJobsTable thead th {
+      color: #6b7280;
+      font-weight: 500;
+      border-bottom: 1px solid #e5e7eb !important;
+    }
+
+    #activeJobsTable tbody td {
+      border-bottom: 1px solid #f1f5f9;
+      color: #374151;
+      vertical-align: middle;
+    }
+
+    /* Status Pills */
+    .badge-status {
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 500;
+      display: inline-block;
+    }
+    .status-progress { background: #DBEAFE; color: #1447E6; }
+    .status-assigned { background: #F3F4F6; color: #364153; }
+
+    /* Priority Pills */
+    .priority-high { background: #FFE2E2; color: #C10007; }
+    .priority-medium { background: #FEF9C2; color: #A65F00; }
+    .priority-low { background: #DCFCE7; color: #008236; }
+
+    /* RECENT ALERTS STYLING*/
+    .alert-item {
+        display: flex;
+        align-items: flex-start;
+        padding: 16px;
+        background-color: #F9FAFB;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+
+    .alert-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .alert-icon-wrapper {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        margin-right: 16px;
+    }
+
+    /* Alert Colors */
+    .alert-red { background-color: #FFE2E2; color: #E7000B; }
+    .alert-yellow { background-color: #FEF9C2; color: #D08700; }
+    .alert-blue { background-color: #DBEAFE; color: #155DFC; }
+
+    /* Text */
+    .alert-text p {
+        margin: 0;
+        font-weight: 500;
+        color: #101828;
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    .alert-text span {
+        display: block;
+        margin-top: 4px;
+        font-size: 13px;
+        color: #6A7282;
+    }
+  </style>
+  <!--End Of Internal Styles -->
 
   <body>
     <!-- Start Of Static Section (Side Bar) -->
@@ -20,7 +153,6 @@
 
     <!-- ===== Sidebar (Desktop) ===== -->
     <aside class="sidebar d-flex flex-column" id="sidebar">
-      
       <!-- 1. Header Section -->
       <div class="sidebar-header">
         <!-- Logo Text -->
@@ -36,7 +168,7 @@
       </div>
 
       <!-- 2. Navigation Menu -->
-        <!-- 2. Navigation Menu -->
+      <!-- 2. Navigation Menu -->
       <ul class="menu flex-grow-1">
         <li data-page="dashboard" class="active">
           <a href="dashboard.html">
@@ -82,28 +214,29 @@
       </ul>
       <!-- 3. Sidebar Footer (User Profile) -->
       <div class="sidebar-footer">
-      <div class="d-flex align-items-center gap-3">
-      <!-- Avatar Circle -->
-      <div class="user-avatar" id="userAvatar">U</div>
+        <div class="d-flex align-items-center gap-3">
+          <!-- Avatar Circle -->
+          <div class="user-avatar" id="userAvatar">U</div>
 
-      <!-- Text Info -->
-      <div class="user-info">
-      <h6 id="sidebarUsername">User</h6>
-      <small id="sidebarEmail">user@email.com</small>
-    </div>
-    </div>
+          <!-- Text Info -->
+          <div class="user-info">
+            <h6 id="sidebarUsername">User</h6>
+            <small id="sidebarEmail">user@email.com</small>
+          </div>
+        </div>
       </div>
     </aside>
     <!-- End OF Sidebar -->
 
     <!-- ===== Main Wrapper (Content) ===== -->
     <div class="main-wrapper" id="mainWrapper">
-      
       <!-- Mobile Header (Visible only on mobile/tablet to toggle sidebar) -->
-      <div class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+      <div
+        class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top"
+      >
         <h5 class="m-0 fw-bold text-dark">LockAccess Pro</h5>
         <button class="btn btn-light" id="toggleSidebar">
-            <i class="fas fa-bars"></i>
+          <i class="fas fa-bars"></i>
         </button>
       </div>
 
@@ -111,175 +244,362 @@
       <main class="content">
         <!-- Header -->
         <div class="d-flex flex-column justify-content-left">
-            <h3 class="page-title">Dashboard Overview</h3>
-            <p class="page-subtitle">
-              Welcome back! Here's what's happening today.
-            </p>
+          <h3 class="page-title">Dashboard Overview</h3>
+          <p class="page-subtitle">
+            Welcome back! Here's what's happening today.
+          </p>
         </div>
 
         <!-- Status Cards -->
-        <div class="row g-2 mb-4">
-          <div class="col-sm-6 col-xl-3">
+        <div class="row g-4 mb-4">
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
             <div class="stat-card">
               <div class="info">
-                <p class="title">Total Companies</p>
-                <h3>248</h3>
-                <span class="trend"
-                  >+12% from last <br />
-                  month</span>
+                <p class="icon-box"><i class="fa-solid fa-user-group"></i></p>
+                <h3>18</h3>
+                <span>Number of companies</span>
               </div>
-              <div class="icon-box">
-                <i class="fa-regular fa-building"></i>
-              </div>
+              <p>+3</p>
             </div>
           </div>
 
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
             <div class="stat-card">
               <div class="info">
-                <p class="title">Active Companies</p>
-                <h3>186</h3>
-                <span class="trend"
-                  >+8% from last <br />
-                  month</span
-                >
+                <p class="icon-box"><i class="fa-solid fa-user-group"></i></p>
+                <h3>18</h3>
+                <span>Number of companies</span>
               </div>
-              <div class="icon-box">
-                <i class="fa-regular fa-building"></i>
-              </div>
+              <p>+3</p>
             </div>
           </div>
 
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
             <div class="stat-card">
               <div class="info">
-                <p class="title">Total Jobs</p>
-                <h3>1,842</h3>
-                <span class="trend"
-                  >+23% from last <br />
-                  month</span
-                >
+                <p class="icon-box"><i class="fa-solid fa-user-group"></i></p>
+                <h3>18</h3>
+                <span>Number of companies</span>
               </div>
-              <div class="icon-box"><i class="fa-solid fa-suitcase"></i></div>
+              <p>+3</p>
             </div>
           </div>
 
-          <div class="col-sm-6 col-xl-3">
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
             <div class="stat-card">
               <div class="info">
-                <p class="title">Total Revenue</p>
-                <h3>$94,320</h3>
-                <span class="trend"
-                  >+18% from last <br />
-                  month</span
-                >
+                <p class="icon-box"><i class="fa-solid fa-user-group"></i></p>
+                <h3>18</h3>
+                <span>Number of companies</span>
               </div>
-              <div class="icon-box"><i class="fas fa-dollar-sign"></i></div>
+              <p>+3</p>
             </div>
           </div>
-          <!-- End Of Status Cards -->
+
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
+            <div class="stat-card">
+              <div class="info">
+                <p class="icon-box"><i class="fa-solid fa-user-group"></i></p>
+                <h3>18</h3>
+                <span>Number of companies</span>
+              </div>
+              <p>+3</p>
+            </div>
+          </div>
         </div>
+        <!-- End Of Status Cards -->
 
         <!-- Charts Row -->
         <div class="row g-3 mb-4">
+          <!-- Jobs This Week -->
           <div class="col-lg-6">
             <div class="card-box">
-              <h6>Jobs & Revenue Trend</h6>
-              <div id="lineChart"></div>
+              <h6>Jobs This Week</h6>
+              <div id="jobsWeekChart"></div>
             </div>
           </div>
 
+          <!-- Revenue Trend -->
           <div class="col-lg-6">
             <div class="card-box">
-              <h6>Company Status Distribution</h6>
-              <div id="pieChart"></div>
+              <h6>Revenue Trend</h6>
+              <div id="revenueTrendChart"></div>
             </div>
           </div>
         </div>
         <!-- End Of Charts Row -->
 
         <!--Recent Activity Row -->
-        <div class="row">
-          <div class="col-12">
+        <div class="row g-2">
+          <!-- Active Jobs -->
+          <div class="col-lg-8">
+          <div class="card-box">
+          <h6>Active Jobs</h6>
+          <div class="table-responsive">
+          <table id="activeJobsTable" class="table w-100">
+          <thead>
+          <tr>
+          <th>Job ID</th>
+          <th>Company</th>
+          <th>Type</th>
+          <th>Technician</th>
+          <th>Status</th>
+          <th>Priority</th>
+        </tr>
+        </thead>
+      <tbody></tbody>
+      </table>
+      </div>
+          </div>
+          </div>
+
+          <!-- Recent Alerts -->
+          <div class="col-lg-4">
             <div class="card-box">
-              <h6>Recent Activity</h6>
-              <div class="activity-list">
-                <!-- Item 1 -->
-                <div class="activity-item">
-                  <div class="activity-info">
-                    <div class="status-dot bg-success"></div>
-                    <div class="activity-text">
-                      <strong>ABC Locksmith</strong>
-                      <span>New job completed</span>
-                    </div>
-                  </div>
-                  <div class="activity-time">2 hours ago</div>
+              <h6>Recent Alerts</h6>
+              <!-- Alert 1: Overdue -->
+              <div class="alert-item">
+                <div class="alert-icon-wrapper alert-red">
+                  <i class="fa-regular fa-clock"></i>
                 </div>
-
-                <!-- Item 2 -->
-                <div class="activity-item">
-                  <div class="activity-info">
-                    <div class="status-dot bg-primary"></div>
-                    <div class="activity-text">
-                      <strong>QuickLock Services</strong>
-                      <span>Company registered</span>
-                    </div>
-                  </div>
-                  <div class="activity-time">4 hours ago</div>
+                <div class="alert-text">
+                  <p>Job #1189 is overdue by 2 hours</p>
+                  <span>15 min ago</span>
                 </div>
-
-                <!-- Item 3 -->
-                <div class="activity-item">
-                  <div class="activity-info">
-                    <div class="status-dot bg-warning"></div>
-                    <div class="activity-text">
-                      <strong>SafeKey Inc</strong>
-                      <span>Key code requested</span>
-                    </div>
-                  </div>
-                  <div class="activity-time">5 hours ago</div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="activity-item">
-                  <div class="activity-info">
-                    <div class="status-dot bg-success"></div>
-                    <div class="activity-text">
-                      <strong>Master Locks Co</strong>
-                      <span>Coins purchased</span>
-                    </div>
-                  </div>
-                  <div class="activity-time">6 hours ago</div>
-                </div>
-
-                <!-- Item 5 -->
-                <div class="activity-item">
-                  <div class="activity-info">
-                    <div class="status-dot bg-primary"></div>
-                    <div class="activity-text">
-                      <strong>Emergency Lock</strong>
-                      <span>Dispatcher assigned</span>
-                    </div>
-                  </div>
-                  <div class="activity-time">8 hours ago</div>
-                </div>
-
               </div>
+
+              <!-- Alert 2: Payment -->
+              <div class="alert-item">
+                <div class="alert-icon-wrapper alert-yellow">
+                  <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+                <div class="alert-text">
+                  <p>SecureAccess Inc has pending payment of $2,450</p>
+                  <span>1 hour ago</span>
+                </div>
+              </div>
+
+              <!-- Alert 3: Unavailable -->
+              <div class="alert-item">
+                <div class="alert-icon-wrapper alert-blue">
+                  <i class="fa-solid fa-user-group"></i>
+                </div>
+                <div class="alert-text">
+                  <p>Technician Mike Davis marked unavailable</p>
+                  <span>2 hours ago</span>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-        <!-- End of Activity -->
-
+        <!-- End of Recent Activity -->
+        
       </main>
       <!-- End of Content -->
     </div>
     <!-- End of Main Wrapper -->
 
     <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/apexcharts.min.js"></script>
     <script src="../assets/js/script.js"></script>
 
+    <!-- Internal Script to Render Charts -->
+    <script>
+      /* DASHBOARD CHARTS */
+      /* ===== Jobs This Week (Bar Chart) ===== */
+      const jobsWeekEl = document.querySelector("#jobsWeekChart");
 
+      if (jobsWeekEl && typeof ApexCharts !== "undefined") {
+        new ApexCharts(jobsWeekEl, {
+          series: [
+            {
+              name: "Jobs",
+              data: [12, 18, 15, 22, 28, 17, 9],
+            },
+          ],
+          chart: {
+            type: "bar",
+            height: 320,
+            toolbar: { show: false },
+            fontFamily: "inherit",
+          },
+          plotOptions: {
+            bar: {
+              borderRadius: 12,
+              columnWidth: "55%",
+            },
+          },
+          dataLabels: { enabled: false },
+          colors: ["#3B82F6"],
+          xaxis: {
+            categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+              style: {
+                colors: "#9CA3AF",
+                fontSize: "13px",
+              },
+            },
+          },
+          yaxis: {
+          min: 0,
+          max: 28,
+          tickAmount: 4,
+          labels: {
+          formatter: (val) => Math.round(val),
+          style: {
+          colors: "#9CA3AF",
+          fontSize: "13px",
+          },
+            },
+          },
+          grid: {
+            borderColor: "#E5E7EB",
+            strokeDashArray: 4,
+          },
+          tooltip: {
+            y: { formatter: (val) => `${val} Jobs` },
+          },
+        }).render();
+      }
+
+      /* ===== Revenue Trend (Line Chart) ===== */
+      const revenueTrendEl = document.querySelector("#revenueTrendChart");
+
+      if (revenueTrendEl && typeof ApexCharts !== "undefined") {
+        new ApexCharts(revenueTrendEl, {
+          series: [
+            {
+              name: "Revenue",
+              data: [40000, 45000, 60000, 66000, 70000],
+            },
+          ],
+          chart: {
+            type: "line",
+            height: 320,
+            toolbar: { show: false },
+            fontFamily: "inherit",
+          },
+          stroke: {
+            curve: "smooth",
+            width: 4,
+          },
+          markers: {
+            size: 6,
+            colors: ["#ffffff"],
+            strokeColors: "#10B981",
+            strokeWidth: 3,
+            hover: { size: 8 },
+          },
+          colors: ["#10B981"],
+          xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+              style: {
+                colors: "#9CA3AF",
+                fontSize: "13px",
+              },
+            },
+          },
+          yaxis: {
+          min: 0,
+          max: 80000,
+          tickAmount: 4,
+          labels: {
+          formatter: (val) => Math.round(val),
+          style: {
+          colors: "#9CA3AF",
+          fontSize: "13px",
+          },
+            },
+          },
+          grid: {
+            borderColor: "#E5E7EB",
+            strokeDashArray: 4,
+          },
+          tooltip: {
+            y: {
+              formatter: (val) => `$${val.toLocaleString()}`,
+            },
+          },
+        }).render();
+      }
+
+     /* ===== Active Jobs DataTable ===== */
+    $(document).ready(function () {
+    const ACTIVE_JOBS = [
+    {
+      id: "JOB-1234",
+      company: "QuickLock Services",
+      type: "Emergency Lockout",
+      tech: "John Smith",
+      status: "In Progress",
+      priority: "High",
+    },
+    {
+      id: "JOB-1235",
+      company: "SecureAccess Inc",
+      type: "Lock Installation",
+      tech: "Sarah Johnson",
+      status: "In Progress",
+      priority: "Medium",
+    },
+    {
+      id: "JOB-1236",
+      company: "MasterKey Solutions",
+      type: "Key Duplication",
+      tech: "Mike Davis",
+      status: "Assigned",
+      priority: "Low",
+    },
+    {
+      id: "JOB-1237",
+      company: "QuickLock Services",
+      type: "Safe Opening",
+      tech: "Emily Brown",
+      status: "In Progress",
+      priority: "High",
+    },
+  ];
+
+  $("#activeJobsTable").DataTable({
+    data: ACTIVE_JOBS,
+    columns: [
+      { data: "id" },
+      { data: "company" },
+      { data: "type" },
+      { data: "tech" },
+      {
+        data: "status",
+        render: (d) => {
+          const cls = d === "In Progress" ? "status-progress" : "status-assigned";
+          return `<span class="badge-status ${cls}">${d}</span>`;
+        },
+      },
+      {
+        data: "priority",
+        render: (d) => {
+          let cls = "";
+          if (d === "High") cls = "priority-high";
+          else if (d === "Medium") cls = "priority-medium";
+          else cls = "priority-low";
+          return `<span class="badge-status ${cls}">${d}</span>`;
+        },
+      },
+    ],
+    paging: false,
+    info: false,
+    searching: false,
+  });
+  });
+    </script>
   </body>
 </html>

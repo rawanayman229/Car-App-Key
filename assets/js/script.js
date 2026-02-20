@@ -1,3 +1,4 @@
+/*GLOBAL UI LOGIC */
 document.addEventListener("DOMContentLoaded", () => {
   const toggleBtn = document.getElementById("toggleSidebar");
   const closeBtn = document.getElementById("closeSidebar");
@@ -5,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const currentPage = location.pathname.split("/").pop() || "dashboard.html";
 
-  // Active Link logic
+  /* ===== Active Link Logic ===== */
   document.querySelectorAll(".menu li").forEach((li) => {
     const link = li.querySelector("a");
     if (link && link.getAttribute("href") === currentPage) {
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Toggle Sidebar
+  /* ===== Sidebar Toggle ===== */
   if (toggleBtn) {
     toggleBtn.onclick = () => {
       window.innerWidth > 992
@@ -23,54 +24,25 @@ document.addEventListener("DOMContentLoaded", () => {
         : body.classList.toggle("sidebar-open");
     };
   }
+
   if (overlay) overlay.onclick = () => body.classList.remove("sidebar-open");
   if (closeBtn) closeBtn.onclick = () => body.classList.remove("sidebar-open");
-
-  //======== Start Of Dashboard Page=========
-
-  // --- APEX CHARTS (Dashboard Only) ---
-  const lineEl = document.querySelector("#lineChart");
-  const pieEl = document.querySelector("#pieChart");
-
-  if (lineEl && typeof ApexCharts !== "undefined") {
-    new ApexCharts(lineEl, {
-      series: [
-        { name: "Jobs", data: [0, 60, 120, 180, 240] },
-        { name: "Revenue ($)", data: [0, 25000, 50000, 75000, 100000] },
-      ],
-      chart: { height: 300, type: "line", toolbar: { show: false } },
-      stroke: { curve: "smooth", width: 3 },
-      colors: ["#2563EB", "#10B981"],
-      xaxis: { categories: ["Jan", "Feb", "Mar", "Apr", "May"] },
-    }).render();
-  }
-
-  if (pieEl && typeof ApexCharts !== "undefined") {
-    new ApexCharts(pieEl, {
-      series: [75, 18, 7],
-      chart: { type: "donut", height: 320 },
-      labels: ["Active", "Inactive", "Pending"],
-      colors: ["#10B981", "#6B7280", "#F59E0B"],
-      legend: { position: "bottom" },
-    }).render();
-  }
 });
 
-//======== End Of Dashboard Page=========
-
-// GLOBAL HELPER FUNCTIONS (Available to all pages)
-
-// Renders: Name (Top) + Subtext (Bottom)
+/* GLOBAL HELPER FUNCTIONS*/
+// Name + sub text
 window.renderDoubleLine = (line1, line2, classPrefix) => {
   return `
-        <div class="${classPrefix}-info">
-            <span class="${classPrefix}-name">${line1}</span>
-            <span class="${classPrefix}-email" style="display:block; font-size:12px; color:#6b7280;">${line2}</span>
-        </div>
-    `;
+    <div class="${classPrefix}-info">
+      <span class="${classPrefix}-name">${line1}</span>
+      <span class="${classPrefix}-email" style="display:block;font-size:12px;color:#6b7280;">
+        ${line2}
+      </span>
+    </div>
+  `;
 };
 
-// Renders: Colored Badges based on status text
+// Status badge renderer
 window.renderStatusBadge = (status) => {
   let className = "badge-status-inactive";
   const s = (status || "").toLowerCase();
@@ -85,34 +57,29 @@ window.renderStatusBadge = (status) => {
   else if (s === "dispatcher") className = "badge-role-dispatcher";
   else if (s === "urgent") className = "badge-priority-urgent";
   else if (s === "normal") className = "badge-priority-normal";
+
   return `<span class="badge ${className}">${status}</span>`;
 };
 
+// Actions renderer
 window.renderActions = (actions = []) => {
   return `
     <div class="action-btns">
       ${actions
         .map(
           (action) => `
-            <i 
-              class="${action.icon}" 
-              title="${action.title || ""}" 
-              onclick="${action.onClick || ""}">
-            </i>
-          `,
+        <i class="${action.icon}" 
+          title="${action.title || ""}" 
+          onclick="${action.onClick || ""}">
+        </i>
+      `,
         )
         .join("")}
     </div>
   `;
 };
 
-// GLOBAL Data-table FUNCTION
-/**
- * @param {string} tableId
- * @param {Array|String} dataOrUrl
- * @param {Array} columnsConfig
- * @param {Object} filters
- */
+/* GLOBAL DATATABLE HELPER */
 window.initDataTable = function (
   tableId,
   dataOrUrl,
@@ -143,12 +110,12 @@ window.initDataTable = function (
     },
   });
 
-  // Bind Custom Search Input
+  // Search
   $("#customSearch").on("keyup", function () {
     table.search(this.value).draw();
   });
 
-  // Bind External Dropdown Filters
+  // Filters
   Object.keys(filters).forEach((selector) => {
     $(selector).on("change", function () {
       const val = $(this).val();
@@ -159,7 +126,7 @@ window.initDataTable = function (
   return table;
 };
 
-// GLOBAL Form Validation Function (User Profile in Sidebar)
+/* USER SESSION LOGIC */
 document.addEventListener("DOMContentLoaded", () => {
   const user = localStorage.getItem("user");
 
@@ -172,7 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const userData = JSON.parse(user);
 
-  // Inject user info in sidebar
   const sidebarUsername = document.getElementById("sidebarUsername");
   const sidebarEmail = document.getElementById("sidebarEmail");
   const userAvatar = document.getElementById("userAvatar");
