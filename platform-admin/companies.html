@@ -374,6 +374,7 @@
               <label class="form-label required">Company Name</label>
               <input type="text" id="companyName" class="form-control custom-input" placeholder="e.g., ABC Locksmith Services">
             </div>
+            <div class="error-text" id="err-companyName"></div>
 
             <div class="col-md-6">
               <label class="form-label required">Business Email</label>
@@ -381,6 +382,7 @@
                 <i class="fa-regular fa-envelope"></i>
                 <input type="email" id="companyEmail" class="form-control" placeholder="contact@company.com">
               </div>
+              <div class="error-text" id="err-companyEmail"></div>
             </div>
 
             <div class="col-md-6">
@@ -389,6 +391,7 @@
                 <i class="fa-solid fa-phone"></i>
                 <input type="text" id="companyPhone" class="form-control" placeholder="(555) 123-4567">
               </div>
+              <div class="error-text" id="err-companyPhone"></div>
             </div>
 
             <div class="col-md-6">
@@ -399,6 +402,7 @@
             <div class="col-md-6">
               <label class="form-label required">Commission</label>
               <input type="text" id="commission" class="form-control custom-input">
+              <div class="error-text" id="err-commission"></div>
             </div>
 
             <div class="col-md-6">
@@ -414,6 +418,7 @@
                 <option value="Pending">Pending</option>
                 <option value="Suspended">Suspended</option>
               </select>
+              <div class="error-text" id="err-companyStatus"></div>
             </div>
 
           </div>
@@ -430,26 +435,31 @@
               <label class="form-label required">Street Address</label>
               <input type="text" id="street" class="form-control custom-input" placeholder="123 Main Street">
             </div>
+            <div class="error-text" id="err-street"></div>
 
             <div class="col-md-6">
               <label class="form-label required">City</label>
               <input type="text" id="city" class="form-control custom-input" placeholder="New York">
             </div>
+            <div class="error-text" id="err-city"></div>
 
             <div class="col-md-6">
               <label class="form-label required">State</label>
               <input type="text" id="state" class="form-control custom-input">
             </div>
+            <div class="error-text" id="err-state"></div>
 
             <div class="col-md-6">
               <label class="form-label required">ZIP Code</label>
               <input type="text" id="zip" class="form-control custom-input" placeholder="10001">
             </div>
+            <div class="error-text" id="err-zip"></div>
 
             <div class="col-md-6">
               <label class="form-label required">Area</label>
               <input type="text" id="area" class="form-control custom-input">
             </div>
+            <div class="error-text" id="err-area"></div>
           </div>
         </div>
 
@@ -469,6 +479,7 @@
               <label class="form-label required">Admin Full Name</label>
               <input type="text" id="adminName" class="form-control custom-input" placeholder="John Smith">
             </div>
+            <div class="error-text" id="err-adminName"></div>
 
             <div class="col-md-6">
               <label class="form-label required">Admin Email</label>
@@ -476,6 +487,7 @@
                 <i class="fa-regular fa-envelope"></i>
                 <input type="email" id="adminEmail" class="form-control" placeholder="admin@company.com">
               </div>
+              <div class="error-text" id="err-adminEmail"></div>
             </div>
 
             <div class="col-md-6">
@@ -484,6 +496,7 @@
                 <i class="fa-solid fa-phone"></i>
                 <input type="text" id="adminPhone" class="form-control" placeholder="(555) 123-4567">
               </div>
+              <div class="error-text" id="err-adminPhone"></div>
             </div>
           </div>
         </div>
@@ -663,8 +676,65 @@ $(document).ready(function(){
   });
 
   /* Add Company Modal*/
-  $("#saveCompany").on("click",function(){
+/* ===== Add Company Validation ===== */
+$("#saveCompany").on("click", function () {
 
+  let isValid = true;
+
+  const requiredFields = [
+    { id: "companyName", msg: "Company name is required" },
+    { id: "companyEmail", msg: "Business email is required", type: "email" },
+    { id: "companyPhone", msg: "Business phone is required" },
+    { id: "commission", msg: "Commission is required" },
+    { id: "companyStatus", msg: "Company status is required" },
+
+    { id: "street", msg: "Street address is required" },
+    { id: "city", msg: "City is required" },
+    { id: "state", msg: "State is required" },
+    { id: "zip", msg: "ZIP code is required" },
+    { id: "area", msg: "Area is required" },
+
+    { id: "adminName", msg: "Admin name is required" },
+    { id: "adminEmail", msg: "Admin email is required", type: "email" },
+    { id: "adminPhone", msg: "Admin phone is required" }
+  ];
+
+ // Reset form and errors when modal is closed
+  $('#addCompanyModal').on('hidden.bs.modal', function () {
+  // Clear all input values 
+  $(this).find('input, select').val('');
+
+  // Remove error classes
+  $(this).find('.form-control, .form-select').removeClass('input-error');
+
+  // Hide error messages
+  $(this).find('.error-text').hide();
+  });
+
+  requiredFields.forEach(field => {
+    const el = $("#" + field.id);
+    const val = el.val()?.trim();
+
+    if (!val) {
+      isValid = false;
+      el.addClass("input-error");
+      $("#err-" + field.id).text(field.msg).show();
+    }
+
+    /* Email validation */
+    if (field.type === "email" && val) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(val)) {
+        isValid = false;
+        el.addClass("input-error");
+        $("#err-" + field.id).text("Invalid email format").show();
+      }
+    }
+  });
+
+  if (!isValid) return;
+
+  /* If valid → add company */
   const newCompany = {
     name: $("#companyName").val(),
     status: $("#companyStatus").val(),
@@ -676,10 +746,16 @@ $(document).ready(function(){
   };
 
   companiesTable.row.add(newCompany).draw(false);
+
   bootstrap.Modal.getInstance(
     document.getElementById('addCompanyModal')
   ).hide();
-
+  });
+  
+  /* Auto clear error on input */
+  $(document).on("input change", ".form-control, .form-select", function(){
+  $(this).removeClass("input-error");
+  $("#err-" + this.id).hide();
   });
 
   });
