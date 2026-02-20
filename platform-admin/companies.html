@@ -204,403 +204,341 @@
   </head>
 
   <body>
-    <!-- Start Of Static Section (Side Bar) -->
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- ===== Sidebar (Desktop) ===== -->
-    <aside class="sidebar d-flex flex-column" id="sidebar">
-      
-      <!-- 1. Header Section -->
-      <div class="sidebar-header">
-        <!-- Logo Text -->
-        <div class="logo">
-          <h4>LockAccess Pro</h4>
-          <p>Platform Admin</p>
-        </div>
-
-        <!-- Close button (Mobile) -->
-        <button class="btn d-md-none text-muted" id="closeSidebar">
-          <i class="fas fa-times"></i>
-        </button>
+  <!-- ===== Sidebar (Desktop) ===== -->
+  <aside class="sidebar d-flex flex-column" id="sidebar">
+    <!-- 1. Header Section -->
+    <div class="sidebar-header">
+      <div class="logo">
+        <h4>LockAccess Pro</h4>
+        <p>Platform Admin</p>
       </div>
+      <button class="btn d-md-none text-muted" id="closeSidebar">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
 
-      <!-- 2. Navigation Menu -->
-      <ul class="menu flex-grow-1">
-        <li data-page="dashboard" class="active">
-          <a href="dashboard.html">
-            <i class="fa-solid fa-table-cells-large"></i>
-            Dashboard
-          </a>
-        </li>
+    <!-- 2. Navigation Menu -->
+    <ul class="menu flex-grow-1">
+      <li data-page="dashboard">
+        <a href="dashboard.html"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+      </li>
+      <li data-page="companies" class="active">
+        <a href="companies.html"><i class="fa-regular fa-building"></i> Companies</a>
+      </li>
+      <li data-page="reports">
+        <a href="reports.html"><i class="fa-regular fa-file-lines"></i> Reports</a>
+      </li>
+      <li data-page="jobs">
+        <a href="jobs.html"><i class="fa-solid fa-user-group"></i> Jobs</a>
+      </li>
+      <li data-page="notifications">
+        <a href="notifications.html"><i class="fa-regular fa-bell"></i> Notifications</a>
+      </li>
+      <li data-page="customers">
+        <a href="customers.html"><i class="fa-solid fa-users"></i> Customers</a>
+      </li>
+    </ul>
 
-        <li data-page="companies">
-          <a href="companies.html">
-            <i class="fa-regular fa-building"></i>
-            Companies
-          </a>
-        </li>
-
-        <li data-page="reports">
-          <a href="reports.html">
-            <i class="fa-regular fa-file-lines"></i>
-            Reports
-          </a>
-        </li>
-
-        <li data-page="jobs">
-          <a href="jobs.html">
-            <i class="fa-solid fa-user-group"></i>
-            Jobs
-          </a>
-        </li>
-
-        <li data-page="notifications">
-          <a href="notifications.html">
-            <i class="fa-regular fa-bell"></i>
-            Notifications
-          </a>
-        </li>
-
-        <li data-page="customers">
-          <a href="customers.html">
-            <i class="fa-solid fa-users"></i>
-            Customers
-          </a>
-        </li>
-      </ul>
-      <!-- 3. Sidebar Footer (User Profile) -->
-      <div class="sidebar-footer">
+    <!-- 3. Sidebar Footer -->
+    <div class="sidebar-footer">
       <div class="d-flex align-items-center gap-3">
-      <!-- Avatar Circle -->
-      <div class="user-avatar" id="userAvatar">U</div>
-
-      <!-- Text Info -->
-      <div class="user-info">
-      <h6 id="sidebarUsername">User</h6>
-      <small id="sidebarEmail">user@email.com</small>
-    </div>
-    </div>
-    </div>
-    </aside>
-    <!-- End OF Sidebar -->
-    
-    <!-- ===== Main Wrapper ( Content) ===== -->
-    <div class="main-wrapper">
-
-    <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-      <h3 class="page-title">Companies Management</h3>
-      <p class="page-subtitle">Manage and monitor all locksmith companies on the platform.</p>
-    </div>
-    </div>
-
-    <!-- DataTable Content-->
-    <main class="content mb-4">
-    <div class="row g-3 align-items-center">
-
-      <!-- Search -->
-      <div class="col-lg-10">
-        <div class="search-box">
-          <i class="fas fa-search"></i>
-          <input type="text" id="customSearch" placeholder="Search companies..." />
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div class="user-info">
+          <h6 id="sidebarUsername">User</h6>
+          <small id="sidebarEmail">user@email.com</small>
         </div>
       </div>
-
-      <!-- Add Company Button -->
-      <div class="col-lg-2">
-        <button class="btn add-company-btn w-100"
-          data-bs-toggle="modal"
-          data-bs-target="#addCompanyModal">
-          <i class="fas fa-plus me-2"></i>
-          Add Company
-        </button>
-      </div>
-
-      <!-- Table -->
-      <div class="table-responsive mt-3">
-        <table id="companiesTable" class="table w-100">
-          <thead>
-            <tr>
-              <th>Company</th>
-              <th>Status</th>
-              <th>Dispatchers</th>
-              <th>Technicians</th>
-              <th>Active Jobs</th>
-              <th>Completed</th>
-              <th>Revenue</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
     </div>
+  </aside>
+
+  <!-- ===== Main Wrapper ===== -->
+  <div class="main-wrapper" id="mainWrapper">
+    
+    <!-- 1. Mobile Header (Visible only on mobile/tablet) -->
+    <!-- This structure matches the dashboard exactly -->
+    <div class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+      <h5 class="m-0 fw-bold text-dark">LockAccess Pro</h5>
+      <button class="btn btn-light" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- 2. Main Content Area -->
+    <main class="content mb-4">
+      
+      <!-- Page Header (Desktop View title) -->
+      <div class="d-flex flex-column justify-content-left mb-4">
+        <h3 class="page-title">Companies Management</h3>
+        <p class="page-subtitle">Manage and monitor all locksmith companies on the platform.</p>
+      </div>
+
+      <!-- Main Data Content -->
+      <div class="row g-3 align-items-center">
+        <!-- Search -->
+        <div class="col-lg-10">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="customSearch" placeholder="Search companies..." />
+          </div>
+        </div>
+
+        <!-- Add Company Button -->
+        <div class="col-lg-2">
+          <button class="btn add-company-btn w-100" data-bs-toggle="modal" data-bs-target="#addCompanyModal">
+            <i class="fas fa-plus me-2"></i> Add Company
+          </button>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive mt-3">
+          <table id="companiesTable" class="table w-100">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Status</th>
+                <th>Dispatchers</th>
+                <th>Technicians</th>
+                <th>Active Jobs</th>
+                <th>Completed</th>
+                <th>Revenue</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+      
     </main>
-    </div>
+  </div>
 
-    <!-- =================Start Of ADD COMPANY MODAL ================= -->
+    <!-- ================= ADD COMPANY MODAL ================= -->
     <div class="modal fade" id="addCompanyModal" tabindex="-2">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content add-company-modal">
+      <div class="modal-content add-company-modal">
+        <!-- Header -->
+        <div class="modal-header border-0 pb-2">
+          <div class="d-flex align-items-center gap-3">
+            <i class="fas fa-arrow-left modal-back" data-bs-dismiss="modal"></i>
+            <div>
+              <h4 class="modal-title">Add New Company</h4>
+              <p class="modal-subtitle">Register a new locksmith company on the platform</p>
+            </div>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
 
-      <!-- Header -->
-      <div class="modal-header border-0 pb-2">
-        <div class="d-flex align-items-center gap-3">
-          <i class="fas fa-arrow-left modal-back" data-bs-dismiss="modal"></i>
-          <div>
-            <h4 class="modal-title">Add New Company</h4>
-            <p class="modal-subtitle">Register a new locksmith company on the platform</p>
+        <!-- Body -->
+        <div class="modal-body px-4">
+          <!-- Info -->
+          <div class="form-section-card">
+            <h6 class="section-title"><i class="fa-solid fa-building"></i> Company Information</h6>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label required">Company Name</label>
+                <input type="text" id="companyName" class="form-control custom-input" placeholder="e.g., ABC Locksmith Services">
+              </div>
+              <div class="error-text" id="err-companyName"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Business Email</label>
+                <div class="input-group-custom">
+                  <i class="fa-regular fa-envelope"></i>
+                  <input type="email" id="companyEmail" class="form-control" placeholder="contact@company.com">
+                </div>
+                <div class="error-text" id="err-companyEmail"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Business Phone</label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-phone"></i>
+                  <input type="text" id="companyPhone" class="form-control" placeholder="(555) 123-4567">
+                </div>
+                <div class="error-text" id="err-companyPhone"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Business License Number</label>
+                <input type="text" id="licenseNumber" class="form-control custom-input" placeholder="Enter business license number">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Commission</label>
+                <input type="text" id="commission" class="form-control custom-input">
+                <div class="error-text" id="err-commission"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Tax ID / EIN</label>
+                <input type="text" id="taxId" class="form-control custom-input" placeholder="XX-XXXXXXX">
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Company Status</label>
+                <select id="companyStatus" class="form-select custom-input">
+                  <option value="" disabled selected></option>
+                  <option value="Active">Active</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Suspended">Suspended</option>
+                </select>
+                <div class="error-text" id="err-companyStatus"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="form-section-card">
+            <h6 class="section-title"><i class="fa-solid fa-location-dot"></i> Business Address</h6>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label required">Street Address</label>
+                <input type="text" id="street" class="form-control custom-input" placeholder="123 Main Street">
+              </div>
+              <div class="error-text" id="err-street"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">City</label>
+                <input type="text" id="city" class="form-control custom-input" placeholder="New York">
+              </div>
+              <div class="error-text" id="err-city"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">State</label>
+                <input type="text" id="state" class="form-control custom-input">
+              </div>
+              <div class="error-text" id="err-state"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">ZIP Code</label>
+                <input type="text" id="zip" class="form-control custom-input" placeholder="10001">
+              </div>
+              <div class="error-text" id="err-zip"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Area</label>
+                <input type="text" id="area" class="form-control custom-input">
+              </div>
+              <div class="error-text" id="err-area"></div>
+            </div>
+          </div>
+
+          <!-- Admin -->
+          <div class="form-section-card">
+            <h6 class="section-title"><i class="fa-regular fa-user"></i> Company Administrator</h6>
+            <div class="alert alert-info-soft">
+              <i class="fa-solid fa-circle-info"></i>
+              <span>This person will be the primary admin for this company.</span>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label required">Admin Full Name</label>
+                <input type="text" id="adminName" class="form-control custom-input" placeholder="John Smith">
+              </div>
+              <div class="error-text" id="err-adminName"></div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Admin Email</label>
+                <div class="input-group-custom">
+                  <i class="fa-regular fa-envelope"></i>
+                  <input type="email" id="adminEmail" class="form-control" placeholder="admin@company.com">
+                </div>
+                <div class="error-text" id="err-adminEmail"></div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label required">Admin Phone</label>
+                <div class="input-group-custom">
+                  <i class="fa-solid fa-phone"></i>
+                  <input type="text" id="adminPhone" class="form-control" placeholder="(555) 123-4567">
+                </div>
+                <div class="error-text" id="err-adminPhone"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+        <!-- Footer -->
+        <div class="modal-footer custom-footer">
+          <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" id="saveCompany">
+            <i class="fa-solid fa-building me-2"></i> Create Company
+          </button>
+        </div>
       </div>
-
-      <!-- Body -->
-      <div class="modal-body px-4">
-
-        <!-- ================= Company Information ================= -->
-        <div class="form-section-card">
-          <h6 class="section-title">
-            <i class="fa-solid fa-building"></i> Company Information
-          </h6>
-
-          <div class="row g-3">
-
-            <div class="col-12">
-              <label class="form-label required">Company Name</label>
-              <input type="text" id="companyName" class="form-control custom-input" placeholder="e.g., ABC Locksmith Services">
-            </div>
-            <div class="error-text" id="err-companyName"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Business Email</label>
-              <div class="input-group-custom">
-                <i class="fa-regular fa-envelope"></i>
-                <input type="email" id="companyEmail" class="form-control" placeholder="contact@company.com">
-              </div>
-              <div class="error-text" id="err-companyEmail"></div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Business Phone</label>
-              <div class="input-group-custom">
-                <i class="fa-solid fa-phone"></i>
-                <input type="text" id="companyPhone" class="form-control" placeholder="(555) 123-4567">
-              </div>
-              <div class="error-text" id="err-companyPhone"></div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Business License Number</label>
-              <input type="text" id="licenseNumber" class="form-control custom-input" placeholder="Enter business license number">
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Commission</label>
-              <input type="text" id="commission" class="form-control custom-input">
-              <div class="error-text" id="err-commission"></div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label">Tax ID / EIN</label>
-              <input type="text" id="taxId" class="form-control custom-input" placeholder="XX-XXXXXXX">
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Company Status</label>
-              <select id="companyStatus" class="form-select custom-input">
-                <option value="" disabled selected></option>
-                <option value="Active">Active</option>
-                <option value="Pending">Pending</option>
-                <option value="Suspended">Suspended</option>
-              </select>
-              <div class="error-text" id="err-companyStatus"></div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ================= Business Address ================= -->
-        <div class="form-section-card">
-          <h6 class="section-title">
-            <i class="fa-solid fa-location-dot"></i> Business Address
-          </h6>
-
-          <div class="row g-3">
-            <div class="col-12">
-              <label class="form-label required">Street Address</label>
-              <input type="text" id="street" class="form-control custom-input" placeholder="123 Main Street">
-            </div>
-            <div class="error-text" id="err-street"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">City</label>
-              <input type="text" id="city" class="form-control custom-input" placeholder="New York">
-            </div>
-            <div class="error-text" id="err-city"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">State</label>
-              <input type="text" id="state" class="form-control custom-input">
-            </div>
-            <div class="error-text" id="err-state"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">ZIP Code</label>
-              <input type="text" id="zip" class="form-control custom-input" placeholder="10001">
-            </div>
-            <div class="error-text" id="err-zip"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Area</label>
-              <input type="text" id="area" class="form-control custom-input">
-            </div>
-            <div class="error-text" id="err-area"></div>
-          </div>
-        </div>
-
-        <!-- ================= Company Administrator ================= -->
-        <div class="form-section-card">
-          <h6 class="section-title">
-            <i class="fa-regular fa-user"></i> Company Administrator
-          </h6>
-
-          <div class="alert alert-info-soft">
-            <i class="fa-solid fa-circle-info"></i>
-            <span>This person will be the primary admin for this company and will receive login credentials via email.</span>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <label class="form-label required">Admin Full Name</label>
-              <input type="text" id="adminName" class="form-control custom-input" placeholder="John Smith">
-            </div>
-            <div class="error-text" id="err-adminName"></div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Admin Email</label>
-              <div class="input-group-custom">
-                <i class="fa-regular fa-envelope"></i>
-                <input type="email" id="adminEmail" class="form-control" placeholder="admin@company.com">
-              </div>
-              <div class="error-text" id="err-adminEmail"></div>
-            </div>
-
-            <div class="col-md-6">
-              <label class="form-label required">Admin Phone</label>
-              <div class="input-group-custom">
-                <i class="fa-solid fa-phone"></i>
-                <input type="text" id="adminPhone" class="form-control" placeholder="(555) 123-4567">
-              </div>
-              <div class="error-text" id="err-adminPhone"></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer custom-footer">
-        <button class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-        <button class="btn btn-primary" id="saveCompany">
-          <i class="fa-solid fa-building me-2"></i> Create Company
-        </button>
-      </div>
-
     </div>
-    </div>
-    </div>
-    <!-- =================End Of ADD COMPANY MODAL ================= -->
+  </div>
 
-    <!-- ================= Start Of VIEW DETAILS MODAL ================= -->
-    <div class="modal fade" id="viewDetailsModal" tabindex="-2">
+  <!-- ================= VIEW DETAILS MODAL ================= -->
+  <div class="modal fade" id="viewDetailsModal" tabindex="-2">
     <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content view-details-modal">
-
-      <div class="modal-header border-0 pb-0">
-        <h3 class="modal-title fw-bold" id="modalCompanyName">Company</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <hr class="mx-4">
-
-      <div class="modal-body px-4">
-
-        <div class="row g-4 mb-4">
-
-            <!-- Dispatchers Card -->
-            <div class="col-md-6">
-            <div class="stat-card blue gap-4">
-              <div class="d-flex align-items-center gap-3">
-              <div class="icon"><i class="fa-solid fa-users"></i></div>
-              <div class="text"><span>Dispatchers</span></div>
-              </div>
-              <h2 id="d_dispatchers">0</h2>
-            </div>
-            </div>
-
-            <!-- Technicians Card -->
-            <div class="col-md-6">
-            <div class="stat-card green gap-4">
-              <div class="d-flex align-items-center gap-3">
-              <div class="icon"><i class="fa-solid fa-users"></i></div>
-              <div class="text"><span>Technicians</span></div>
-              </div>
-              <h2 id="d_technicians">0</h2>
-            </div>
-            </div>
-
-            <!-- Active Jobs Card -->
-            <div class="col-md-6">
-            <div class="stat-card yellow gap-4">
-              <div class="d-flex align-items-center gap-3">
-              <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
-              <div class="text"><span>Active Jobs</span></div>
-              </div>
-              <h2 id="d_active">0</h2>
-            </div>
-            </div>
-
-            <!--Total Revenue Card -->
-            <div class="col-md-6">
-            <div class="stat-card purple gap-4">
-              <div class="d-flex align-items-center gap-3">
-              <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
-              <div class="text"><span>Total Revenue</span></div>
-              </div>
-              <h2 id="d_revenue">0</h2>
-            </div>
-            </div>
-
+      <div class="modal-content view-details-modal">
+        <div class="modal-header border-0 pb-0">
+          <h3 class="modal-title fw-bold" id="modalCompanyName">Company</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-
-        <!-- Performane Box -->
-        
-        <div class="performance-box">
-          <h5>Performance Metrics</h5>
-
-          <div class="metric-container">
-          <div class="metric-row">
-            <span>Completed Jobs</span>
-            <strong id="d_completed">0</strong>
+        <hr class="mx-4">
+        <div class="modal-body px-4">
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="stat-card blue gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon"><i class="fa-solid fa-users"></i></div>
+                  <div class="text"><span>Dispatchers</span></div>
+                </div>
+                <h2 id="d_dispatchers">0</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-card green gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon"><i class="fa-solid fa-users"></i></div>
+                  <div class="text"><span>Technicians</span></div>
+                </div>
+                <h2 id="d_technicians">0</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-card yellow gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon"><i class="fa-solid fa-briefcase"></i></div>
+                  <div class="text"><span>Active Jobs</span></div>
+                </div>
+                <h2 id="d_active">0</h2>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-card purple gap-4">
+                <div class="d-flex align-items-center gap-3">
+                  <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+                  <div class="text"><span>Total Revenue</span></div>
+                </div>
+                <h2 id="d_revenue">0</h2>
+              </div>
+            </div>
           </div>
-
-          <div class="metric-row">
-            <span>Status</span>
-            <strong id="d_status" class="status-active">Active</strong>
-          </div>
+          
+          <!-- Performance Metrics Box -->
+          <div class="performance-box">
+            <h5>Performance Metrics</h5>
+            <div class="metric-container">
+              <div class="metric-row">
+                <span>Completed Jobs</span>
+                <strong id="d_completed">0</strong>
+              </div>
+              <div class="metric-row">
+                <span>Status</span>
+                <strong id="d_status" class="status-active">Active</strong>
+              </div>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
-    </div>
-    </div>
-    <!-- ================= End Of VIEW DETAILS MODAL ================= -->
+  </div>
 
   <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
