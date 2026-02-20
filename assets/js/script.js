@@ -49,8 +49,7 @@ window.renderStatusBadge = (status) => {
 
   if (s === "active" || s === "completed") className = "badge-status-active";
   else if (s === "pending") className = "badge-status-pending";
-  else if (s === "suspended" || s === "cancelled")
-    className = "badge-status-suspended";
+  else if (s === "suspended" || s === "cancelled")className = "badge-status-suspended";
   else if (s === "in progress") className = "badge-status-in-progress";
   else if (s === "rejected") className = "badge-status-rejected";
   else if (s === "admin") className = "badge-role-admin";
