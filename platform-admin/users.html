@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users Management</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+
+  <!-- Internal Style For Modals -->
+  <style>
+  /* ===== ADD USER MODAL ===== */
+  .add-user-modal{
+    border-radius: 16px;
+    background: #FFFFFF;
+  }
+
+  .modal-title{
+    font-weight: 800;
+    color:#1F2937;
+  }
+
+  .modal-subtitle{
+    font-size:14px;
+    color:#1F2937;
+    margin:0;
+  }
+  </style>
+  </head>
+
+  <body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar (Desktop) ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <!-- 1. Header Section -->
+      <div class="sidebar-header">
+        <!-- Logo Text -->
+        <div class="logo">
+          <h4>LockAccess Pro</h4>
+          <p>Platform Admin</p>
+        </div>
+
+
+      <!-- Close button (Mobile) -->
+        <button class="btn d-md-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <!-- 2. Navigation Menu -->
+      <ul class="menu flex-grow-1">
+        <li data-page="dashboard" class="active">
+          <a href="dashboard.html">
+            <i class="fa-solid fa-table-cells-large"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li data-page="companies">
+          <a href="companies.html">
+            <i class="fa-regular fa-building"></i>
+            Companies
+          </a>
+        </li>
+
+        <li data-page="reports">
+          <a href="reports.html">
+            <i class="fa-regular fa-file-lines"></i>
+            Reports
+          </a>
+        </li>
+
+        <li data-page="jobs">
+          <a href="jobs.html">
+            <i class="fa-solid fa-user-group"></i>
+            Jobs
+          </a>
+        </li>
+
+        <li data-page="notifications">
+          <a href="notifications.html">
+            <i class="fa-regular fa-bell"></i>
+            Notifications
+          </a>
+        </li>
+
+        <li data-page="customers">
+          <a href="customers.html">
+            <i class="fa-solid fa-user-group"></i>
+            Customer
+          </a>
+        </li>
+
+        <li data-page="users">
+          <a href="users.html">
+            <i class="fa-solid fa-user-group"></i>
+            Users
+          </a>
+        </li>
+
+          <li data-page="calls">
+          <a href="calls.html">
+          <i class="fa-solid fa-mobile-screen"></i> Call Logs
+          </a>
+        </li>
+      </ul>
+
+    <!-- 3. Sidebar Footer (User Profile) -->
+      <div class="sidebar-footer">
+        <div class="d-flex align-items-center gap-3">
+          <!-- Avatar Circle -->
+          <div class="user-avatar" id="userAvatar">U</div>
+
+          <!-- Text Info -->
+          <div class="user-info">
+            <h6 id="sidebarUsername">User</h6>
+            <small id="sidebarEmail">user@email.com</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== Main Wrapper ===== -->
+    <div class="main-wrapper" id="mainWrapper">
+    
+    <!-- 1. Mobile Header (Visible only on mobile/tablet) -->
+    <div class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+      <h5 class="m-0 fw-bold text-dark">LockAccess Pro</h5>
+      <button class="btn btn-light" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+      <!-- Main Content -->
+      <main class="mb-4">
+
+    <!-- Page Header (Desktop View title) -->
+      <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex flex-column justify-content-left">
+        <h3 class="page-title">Users Management</h3>
+        <p class="page-subtitle">Manage platform administrators and dispatchers.</p>
+      </div>
+
+        <!-- Add User Button -->
+        <div class="col-lg-2">
+          <button class="btn add-btn w-100" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="fas fa-plus me-2"></i> Create New User
+          </button>
+        </div>
+      </div>
+
+          <!-- Stats Card -->
+          <div class="row g-4 mb-4">
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+              <div class="stat-card">
+                <div class="info">
+                  Total Users
+                  <h3>8</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+              <div class="stat-card">
+                <div class="info">
+                  Admins
+                  <h3>5</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+              <div class="stat-card">
+                <div class="info">
+                  Dispatchers
+                  <h3>3</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+              <div class="stat-card">
+                <div class="info">
+                  Active Users
+                  <h3>7</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Of Status Cards -->
+
+      <!-- Main Data Content -->
+      <div class="row content g-3 align-items-center">
+      <!-- Search + Filter -->
+      <div class="row g-3 align-items-center">
+      <div class="col-lg-9">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="customSearch" placeholder="Search users by name, email, or company..." />
+      </div>
+      </div>
+
+      <div class="col-lg-3 d-flex justify-content-end align-items-center gap-2">
+      <div class="select-box w-100">
+        <i class="fa-solid fa-chevron-down"></i>
+        <select id="rolesFilter">
+          <option value="">All Rolls</option>
+          <option value="Admin">Admin</option>
+          <option value="Dispatcher">Dispatchers</option>
+        </select>
+      </div>
+      </div>
+      </div>
+
+          <!-- Table -->
+          <div class="table-responsive">
+            <table id="usersTable" class="table w-100">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Last Login</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          </div>
+      </main>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal fade" id="addUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content add-user-modal">
+
+      <!-- Header -->
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title fw-bold">Create New User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body pt-2">
+
+        <!-- First Name -->
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input id="firstName" type="text" class="form-control" placeholder="Enter first name">
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input id="lastName" type="text" class="form-control" placeholder="Enter last name">
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+          <label class="form-label">Email Address</label>
+          <input id="email" type="email" class="form-control" placeholder="Enter email">
+        </div>
+
+        <!-- Role -->
+        <div class="mb-3">
+          <label class="form-label">Role</label>
+          <select id="role" class="form-select">
+            <option>Admin</option>
+            <option>Dispatcher</option>
+          </select>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label">Initial Password</label>
+          <input id="password" type="password" class="form-control" placeholder="Enter initial password">
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer border-0 d-flex justify-content-center gap-4 ">
+        <button class="btn btn-light px-5" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <button id="createUserBtn" class="btn btn-primary px-5">
+          Create User
+        </button>
+      </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- End Of Add User Modal -->
+
+    <!-- Key Password change popup -->
+    <div class="modal fade" id="passwordModal">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <h5 class="mb-3">Change Password</h5>
+      <input id="newPassword" type="password" class="form-control mb-3" placeholder="New password">
+      <button id="savePassword" class="btn btn-primary w-100">Save</button>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    
+    <script>
+      let usersTable;
+      
+      const MOCK_USERS = [
+        {
+          name: "John Smith",
+          email: "john.smith@platform.com",
+          role: "Admin",
+          lastLogin: "2026-01-07 09:30 AM",
+          status: "Active",
+        },
+        {
+          name: "Sarah Johnson",
+          email: "sarah.j@platform.com",
+          role: "Dispatcher",
+          lastLogin: "2026-01-07 08:15 AM",
+          status: "Active",
+        },
+        {
+          name: "Mike Williams",
+          email: "mike.w@quicklock.com",
+          role: "Admin",
+          lastLogin: "2026-01-06 05:45 PM",
+          status: "Active",
+        },
+        {
+          name: "Emily Davis",
+          email: "emily.d@platform.com",
+          role: "Dispatcher",
+          lastLogin: "2026-01-05 02:20 PM",
+          status: "Inactive",
+        },
+        {
+          name: "Robert Brown",
+          email: "robert.b@quicklock.com",
+          role: "Admin",
+          lastLogin: "2026-01-07 07:00 AM",
+          status: "Active",
+        },
+          {
+          name: "Robert Brown",
+          email: "robert.b@quicklock.com",
+          role: "Admin",
+          lastLogin: "2026-01-07 07:00 AM",
+          status: "Active",
+        },
+          {
+          name: "Robert Brown",
+          email: "robert.b@quicklock.com",
+          role: "Admin",
+          lastLogin: "2026-01-07 07:00 AM",
+          status: "Active",
+        },
+          {
+          name: "Robert Brown",
+          email: "robert.b@quicklock.com",
+          role: "Admin",
+          lastLogin: "2026-01-07 07:00 AM",
+          status: "Active",
+        },
+      ];
+
+
+      $(document).ready(function () {
+      usersTable = initDataTable(
+          "#usersTable",
+          MOCK_USERS,
+          [
+            {
+              data: null,
+              render: (d, type) =>
+                type === "filter"
+                  ? `${d.name} ${d.email}`
+                  : renderDoubleLine(d.name, d.email, "user"),
+            },
+            {
+              data: "role",
+              render: (d) => renderStatusBadge(d),
+            },
+            { data: "lastLogin" },
+            {
+              data: "status",
+              render: (d) => renderStatusBadge(d),
+            },
+            {
+      data: null,
+      orderable: false,
+      render: () => `
+      <div class="d-flex gap-2">
+      <button class="btn btn-sm key-btn"><i class="fa-solid fa-key"></i></button>
+      <button class="btn btn-sm edit-btn"><i class="fa-regular fa-pen-to-square"></i></button>
+      <button class="btn btn-sm delete-btn"><i class="fa-regular fa-trash-can"></i></button>
+      </div>`
+      },
+          ],
+          {
+            "#rolesFilter": 1,
+          },
+        );
+      });
+
+      let editingRow = null;
+
+   /* DELETE ROW */
+    $('#usersTable').on('click', '.delete-btn', function () {
+    const row = usersTable.row($(this).closest('tr'));
+    if (confirm("Delete this user?")) {
+    row.remove().draw();
+    }
+  });
+
+   /* EDIT ROW */
+  $('#usersTable').on('click', '.edit-btn', function () {
+
+  const tr = $(this).closest('tr');
+  const row = usersTable.row(tr);
+  const data = row.data();
+
+
+    if (tr.hasClass("editing")) {
+
+    const inputs = tr.find("input,select");
+
+    data.name = inputs.eq(0).val();
+    data.role = inputs.eq(1).val();
+    data.status = inputs.eq(2).val();
+
+    row.data(data).draw(false);
+    tr.removeClass("editing");
+
+    $(this).html('<i class="fa-regular fa-pen-to-square"></i>');
+    return;
+  }
+
+  tr.addClass("editing");
+
+  tr.find("td").eq(0).html(`<input class="form-control form-control-sm" value="${data.name}">`);
+
+  tr.find("td").eq(1).html(`
+    <select class="form-select form-select-sm">
+      <option ${data.role=="Admin"?"selected":""}>Admin</option>
+      <option ${data.role=="Dispatcher"?"selected":""}>Dispatcher</option>
+    </select>
+  `);
+
+  // last login
+  tr.find("td").eq(2).html(data.lastLogin);
+
+  tr.find("td").eq(3).html(`
+    <select class="form-select form-select-sm">
+      <option ${data.status=="Active"?"selected":""}>Active</option>
+      <option ${data.status=="Inactive"?"selected":""}>Inactive</option>
+    </select>
+  `);
+
+  $(this).html('<i class="fa-solid fa-check"></i>');
+});
+
+
+  /* CHANGE PASSWORD */
+  let selectedRow;
+
+  $('#usersTable').on('click', '.key-btn', function () {
+  selectedRow = usersTable.row($(this).closest('tr'));
+  new bootstrap.Modal(document.getElementById('passwordModal')).show();
+    });
+
+  $('#savePassword').click(function () {
+  const val = $("#newPassword").val();
+
+  if (val.length < 6) {
+    alert("Password must be at least 6 characters");
+    return;
+  }
+
+  $("#newPassword").val("");
+  bootstrap.Modal.getInstance(document.getElementById('passwordModal')).hide();
+
+  alert("Password changed successfully");
+});
+
+  // Add User Modal Logic
+  document.getElementById("createUserBtn").addEventListener("click", function () {
+  const firstName = document.getElementById("firstName");
+  const lastName = document.getElementById("lastName");
+  const email = document.getElementById("email");
+  const role = document.getElementById("role");
+  const password = document.getElementById("password");
+
+  let valid = true;
+
+  // clear previous errors
+  document.querySelectorAll(".error-msg").forEach(e => e.remove());
+  document.querySelectorAll(".is-invalid").forEach(e => e.classList.remove("is-invalid"));
+
+    function showError(input, message) {
+    input.classList.add("is-invalid");
+    const err = document.createElement("div");
+    err.className = "error-msg text-danger small mt-1";
+    err.innerText = message;
+    input.parentNode.appendChild(err);
+    valid = false;
+  }
+
+  // validations
+  if (!firstName.value.trim())
+    showError(firstName, "First name required");
+
+  if (!lastName.value.trim())
+    showError(lastName, "Last name required");
+
+  if (!email.value.trim())
+    showError(email, "Email required");
+  else if (!/^\S+@\S+\.\S+$/.test(email.value))
+    showError(email, "Invalid email format");
+
+  if (!role.value)
+    showError(role, "Select role");
+
+  if (!password.value)
+    showError(password, "Password required");
+  else if (password.value.length < 6)
+    showError(password, "Minimum 6 characters");
+
+  // Add to table if valid
+  if (valid) {
+  const newUser = {
+    name: firstName.value.trim() + " " + lastName.value.trim(),
+    email: email.value.trim(),
+    role: role.value,
+    lastLogin: "Just Now",
+    status: "Active"
+  };
+
+  // add row to table
+  usersTable.row.add(newUser).draw();
+
+  // close modal
+  const modal = bootstrap.Modal.getInstance(document.getElementById("addUserModal"));
+  modal.hide();
+
+  // reset form
+  [firstName,lastName,email,password].forEach(i => i.value = "");
+  role.selectedIndex = 0;
+  }
+  });
+  </script>
+  </body>
+  </html>

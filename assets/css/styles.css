@@ -209,7 +209,7 @@ body {
   }
 
   /* Add  Button */
-  .add-company-btn{
+  .add-btn{
     background-color: var(--primary-color);
     color: #ffffff;
     border-radius: 10px;
@@ -218,6 +218,23 @@ body {
     line-height: 24px;
     font-weight: 400;
     border: none;
+  }
+
+  /* Modals Styles*/
+  .modal-backdrop{
+    z-index: 3000 !important;
+    background: rgba(0,0,0,0.7) !important;
+    backdrop-filter: blur(2px);
+  }
+
+  /* Modal itself */
+  .modal{
+    z-index: 4000 !important;
+  }
+
+  /* Modal dialog */
+  .modal-dialog{
+    z-index: 4100 !important; 
   }
 
   /* Filters & Search bar */
@@ -287,21 +304,55 @@ body {
     pointer-events: none;
   }
 
-/* Filter Button */
-.filter-btn {
-  height: 50px;
-  border-radius: 14px;
-  border: 0.8px solid #E5E7EB;
-  background: #ffffff;
-  font-size: 16px;
-  font-weight: 400;
-  color: var(--title-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: 0.2s;
-}
+   /* Status Cards */
+    .stat-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 0.8px solid #e5e7eb;
+      padding: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      transition: 0.3s ease;
+    }
+    /* Icon Of status cards*/
+    .icon-box {
+      background-color: #f0fdf4;
+      width: 12px;
+      height: 18px;
+      border-radius: 10px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eff6ff;
+      color: #00a63e;
+    }
+
+    /*  Text */
+    .stat-card .info h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--title-color);
+      margin: 0 0 8px;
+      line-height: 32px;
+    }
+
+    .stat-card p {
+      font-size: 20px;
+      font-weight: 600;
+      color: #00a63e;
+    }
+    .stat-card span {
+      font-size: 13px;
+      color: #6a7282;
+    }
 
 /* Data-table  */
 .table-container {
@@ -367,6 +418,14 @@ table.dataTable tbody td {
   font-weight: 400; 
 }
 
+.badge-status-assigned {
+  background-color: #F3E8FF; 
+  color: #8200DB; 
+  border-radius: 12px; 
+  padding: 6px 12px; 
+  font-weight: 400; 
+}
+
 .badge-status-suspended {
   background-color: #FFE2E2; 
   color: #C10007; 
@@ -383,7 +442,7 @@ table.dataTable tbody td {
   font-weight: 400; 
 }
 
-.badge-status-in-progress {
+.badge-status-in-progress{
   background-color: #DBEAFE; 
   color: #1447E6; 
   border-radius: 12px; 
@@ -412,12 +471,48 @@ table.dataTable tbody td {
   border-radius: 4px;
   padding: 6px;
 }
+.badge-priority-high{
+  background-color: #FEF2F2;
+  color: #E7000B;
+  border-radius: 12px; 
+  padding: 6px 12px; 
+  font-weight: 400; 
+}
+.badge-priority-medium{
+  background-color: #FEF9C2;
+  color: #A65F00;
+  border-radius: 12px; 
+  padding: 6px 12px; 
+  font-weight: 400; 
+}
+.badge-priority-low{
+  background-color: #DCFCE7;
+  color: #008236;
+  border-radius: 12px; 
+  padding: 6px 12px; 
+  font-weight: 400; 
+}
 .badge-priority-normal {
   background-color: #F3F4F6;
   color: #4A5565;
   border: none;
   border-radius: 4px;
   padding: 6px;
+}
+
+.badge-role-admin{
+  background-color: #F3E8FF;
+  color: #8200DB;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-weight: 400;
+}
+.badge-role-dispatcher{
+  background-color: #DBEAFE;
+  color: #1447E6;
+  border-radius: 12px;
+  padding: 6px 12px;
+  font-weight: 400;
 }
 
 /* Hide Default DataTables Search and Length */
@@ -483,18 +578,6 @@ table.dataTable tbody td {
   color: #4B5563;
 }
 
-/* Date Icon text */
-.date-cell {
-  color: #6B7280;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.jobs-tab {
-  border: none;
-  background-color: transparent ;
-}
-
 /* ===== Validation Styles ===== */
 .input-error{
   border: 1.5px solid #dc2626 !important;
@@ -507,8 +590,6 @@ table.dataTable tbody td {
   margin-top: 4px;
   display: none;
 }
-
-
 
 /* --- Desktop Toggled State (Collapsed) --- */
 body.sidebar-collapsed .sidebar {
@@ -544,61 +625,12 @@ body.sidebar-collapsed .main-wrapper {
   body.sidebar-open .sidebar-overlay { display: block; }
 
   .stat-card { width: 100%; }
-
-  .steps-header,
-  .job-step {
-    padding: 0 20px;
-  }
-
-  .jobs-tabs {
-    gap: 20px;
-  }
-
-  .step {
-    width: 80px;
-    font-size: 13px;
-  }
-
-  .step .circle {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-  }
 }
 
 /* --- Mobile Responsive--- */
 @media (max-width: 768px) {
   .content h3{
   font-size: 20px;
-  }
-
-  /* Form container */
-  .job-form {
-    padding: 16px;
-  }
-
-  /* Steps */
-  .steps-header,
-  .job-step {
-    padding: 0;
-  }
-
-  .steps {
-    gap: 10px;
-  }
-
-  .step {
-    width: auto;
-    flex: 1;
-    font-size: 12px;
-  }
-
-  .step span {
-    display: none; 
-  }
-
-  .line {
-    height: 1px;
   }
 
   /* Priority cards block view */
@@ -619,31 +651,6 @@ body.sidebar-collapsed .main-wrapper {
     font-size: 12px;
   }
 
-  /* Smaller icons */
-  .priority-icon,
-  .priority-icon.urgent {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-
-  /* Buttons full width */
-  .job-step .btn {
-    width: 100%;
-  }
-
-  .job-step .d-flex {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .cust-toggle {
-    flex-direction: column;
-  }
-
-  .customers-scroll {
-    max-height: 220px;
-  }
 }
 
 

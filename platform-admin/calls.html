@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calls Management</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+
+      <!-- Internal CSS Styles -->
+    <style>
+  .filter{
+    background:#F3F3F5;
+    border-radius:14px;
+    border: 0.8px solid #00000000;
+    padding:10px 15px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+  .filter input,
+  .filter select{
+    border:none;
+    outline:none;
+    background:transparent;
+    font-size:14px;
+    min-width:140px;
+  }
+  .avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#e9eaec;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:600;
+    }
+
+  .badge-call{
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:500;
+  }
+
+  .inbound{
+    background:#2f6fed;
+    color:#fff;
+    }
+
+  .outbound{
+    background:#e9eaec;
+    color:#333;
+  }
+
+  .action-icon{
+    cursor:pointer;
+    color:#444;
+    transition:.2s;
+  }
+  .action-icon:hover{
+    color:#000;
+    transform:scale(1.1);
+  }
+
+  </style>
+  </head>
+
+  <body>
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar (Desktop) ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <!-- 1. Header Section -->
+      <div class="sidebar-header">
+        <!-- Logo Text -->
+        <div class="logo">
+          <h4>LockAccess Pro</h4>
+          <p>Platform Admin</p>
+        </div>
+
+
+      <!-- Close button (Mobile) -->
+        <button class="btn d-md-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <!-- 2. Navigation Menu -->
+      <ul class="menu flex-grow-1">
+        <li data-page="dashboard" class="active">
+          <a href="dashboard.html">
+            <i class="fa-solid fa-table-cells-large"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li data-page="companies">
+          <a href="companies.html">
+            <i class="fa-regular fa-building"></i>
+            Companies
+          </a>
+        </li>
+
+        <li data-page="reports">
+          <a href="reports.html">
+            <i class="fa-regular fa-file-lines"></i>
+            Reports
+          </a>
+        </li>
+
+        <li data-page="jobs">
+          <a href="jobs.html">
+            <i class="fa-solid fa-user-group"></i>
+            Jobs
+          </a>
+        </li>
+
+        <li data-page="notifications">
+          <a href="notifications.html">
+            <i class="fa-regular fa-bell"></i>
+            Notifications
+          </a>
+        </li>
+
+        <li data-page="customers">
+          <a href="customers.html">
+            <i class="fa-solid fa-user-group"></i>
+            Customer
+          </a>
+        </li>
+
+        <li data-page="users">
+          <a href="users.html">
+            <i class="fa-solid fa-user-group"></i>
+            Users
+          </a>
+        </li>
+
+          <li data-page="calls">
+          <a href="calls.html">
+          <i class="fa-solid fa-mobile-screen"></i> Call Logs
+          </a>
+        </li>
+      </ul>
+
+    <!-- 3. Sidebar Footer (User Profile) -->
+      <div class="sidebar-footer">
+        <div class="d-flex align-items-center gap-3">
+          <!-- Avatar Circle -->
+          <div class="user-avatar" id="userAvatar">U</div>
+
+          <!-- Text Info -->
+          <div class="user-info">
+            <h6 id="sidebarUsername">User</h6>
+            <small id="sidebarEmail">user@email.com</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== Main Wrapper ===== -->
+    <div class="main-wrapper" id="mainWrapper">
+    
+    <!-- 1. Mobile Header (Visible only on mobile/tablet) -->
+    <div class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+      <h5 class="m-0 fw-bold text-dark">LockAccess Pro</h5>
+      <button class="btn btn-light" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+      <!-- Main Content -->
+      <main class="mb-4">
+
+      <!-- Page Header (Desktop View title) -->
+      <div class="d-flex flex-column justify-content-left">
+        <h3 class="page-title mb-4">Call Logs</h3>
+      </div>
+
+    <!-- Main Data Content -->
+    <div class="row content gap-3 align-items-center mb-3">
+
+    <!-- ===== Search + Filter Section ===== -->
+    <!-- Search -->
+      <div class="col-lg-3">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="customSearch" placeholder="Search by Call ID or Dispatcher..." />
+          </div>
+        </div>
+
+    <!-- Date Range -->
+    <div class="filter col-lg-2">
+    <i class="fa-regular fa-calendar"></i>
+    <input type="text" id="dateRange" placeholder="Date Range">
+    </div>
+
+    <!-- Dispatcher -->
+    <div class="filter col-lg-2">
+    <select id="dispatcherFilter">
+      <option value="">All Dispatchers</option>
+    </select>
+    </div>
+
+    <!-- Type -->
+    <div class="filter col-lg-2">
+    <select id="typeFilter">
+      <option value="">All Types</option>
+      <option>Inbound</option>
+      <option>Outbound</option>
+    </select>
+    </div>
+
+    <!-- Duration -->
+    <div class="filter col-lg-2 duration-filter">
+    <select id="durationOperator">
+      <option value="">All Durations</option>
+      <option value="">Less than 30 mins</option>
+      <option value="">Greater than 30 mins</option>
+    </select>
+    </div>
+
+    <p>Showing 11 of 25 calls</p>
+    </div>
+
+      <!-- Table -->
+      <div class="table-responsive">
+            <table id="callsTable" class="table w-100">
+              <thead>
+                <tr>
+                  <th>Call ID</th>
+                  <th>Date & Time</th>
+                  <th>Employee</th>
+                  <th>Customer</th>
+                  <th>Duration</th>
+                  <th>Call Type</th>
+                  <th>Recording</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+      </div>
+
+      </main>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/script.js"></script>
+    
+    <script>
+    let callsTable;
+
+  /* MOCK CALL DATA */
+  const MOCK_CALLS = [
+  {id:"CL-01000",date:"Jan 18, 2026, 08:40 PM",employee:"Sarah Johnson",initials:"SJ",customer:"***-***-5701",duration:"0:08",type:"Inbound",recording:true},
+  {id:"CL-01001",date:"Dec 31, 2025, 08:40 PM",employee:"Mike Davis",initials:"MD",customer:"***-***-8261",duration:"43:19",type:"Inbound",recording:true},
+  {id:"CL-01002",date:"Dec 24, 2025, 08:40 PM",employee:"Robert Wilson",initials:"RW",customer:"***-***-5184",duration:"14:04",type:"Outbound",recording:true},
+  {id:"CL-01003",date:"Jan 1, 2026, 08:40 PM",employee:"Emily Chen",initials:"EC",customer:"***-***-3468",duration:"9:55",type:"Outbound",recording:false},
+  {id:"CL-01004",date:"Jan 9, 2026, 08:40 PM",employee:"Mike Davis",initials:"MD",customer:"***-***-2030",duration:"37:14",type:"Inbound",recording:true},
+  {id:"CL-01005",date:"Jan 13, 2026, 08:40 PM",employee:"Emily Chen",initials:"EC",customer:"***-***-9609",duration:"12:52",type:"Outbound",recording:true},
+  {id:"CL-01006",date:"Jan 10, 2026, 08:40 PM",employee:"Robert Wilson",initials:"RW",customer:"***-***-1203",duration:"24:14",type:"Inbound",recording:true},
+  {id:"CL-01007",date:"Jan 4, 2026, 08:40 PM",employee:"John Smith",initials:"JS",customer:"***-***-8150",duration:"1:50",type:"Outbound",recording:true},
+  {id:"CL-01008",date:"Jan 16, 2026, 08:40 PM",employee:"Sarah Johnson",initials:"SJ",customer:"***-***-5180",duration:"41:58",type:"Outbound",recording:true},
+  {id:"CL-01009",date:"Jan 18, 2026, 08:40 PM",employee:"John Smith",initials:"JS",customer:"***-***-1701",duration:"6:52",type:"Inbound",recording:false},
+  {id:"CL-01010",date:"Jan 18, 2026, 08:40 PM",employee:"Robert Wilson",initials:"RW",customer:"***-***-1600",duration:"4:15",type:"Inbound",recording:true}
+  ];
+
+  /* INIT TABLE */
+  $(document).ready(function(){
+  callsTable = window.initDataTable("#callsTable", MOCK_CALLS, [
+    {data:"id"},
+    {data:"date"},
+    {
+      data:null,
+      render:d=>`
+        <div class="d-flex align-items-center gap-2">
+          <div class="avatar">${d.initials}</div>
+          ${d.employee}
+        </div>`
+    },
+    {data:"customer"},
+    {data:"duration"},
+    {
+      data:"type",
+      render:type=>`
+        <span class="badge-call ${type=="Inbound"?"inbound":"outbound"}">
+          <i class="fa-solid fa-phone"></i> ${type}
+        </span>`
+    },
+    {
+      data:"recording",
+      render:r=>{
+        if(!r) return `<span class="text-muted">No recording</span>`;
+        return `
+          <div class="d-flex gap-3 fs-6">
+            <i class="fa-regular fa-circle-play action-icon"></i>
+            <i class="fa-solid fa-download action-icon"></i>
+            <i class="fa-solid fa-ellipsis-vertical action-icon"></i>
+          </div>`;
+      }
+    },
+  ]);
+
+  });
+  </script>
+  </body>
+  </html>

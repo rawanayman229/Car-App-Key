@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Platform Admin </title>
 
-    <!-- CSS Dependencies (Based on your file structure) -->
+    <!-- CSS -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/all.min.css" />
 
@@ -258,7 +258,7 @@
     <script>
     $(document).ready(function () {
    // Password Visibility Toggle
-  $("#togglePassword").on("click", function () {
+    $("#togglePassword").on("click", function () {
     const passwordInput = $("#password");
     const icon = $(this).find("i");
 
@@ -321,7 +321,7 @@
 
     localStorage.setItem("user", JSON.stringify(userData));
 
-    window.location.href = "platform-admin/dashboard.html";
+    window.location.href = "/platform-admin/dashboard.html";
     }
   });
 

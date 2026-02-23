@@ -52,13 +52,18 @@ window.renderStatusBadge = (status) => {
   else if (s === "suspended" || s === "cancelled")className = "badge-status-suspended";
   else if (s === "in progress") className = "badge-status-in-progress";
   else if (s === "rejected") className = "badge-status-rejected";
+  else if (s === "assigned") className = "badge-status-assigned";
   else if (s === "admin") className = "badge-role-admin";
   else if (s === "dispatcher") className = "badge-role-dispatcher";
   else if (s === "urgent") className = "badge-priority-urgent";
   else if (s === "normal") className = "badge-priority-normal";
+  else if (s === "high") className = "badge-priority-high";
+  else if (s === "medium") className = "badge-priority-medium";
+  else if (s === "low") className = "badge-priority-low";
 
   return `<span class="badge ${className}">${status}</span>`;
 };
+
 
 // Actions renderer
 window.renderActions = (actions = []) => {

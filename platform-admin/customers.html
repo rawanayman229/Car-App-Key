@@ -1,26 +1,98 @@
-<!doctype html>
-<html lang="en">
+  <!doctype html>
+  <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Customers Management</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customers</title>
+  <!-- CSS Links -->
+  <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../assets/css/all.min.css" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
 
-    <!-- CSS Links-->
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../assets/css/apexcharts.css" />
-    <link rel="stylesheet" href="../assets/css/all.min.css" />
-    <link rel="stylesheet" href="../assets/css/styles.css" />
+  <!-- Internal Styles -->
+  <style>
+  /* ===== Details Customer Modal ===== */
+  .custom-modal{
+    border-radius: 22px;
+    border: none;
+    padding: 24px 26px 28px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+  }
+
+  /* Header */
+  .custom-modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    border-bottom: 0.8px solid var(--border-color);
+  }
+
+  .custom-modal-header h3{
+    font-size: 34px;
+    font-weight: 700;
+    color:#4A5565;
+    margin:0;
+  }
+
+  .custom-modal-header p{
+    margin-top:6px;
+    font-size:20px;
+    color:#6A7282;
+  }
+
+  /* Body */
+  .custom-modal-body{
+    padding: 0 4px;
+    margin-top: 15px;
+  }
+
+  /* Info card */
+  .info-card{
+    background:#F9FAFB;
+    border-radius:10px;
+    padding:22px 26px 26px;
+  }
+
+  .info-title{
+    font-size:14px;
+    font-weight:400;
+    color:#6A7282;
+    margin-bottom:22px;
+  }
+
+  /* Labels */
+  .info-label{
+    font-size:14px;
+    color:#4b5563;
+  }
+
+  .info-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:12px 0;
+  }
+
+  /* Values */
+  .info-value{
+    font-size:14px;
+    font-weight:400;
+    color:#101828;
+    text-align:right;
+    max-width:60%;
+    word-break:break-word;
+  }
+
+  </style>
   </head>
 
   <body>
-    <!-- Start Of Static Section (Side Bar) -->
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-    <!-- ===== Sidebar (Desktop) ===== -->
+  <!-- ===== Sidebar (Desktop) ===== -->
     <aside class="sidebar d-flex flex-column" id="sidebar">
-      
       <!-- 1. Header Section -->
       <div class="sidebar-header">
         <!-- Logo Text -->
@@ -36,7 +108,6 @@
       </div>
 
       <!-- 2. Navigation Menu -->
-        <!-- 2. Navigation Menu -->
       <ul class="menu flex-grow-1">
         <li data-page="dashboard" class="active">
           <a href="dashboard.html">
@@ -75,30 +146,252 @@
 
         <li data-page="customers">
           <a href="customers.html">
-            <i class="fa-solid fa-users"></i>
-            Customers
+            <i class="fa-solid fa-user-group"></i>
+            Customer
+          </a>
+        </li>
+
+        <li data-page="users">
+          <a href="users.html">
+            <i class="fa-solid fa-user-group"></i>
+            Users
+          </a>
+        </li>
+
+          <li data-page="calls">
+          <a href="calls.html">
+          <i class="fa-solid fa-mobile-screen"></i>Call Logs
           </a>
         </li>
       </ul>
       <!-- 3. Sidebar Footer (User Profile) -->
       <div class="sidebar-footer">
-      <div class="d-flex align-items-center gap-3">
-      <!-- Avatar Circle -->
-      <div class="user-avatar" id="userAvatar">U</div>
+        <div class="d-flex align-items-center gap-3">
+          <!-- Avatar Circle -->
+          <div class="user-avatar" id="userAvatar">U</div>
 
-      <!-- Text Info -->
-      <div class="user-info">
-      <h6 id="sidebarUsername">User</h6>
-      <small id="sidebarEmail">user@email.com</small>
-    </div>
-    </div>
-    </div>
+          <!-- Text Info -->
+          <div class="user-info">
+            <h6 id="sidebarUsername">User</h6>
+            <small id="sidebarEmail">user@email.com</small>
+          </div>
+        </div>
+      </div>
     </aside>
-    <!-- End OF Sidebar -->
 
-    <!-- JS Files -->
-    <script src="../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/apexcharts.min.js"></script>
-    <script src="../assets/js/script.js"></script>
+  <!-- ===== Main Wrapper ===== -->
+  <div class="main-wrapper" id="mainWrapper">
+    
+    <!-- 1. Mobile Header (Visible only on mobile/tablet) -->
+    <div class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+      <h5 class="m-0 fw-bold text-dark">LockAccess Pro</h5>
+      <button class="btn btn-light" id="toggleSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- 2. Main Content Area -->
+    <main class="mb-4">
+      
+      <!-- Page Header (Desktop View title) -->
+      <div class="d-flex flex-column justify-content-left mb-4">
+        <h3 class="page-title">Customers</h3>
+        <p class="page-subtitle">Monitor and manage all jobs across all companies.</p>
+      </div>
+
+      <!-- Main Data Content -->
+      <div class="row content g-3 align-items-center">
+        <!-- Search -->
+        <div class="col-lg-12">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="customSearch" placeholder="Search by job ID, company, customer, or type..." />
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive mt-3">
+        <table id="customersTable" class="table w-100">
+          <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+  <!-- ===== CUSTOMER DETAILS MODAL ===== -->
+  <div class="modal fade" id="customerDetailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content custom-modal">
+
+      <!-- Header -->
+      <div class="custom-modal-header">
+        <div>
+          <h3 id="modalCustomerName">John Doe</h3>
+          <p id="modalServiceType">Emergency Lockout</p>
+        </div>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal">
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="custom-modal-body">
+      <div class="info-card">
+      <h6 class="info-title">Customer Information</h6>
+
+    <div class="info-row">
+    <span class="info-label">Name</span>
+    <span class="info-value" id="infoName">John Doe</span>
+    </div>
+
+    <div class="info-row">
+    <span class="info-label">Address</span>
+    <span span class="info-value" id="infoAddress">Dubai</span>
+    </div>
+
+    <div class="info-row">
+    <span class="info-label">Number</span>
+    <span class="info-value" id="infoPhone">01545455</span>
+    </div>
+
+    <div class="info-row">
+    <span class="info-label">Email</span>
+    <span class="info-value" id="infoEmail">example@gmail.com</span>
+    </div>
+      </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    </main>
+  </div>
+
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+  <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/script.js"></script>
+
+  <script>
+  const MOCK_CUSTOMERS = [
+  {
+    id: 1,
+    name: "John Doe",
+    serviceType: "Emergency Lockout",
+    address: "Dubai",
+    phone: "01545455",
+    email: "example@gmail.com"
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    serviceType: "Key Replacement",
+    address: "123 Main St, NY",
+    phone: "055-987-6543",
+    email: "jane.smith@email.com"
+  },
+  {
+    id: 3,
+    name: "Bob Wilson",
+    serviceType: "Ignition Repair",
+    address: "45 Palm Ave, FL",
+    phone: "032-111-2222",
+    email: "bob.w@email.com"
+  },
+  {
+    id: 4,
+    name: "Alice Brown",
+    serviceType: "Lock Installation",
+    address: "88 Market St, CA",
+    phone: "099-444-5555",
+    email: "alice.b@email.com"
+  },
+  {
+    id: 5,
+    name: "Tom Harris",
+    serviceType: "Safe Unlocking",
+    address: "10 Downing St, TX",
+    phone: "011-222-3333",
+    email: "tom.harris@email.com"
+  },
+  {
+    id: 6,
+    name: "Lisa Chen",
+    serviceType: "Car Lockout",
+    address: "505 Broadway, WA",
+    phone: "077-888-9999",
+    email: "lisa.c@email.com"
+  },
+    {
+    id: 7,
+    name: "Lisa Chen",
+    serviceType: "Car Lockout",
+    address: "505 Broadway, WA",
+    phone: "077-888-9999",
+    email: "lisa.c@email.com"
+  },
+    {
+    id: 8,
+    name: "Lisa Chen",
+    serviceType: "Car Lockout",
+    address: "505 Broadway, WA",
+    phone: "077-888-9999",
+    email: "lisa.c@email.com"
+  }
+];
+
+  let customersTable;
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+  customersTable = initDataTable(
+    "#customersTable",
+    MOCK_CUSTOMERS,
+    [
+      {
+        data: "name",
+        className: "ps-4 fw-normal"
+      },
+      {
+        data: null,
+        className: "text-end pe-4",
+        render: () =>
+          `<a href="#" class="view-details-btn text-decoration-none text-primary fw-semibold">View</a>`
+      }
+    ],
+    {} 
+  );
+
+  customersTable.draw();
+
+  /* ===== Customer Details Modal Logic ===== */
+  $('#customersTable tbody').on('click', '.view-details-btn', function(e) {
+    e.preventDefault();
+
+    const tr = $(this).closest('tr');
+    const rowData = customersTable.row(tr).data();
+
+    $('#modalCustomerName').text(rowData.name);
+    $('#modalServiceType').text(rowData.serviceType);
+    $('#infoName').text(rowData.name);
+    $('#infoAddress').text(rowData.address);
+    $('#infoPhone').text(rowData.phone);
+    $('#infoEmail').text(rowData.email);
+
+    const modal = new bootstrap.Modal(
+      document.getElementById('customerDetailModal')
+    );
+    modal.show();
+  });
+
+  });
+  </script>
   </body>
-</html>
+  </html>
