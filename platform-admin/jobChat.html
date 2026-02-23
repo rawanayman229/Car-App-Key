@@ -1,0 +1,510 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jobs Chat</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+
+    <style>
+      body {
+        background: #fff;
+      }
+
+      /* header */
+      .job-header {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        border: 0.8px solid #0000001a;
+        margin-bottom: 20px;
+      }
+      .role-badge {
+        background: #e0ecff;
+        color: #2563eb;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      /* card */
+      .chat-card {
+        background: #fff;
+        border: 0.8px solid #0000001a;
+        border-radius: 16px;
+        padding: 20px;
+      }
+
+      /* tabs */
+      .chat-tabs {
+        display: flex;
+        background: #ECECF0;
+        align-items: center;
+        padding: 8px;
+        border-radius: 14px;
+        width: 200px;
+        height:40px ;
+        gap: 6px;
+        margin-bottom: 18px;
+      }
+      .chat-tab {
+        border: none;
+        padding: 4px;
+        border-radius: 14px;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .chat-tab.active {
+        background: #fff;
+      }
+
+      /* layout */
+      .chat-layout {
+        display: flex;
+        gap: 20px;
+        height: 520px;
+      }
+
+      /* conversations */
+      .convo-list {
+        width: 320px;
+        border: 0.8px solid #0000001a;
+        border-radius: 14px;
+        overflow: hidden;
+        background: #fff;
+      }
+      .convo-header {
+        padding: 12px 14px;
+        font-weight: 700;
+        border-bottom: 0.8px solid #0000001a;
+      }
+      .convo-item {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .convo-item:hover {
+        background: #f9fafb;
+      }
+      .convo-item.active {
+        background: #ECECF080;
+      }
+
+      .convo-left {
+        flex: 1;
+      }
+      .convo-name {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .convo-preview {
+        font-size: 13px;
+        color: #6b7280;
+        margin-top: 2px;
+      }
+      .convo-role {
+        display: inline-block;
+        font-size: 11px;
+        padding: 3px 10px;
+        border-radius: 12px;
+        background: #e0ecff;
+        color: #2563eb;
+        margin-top: 6px;
+        font-weight: 600;
+      }
+
+      .convo-right {
+        text-align: right;
+      }
+      .convo-time {
+        font-size: 12px;
+        color: #6b7280;
+      }
+      .unread {
+        background: #2563eb;
+        color: #fff;
+        font-size: 11px;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6px;
+        margin-left: auto;
+      }
+
+      /* chat panel */
+      .chat-panel {
+        flex: 1;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+      }
+      .chat-head {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* messages */
+      .messages {
+        flex: 1;
+        padding: 16px;
+        overflow-y: auto;
+        background: #ffff;
+      }
+      .msg {
+        margin-bottom: 12px;
+        max-width: 70%;
+        padding: 10px 14px;
+        border-radius: 16px;
+        font-size: 14px;
+      }
+      .msg.left {
+        background: #ECECF080;
+      }
+      .msg.right {
+        background: #2563eb;
+        color: #fff;
+        margin-left: auto;
+      }
+
+      /* input */
+      .chat-input {
+        padding: 10px;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 10px;
+      }
+      .chat-input input {
+        flex: 1;
+        border-radius: 30px;
+        border: 1px solid #ddd;
+        padding: 10px 14px;
+      }
+
+      /* internal chat */
+      .internal-header {
+        padding: 14px;
+        border-bottom: 1px solid #eee;
+      }
+      .internal-title {
+        font-weight: 700;
+      }
+      .internal-sub {
+        font-size: 13px;
+        color: #6b7280;
+      }
+
+      /* attachment */
+      .attachment {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 13px;
+        margin-top: 6px;
+      }
+
+      /* permission */
+      .permission {
+        background: #ececf080;
+        border: 0.8px solid #0000001a;
+        border-radius: 14px;
+      }
+
+      /* responsive */
+      @media (max-width: 768px) {
+        .chat-layout {
+          flex-direction: column;
+          height: auto;
+        }
+        .convo-list {
+          width: 100%;
+          max-height: 260px;
+        }
+        .chat-panel {
+          height: 420px;
+        }
+        .msg {
+          max-width: 85%;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="p-4">
+    <!-- Header -->
+    <div class="job-header d-flex justify-content-between">
+      <div>
+        <h5 class="mb-1">
+          Job Details <span class="text-muted small">#JOB-2026-0245</span>
+        </h5>
+        <div class="text-muted">HVAC Repair - Residential (Sarah Johnson)</div>
+      </div>
+      <div>
+        <div class="text-muted small">Current Role</div>
+        <span class="role-badge">Platform Dispatcher</span>
+      </div>
+    </div>
+
+    <!-- Chat Card -->
+    <div class="chat-card">
+      <h5>Communication Center</h5>
+      <div class="text-muted small mb-3">
+        All job-related communications, calls, and activity logs
+      </div>
+
+      <div class="chat-tabs">
+        <button class="chat-tab active" data-tab="client">Client Chats</button>
+        <button class="chat-tab" data-tab="internal">Internal Chat</button>
+      </div>
+
+      <div class="chat-layout">
+        <!-- Conversations -->
+        <div class="convo-list">
+          <div class="convo-header">Conversations</div>
+          <div id="conversationList"></div>
+        </div>
+
+        <!-- Chat Panel -->
+        <div class="chat-panel" id="chatPanel"></div>
+      </div>
+    </div>
+
+    <!-- Permission -->
+    <div class="job-header permission mt-3">
+      <strong>Permission Level</strong><br />
+      <span class="text-muted small">
+        Platform Dispatcher: Full access to client chats, internal
+        communication, and call records
+      </span>
+    </div>
+
+    <script>
+      const chats = {
+        client: [
+          {
+            name: "Sarah Johnson",
+            role: "Platform Dispatcher",
+            preview: "I'll be arriving in 15 minutes",
+            time: "5h ago",
+            unread: 2,
+            messages: [
+              { side: "left", text: "What time will the technician arrive?" },
+              {
+                side: "right",
+                text: "The technician is on the way. ETA is approximately 15 minutes.",
+              },
+              { side: "right", text: "I'll be arriving in 15 minutes" },
+            ],
+          },
+          {
+            name: "Sarah Johnson",
+            role: "Technician",
+            preview: "The issue has been resolved",
+            time: "6h ago",
+            unread: 0,
+            messages: [
+              {
+                side: "left",
+                text: "Repair complete. System tested and running smoothly.",
+              },
+            ],
+          },
+          {
+            name: "Sarah Johnson",
+            role: "Company Dispatcher",
+            preview: "Your appointment is confirmed for tomorrow",
+            time: "21/02/2026",
+            unread: 0,
+            messages: [
+              {
+                side: "right",
+                text: "Your appointment is confirmed for tomorrow.",
+              },
+            ],
+          },
+        ],
+
+        internal: [
+          {
+            messages: [
+              {
+                side: "left",
+                name: "Mike Chen",
+                role: "Platform Dispatcher",
+                text: "Tech is en route to the job site. ETA 20 minutes.",
+              },
+              {
+                side: "left",
+                name: "David Martinez",
+                role: "Technician",
+                text: "Arrived on site. Customer is waiting. Starting diagnosis now.",
+              },
+              {
+                side: "left",
+                name: "Lisa Wong",
+                role: "Company Dispatcher",
+                text: "Great. Let me know if you need any additional parts.",
+              },
+              {
+                side: "left",
+                name: "David Martinez",
+                role: "Technician",
+                text: "Found the issue - faulty capacitor. I have a replacement in the van.",
+                file: true,
+              },
+              {
+                side: "left",
+                name: "Mike Chen",
+                role: "Platform Dispatcher",
+                text: "Perfect. Update the job notes when complete.",
+              },
+              {
+                side: "left",
+                name: "David Martinez",
+                role: "Technician",
+                text: "Repair complete. System tested and running smoothly. Customer signed off.",
+              },
+            ],
+          },
+        ],
+      };
+
+      /* render client list */
+      function loadClientList() {
+        // show left panel 
+        document.querySelector(".convo-list").style.display = "block";
+        document.getElementById("chatPanel").style.flex = "1";
+
+        const list = document.getElementById("conversationList");
+        list.innerHTML = "";
+
+        chats.client.forEach((c, i) => {
+          const div = document.createElement("div");
+          div.className = "convo-item" + (i === 0 ? " active" : "");
+          div.innerHTML = `
+        <div class="convo-left">
+        <div class="convo-name">${c.name}</div>
+        <div class="convo-role">${c.role}</div>
+        <div class="convo-preview">${c.preview}</div>
+        </div>
+        <div class="convo-right">
+        <div class="convo-time">${c.time}</div>
+        ${c.unread ? `<div class="unread">${c.unread}</div>` : ""}
+        </div>`;
+          div.onclick = () => {
+            document
+              .querySelectorAll(".convo-item")
+              .forEach((x) => x.classList.remove("active"));
+            div.classList.add("active");
+            openClientChat(i);
+          };
+          list.appendChild(div);
+        });
+
+        openClientChat(0);
+      }
+
+      /* client chat */
+      function openClientChat(i) {
+        const chat = chats.client[i];
+        document.getElementById("chatPanel").innerHTML = `
+        <div class="chat-head">
+        <div>
+        <div class="fw-semibold">${chat.name}</div>
+        <span class="role-badge">${chat.role}</span>
+        </div>
+        <button class="btn btn-light btn-sm"><i class="fa fa-phone"></i></button>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="chat-input">
+        <input placeholder="Type a message..."/>
+        <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>`;
+        const box = document.getElementById("messages");
+        chat.messages.forEach((m) => {
+          const el = document.createElement("div");
+          el.className = "msg " + m.side;
+          el.textContent = m.text;
+          box.appendChild(el);
+        });
+      }
+
+    /* internal chat */
+    function loadInternal() {
+    // hide left conversation panel
+    document.querySelector(".convo-list").style.display = "none";
+
+    // expand chat panel full width
+    document.getElementById("chatPanel").style.flex = "1 1 100%";
+
+    document.getElementById("chatPanel").innerHTML = `
+    <div class="internal-header">
+      <div class="internal-title">Internal Communication</div>
+      <div class="internal-sub">Operational chat between dispatchers and technicians</div>
+    </div>
+    <div class="messages" id="internalMessages"></div> `;
+
+    const box = document.getElementById("internalMessages");
+
+    chats.internal[0].messages.forEach((m) => {
+    const el = document.createElement("div");
+    el.className = "msg left";
+
+    el.innerHTML = `
+      <!-- Header row -->
+      <div class="d-flex align-items-center gap-2 mb-1">
+        <strong>${m.name}</strong>
+        <span class="convo-role">${m.role}</span>
+        <span class="text-muted small ms-auto">9:00 AM</span>
+      </div>
+
+      <!-- Message bubble -->
+      <div class="p-2 rounded-3";">
+        ${m.text}
+
+        ${
+          m.file
+            ? `<div class="attachment mt-2">
+                 <i class="fa fa-image"></i> fault_diagnosis.jpg
+               </div>`
+            : ""
+        }
+      </div>`;
+
+     box.appendChild(el);
+        });
+       }
+      /* tabs */
+      document.querySelectorAll(".chat-tab").forEach((btn) => {
+        btn.onclick = () => {
+          document
+            .querySelectorAll(".chat-tab")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          if (btn.dataset.tab === "client") {
+            loadClientList();
+          } else {
+            loadInternal();
+          }
+        };
+      });
+
+      /* default */
+      loadClientList();
+    </script>
+  </body>
+</html>

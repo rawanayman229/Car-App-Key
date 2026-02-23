@@ -863,10 +863,14 @@ $(document).ready(function(){
         data: "amount",
         render: d => `$${d.toLocaleString()}`
       },
-      { 
+      {
       data: null,
-        render: () => `<a href="#" class="view-whatsapp text-decoration-none text-primary fw-semibold">View</a>`
-      },
+      render: (row) => `
+        <a href="jobChat.html?id=${row.id}" 
+        class="text-decoration-none text-primary fw-semibold">
+        View
+        </a>`
+     },
       { 
       data: null,
       render: () => `<a href="#" class="view-details text-decoration-none text-primary fw-semibold">View</a>`
