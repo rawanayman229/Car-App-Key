@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Details</title>
+
+     <!-- External CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Internal Style -->
+    <style>
+        body {
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+      /* Card Container */
+      .modal-card {
+        width: 100%;
+        max-width: 100%;
+        border: 0.8px solid var( --card-border);
+        border-radius: 8px;
+        padding: 40px;
+        position: relative;
+        margin: 20px;
+      }
+
+      /* Header */
+      .card-header-custom {
+        margin-bottom: 40px;
+      }
+
+      .card-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #0A0A0A;
+        margin: 0 0 8px 0;
+      }
+
+      .card-subtitle {
+        font-size: 15px;
+        color: #717182;
+        margin: 0;
+        font-weight: 400;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: #717182;
+        cursor: pointer;
+      }
+
+      /* Sections */
+      .section-group {
+        margin-bottom: 32px;
+        border-bottom: 0.8px solid var(--card-border);
+      }
+
+      .section-group:last-child {
+        border-bottom: none;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0A0A0A;
+        margin-bottom: 20px;
+      }
+
+      /* Data Rows */
+      .info-row {
+        display: flex;
+        margin-bottom: 16px;
+        align-items: flex-start;
+      }
+
+      .info-label {
+        width: 40%;
+        font-size: 16px;
+        color: #717182;
+        font-weight: 400;
+      }
+
+      .info-value {
+        width: 60%;
+        font-size: 16px;
+        color: #0A0A0A;
+        font-weight: 400;
+      }
+
+      /* Badges */
+      .badge-status {
+        background-color: #00A63E;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+      }
+
+      .badge-service {
+        background-color: #ECEEF2;
+        color: #030213;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+        margin-right: 4px;
+        margin-bottom: 4px;
+      }
+
+      .badge-suspended {
+        background-color: #D4183D;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- The Card -->
+    <div class="modal-card">
+      <button class="close-btn" onclick="history.back()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="card-header-custom">
+        <h1 class="card-title">Company Details</h1>
+        <p class="card-subtitle">Read-only view of company information</p>
+      </div>
+
+      <!-- Content injected by JS -->
+      <div id="detailsContent"></div>
+    </div>
+
+      <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Internal Scripts -->
+    <script>
+      const companies = [
+        {
+          name: "ABC Plumbing",
+          id: "CMP-001",
+          city: "Downtown District",
+          services: ["Plumbing", "Heating"],
+          tech: 12,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0101",
+        },
+        {
+          name: "ElectroTech",
+          id: "CMP-002",
+          city: "North Zone",
+          services: ["Electrical", "HVAC"],
+          tech: 8,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0102",
+        },
+        {
+          name: "CoolBreeze",
+          id: "CMP-003",
+          city: "West Side",
+          services: ["HVAC"],
+          tech: 15,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0103",
+        },
+        {
+          name: "Premier Electric",
+          id: "CMP-004",
+          city: "Downtown District",
+          services: ["Electrical"],
+          tech: 6,
+          status: "Suspended",
+          person: "John Doe",
+          phone: "555-0104",
+        },
+        {
+          name: "QuickFix Lock",
+          id: "CMP-005",
+          city: "East End",
+          services: ["Locksmith"],
+          tech: 3,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0105",
+        },
+        {
+          name: "City Heating",
+          id: "CMP-006",
+          city: "North Zone",
+          services: ["Heating"],
+          tech: 9,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0106",
+        },
+        {
+          name: "Metro Plumbers",
+          id: "CMP-007",
+          city: "West Side",
+          services: ["Plumbing"],
+          tech: 11,
+          status: "Suspended",
+          person: "John Doe",
+          phone: "555-0107",
+        },
+        {
+          name: "Alpha HVAC",
+          id: "CMP-008",
+          city: "Downtown District",
+          services: ["HVAC"],
+          tech: 20,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0108",
+        },
+      ];
+
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get("id");
+
+      if (!id) id = "CMP-001";
+
+      const company = companies.find((c) => c.id === id);
+
+      const contentDiv = document.getElementById("detailsContent");
+
+      if (company) {
+        // Helper to generate service badges
+        const servicesHtml = company.services
+          .map((s) => `<span class="badge-service">${s}</span>`)
+          .join("");
+
+        // Helper for status badge color
+        const statusClass =
+          company.status === "Active"
+            ? "badge-status"
+            : "badge-status badge-suspended";
+
+        contentDiv.innerHTML = `
+          <!-- Basic Information -->
+          <div class="section-group">
+            <div class="section-title">Basic Information</div>
+            
+            <div class="info-row">
+              <div class="info-label">Company Name</div>
+              <div class="info-value">${company.name}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Company ID</div>
+              <div class="info-value">${company.id}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Status</div>
+              <div class="info-value">
+                <span class="${statusClass}">${company.status}</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Joined Date</div>
+              <div class="info-value">${company.joinedDate}</div>
+            </div>
+          </div>
+
+          <!-- Location & Services -->
+          <div class="section-group">
+            <div class="section-title">Location & Services</div>
+            
+            <div class="info-row">
+              <div class="info-label">City / Area</div>
+              <div class="info-value">${company.city}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Address</div>
+              <div class="info-value">${company.address}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Service Types</div>
+              <div class="info-value">${servicesHtml}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Active Technicians</div>
+              <div class="info-value">${company.techCount}</div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="section-group" style="margin-bottom: 0;">
+            <div class="section-title">Contact Information</div>
+            
+            <div class="info-row">
+              <div class="info-label">Contact Person</div>
+              <div class="info-value">${company.contactPerson}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Phone</div>
+              <div class="info-value">${company.phone}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Email</div>
+              <div class="info-value">${company.email}</div>
+            </div>
+          </div>
+        `;
+      } else {
+        contentDiv.innerHTML =
+          "<p style='text-align:center; color:#666;'>Company not found.</p>";
+      }
+    </script>
+  </body>
+</html>

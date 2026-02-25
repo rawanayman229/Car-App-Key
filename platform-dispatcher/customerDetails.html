@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customers Details</title>
+
+     <!-- External CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Internal Style -->
+    <style>
+        body {
+        background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+      /* Card Container */
+      .modal-card {
+        width: 100%;
+        max-width: 100%;
+        border: 0.8px solid var( --card-border);
+        border-radius: 8px;
+        padding: 40px;
+        position: relative;
+        margin: 20px;
+      }
+
+      /* Header */
+      .card-header-custom {
+        margin-bottom: 40px;
+      }
+
+      .card-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #0A0A0A;
+        margin: 0 0 8px 0;
+      }
+
+      .card-subtitle {
+        font-size: 15px;
+        color: #717182;
+        margin: 0;
+        font-weight: 400;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: #717182;
+        cursor: pointer;
+      }
+
+      /* Sections */
+      .section-group {
+        margin-bottom: 32px;
+        border-bottom: 0.8px solid var(--card-border);
+      }
+
+      .section-group:last-child {
+        border-bottom: none;
+      }
+
+      .section-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #0A0A0A;
+        margin-bottom: 20px;
+      }
+
+      /* Data Rows */
+      .info-row {
+        display: flex;
+        margin-bottom: 16px;
+        align-items: flex-start;
+      }
+
+      .info-label {
+        width: 40%;
+        font-size: 16px;
+        color: #717182;
+        font-weight: 400;
+      }
+
+      .info-value {
+        width: 60%;
+        font-size: 16px;
+        color: #0A0A0A;
+        font-weight: 400;
+      }
+
+      /* Badges */
+      .badge-status {
+        background-color: #00A63E;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+      }
+
+      .badge-inactive {
+        background: #ECEEF2;
+        color: #030213;
+      }
+    </style>
+    </head>
+
+  <body>
+    <!-- The Card -->
+    <div class="modal-card">
+      <button class="close-btn" onclick="history.back()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="card-header-custom">
+        <h1 class="card-title">Customers Details</h1>
+        <p class="card-subtitle">Read-only view of customer information</p>
+      </div>
+
+      <!-- Content injected by JS -->
+      <div id="detailsContent"></div>
+    </div>
+
+      <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Internal Scripts -->
+    <script>
+       const customers = [
+        {
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
+          city: "Downtown District",
+          jobs: 5,
+          date: "2024-02-18",
+          status: "Active",
+        },
+         {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+         {
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
+          city: "Downtown District",
+          jobs: 5,
+          date: "2024-02-18",
+          status: "Active",
+        },
+         {
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
+          city: "Downtown District",
+          jobs: 5,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+      ];
+
+      const params = new URLSearchParams(window.location.search);
+      let id = params.get("id");
+
+      if (!id) id = "CUST-1001";
+
+      const customer = customers.find((c) => c.id === id);
+
+      const contentDiv = document.getElementById("detailsContent");
+
+      if (customer) {
+        // Helper for status badge color
+        const statusClass =
+          customer.status === "Active"
+            ? "badge-status"
+            : "badge-status badge-inactive";
+
+        contentDiv.innerHTML = `
+          <!-- Basic Information -->
+          <div class="section-group">
+            <div class="section-title">Basic Information</div>
+            
+            <div class="info-row">
+              <div class="info-label">Customer Name</div>
+              <div class="info-value">${customer.name}</div>
+            </div>
+            
+            <div class="info-row">
+              <div class="info-label">Customer ID</div>
+              <div class="info-value">${customer.id}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Status</div>
+              <div class="info-value">
+                <span class="${statusClass}">${customer.status}</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Joined Date</div>
+              <div class="info-value">${customer.joinedDate}</div>
+            </div>
+          </div>
+
+          <!-- Contact Information -->
+          <div class="section-group">
+            <div class="section-title">Contact Information</div>
+            
+            <div class="info-row">
+              <div class="info-label">Phone</div>
+              <div class="info-value">${customer.phone}</div>
+            </div>
+
+           <div class="info-row">
+              <div class="info-label">Email</div>
+              <div class="info-value">${customer.email}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">City / Area</div>
+              <div class="info-value">${customer.city}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Address</div>
+              <div class="info-value">${customer.address}</div>
+            </div>
+          </div>
+
+          <!-- Job History-->
+          <div class="section-group" style="margin-bottom: 0;">
+            <div class="section-title">Job History</div>
+            
+            <div class="info-row">
+              <div class="info-label">Total Jobs</div>
+              <div class="info-value">${customer.jobs}</div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-label">Last Job Date</div>
+              <div class="info-value">${customer.date}</div>
+            </div>
+          </div>
+        `;
+      } else {
+        contentDiv.innerHTML =
+          "<p style='text-align:center; color:#666;'>customer not found.</p>";
+      }
+    </script>
+  </body>
+</html>

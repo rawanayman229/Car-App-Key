@@ -1,11 +1,11 @@
-<!doctype html>
-<html lang="en">
-  <head>
+   <!doctype html>
+   <html lang="en">
+   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Companies</title>
+    <title>Customers</title>
 
-  <!-- External CSS -->
+    <!-- External CSS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
@@ -66,30 +66,23 @@
         border: 1px solid #eee;
         margin-top: 15px;
       }
-      .service-tag {
-        background: #eceef2;
-        border-radius: 14px;
-        padding: 4px 10px;
-        font-size: 11px;
-        margin: 2px;
-        display: inline-block;
-      }
       .status-badge {
         padding: 4px 10px;
         border-radius: 10px;
         font-size: 12px;
-        color: #fff;
       }
       .status-active {
-        background: #00a63e;
+        background: #00A63E;
+        color: #fff;
       }
-      .status-suspended {
-        background: #d4183d;
+      .status-inactive {
+        background: #ECEEF2;
+        color: #030213;
       }
 
       .action-link {
         text-decoration: none;
-        color: #0a0a0a;
+        color: #0A0A0A;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -115,7 +108,7 @@
     </style>
   </head>
 
-  <body>
+    <body>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="logo"><span>LS</span> LockSmith Platform</div>
@@ -157,7 +150,7 @@
           <select id="statusFilter">
             <option value="">All Status</option>
             <option value="Active">Active</option>
-            <option value="Suspended">Suspended</option>
+            <option value="In Active">In Active</option>
           </select>
         </div>
 
@@ -185,20 +178,20 @@
 
       <!-- Table -->
       <div class="card-box">
-      <h5 class="fw-bold mb-3">Companies Listing</h5>
-      <p class="text-muted">8 companies found</p>
+      <h5 class="fw-bold mb-3">Customers Listing</h5>
+      <p class="text-muted">9 customers found</p>
       <div  class="table-responsive mt-3">
-        <table id="companiesTable" class="table w-100">
+        <table id="customersTable" class="table w-100">
           <thead>
             <tr>
-              <th>Company Name</th>
-              <th>Company ID</th>
-              <th>City/Area</th>
-              <th>Services Types</th>
-              <th>Active Technicians</th>
+              <th>Customer Name</th>
+              <th>Customer ID</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>City / Area</th>
+              <th>Number of Jobs</th>
+              <th>Last Job Date</th>
               <th>Status</th>
-              <th>Contact Person</th>
-              <th>Contact Phone</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -217,119 +210,125 @@
 
     <!-- Internal Scripts -->
     <script>
-      const companies = [
+      const customers = [
         {
-          name: "ABC Plumbing",
-          id: "CMP-001",
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
           city: "Downtown District",
-          services: ["Plumbing", "Heating"],
-          tech: 12,
+          jobs: 5,
+          date: "2024-02-18",
           status: "Active",
-          person: "John Doe",
-          phone: "555-0101",
         },
-        {
-          name: "ElectroTech",
-          id: "CMP-002",
+         {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
           city: "North Zone",
-          services: ["Electrical", "HVAC"],
-          tech: 8,
-          status: "Active",
-          person: "John Doe",
-          phone: "555-0102",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
         },
-        {
-          name: "CoolBreeze",
-          id: "CMP-003",
-          city: "West Side",
-          services: ["HVAC"],
-          tech: 15,
-          status: "Active",
-          person: "John Doe",
-          phone: "555-0103",
-        },
-        {
-          name: "Premier Electric",
-          id: "CMP-004",
+         {
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
           city: "Downtown District",
-          services: ["Electrical"],
-          tech: 6,
-          status: "Suspended",
-          person: "John Doe",
-          phone: "555-0104",
-        },
-        {
-          name: "QuickFix Lock",
-          id: "CMP-005",
-          city: "East End",
-          services: ["Locksmith"],
-          tech: 3,
+          jobs: 5,
+          date: "2024-02-18",
           status: "Active",
-          person: "John Doe",
-          phone: "555-0105",
+        },
+         {
+          name: "Jennifer Anderson",
+          id: "CUST-1001",
+          phone: "+1 (555) ***-1122",
+          email: "j.anderson@email.com",
+          city: "Downtown District",
+          jobs: 5,
+          date: "2024-02-18",
+          status: "Active",
         },
         {
-          name: "City Heating",
-          id: "CMP-006",
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
           city: "North Zone",
-          services: ["Heating"],
-          tech: 9,
-          status: "Active",
-          person: "John Doe",
-          phone: "555-0106",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
         },
         {
-          name: "Metro Plumbers",
-          id: "CMP-007",
-          city: "West Side",
-          services: ["Plumbing"],
-          tech: 11,
-          status: "Suspended",
-          person: "John Doe",
-          phone: "555-0107",
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
         },
         {
-          name: "Alpha HVAC",
-          id: "CMP-008",
-          city: "Downtown District",
-          services: ["HVAC"],
-          tech: 20,
-          status: "Active",
-          person: "John Doe",
-          phone: "555-0108",
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
+        },
+        {
+          name: "Robert Thompson",
+          id: "CUST-1002",
+          phone: "+1 (555) ***-1122",
+          email: "r.thompson@email.com",
+          city: "North Zone",
+          jobs: 12,
+          date: "2024-02-18",
+          status: "In Active",
         },
       ];
 
       let table;
 
       $(document).ready(function () {
-        table = $("#companiesTable").DataTable({
-          data: companies,
+        table = $("#customersTable").DataTable({
+          data: customers,
           dom: "rtp",
           pageLength: 5,
           columns: [
             { data: "name" },
             { data: "id" },
+            { data: "phone" },
+            { data: "email" },
             { data: "city" },
-            {
-              data: "services",
-              render: (s) =>
-                s.map((x) => `<span class="service-tag">${x}</span>`).join(""),
-            },
-            { data: "tech" },
+            { data: "jobs" },
+            { data: "date" },
             {
               data: "status",
               render: (s) =>
-                `<span class="status-badge ${s === "Active" ? "status-active" : "status-suspended"}">${s}</span>`,
+                `<span class="status-badge ${s === "Active" ? "status-active" : "status-inactive"}">${s}</span>`,
             },
-            { data: "person" },
-            { data: "phone" },
             {
               data: null,
               render: (d) => `
-      <a href="companyDetails.html?id=${d.id}" class="action-link">
-        <i class="fa fa-eye"></i> View
-      </a>`,
+             <a href="customerDetails.html?id=${d.id}" class="action-link">
+             <i class="fa fa-eye"></i> View
+            </a>`,
             },
           ],
         });
@@ -342,19 +341,16 @@
         $("#statusFilter").on("change", function () {
           const v = this.value;
           table
-            .column(5)
+            .column(7)
             .search(v ? `^${v}$` : "", true, false)
             .draw();
         });
 
         $("#cityFilter").on("change", function () {
-          table.column(2).search(this.value).draw();
+          table.column(4).search(this.value).draw();
         });
 
-        $("#serviceFilter").on("change", function () {
-          table.column(3).search(this.value).draw();
-        });
       });
     </script>
-  </body>
-</html>
+    </body>
+    </html>
