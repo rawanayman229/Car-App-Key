@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Companies</title>
+
+    <!-- External CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Internal Style -->
+    <style>
+      /* ===== Search & Filter Box ===== */
+      .search-filter-wrapper {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        border: 1px solid #eee;
+      }
+
+      .search-box {
+        flex: 1;
+        min-width: 250px;
+        background: #f3f3f5;
+        border-radius: 12px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .search-box input {
+        border: none;
+        outline: none;
+        background: transparent;
+        width: 100%;
+        font-size: 14px;
+      }
+
+      .filter-box {
+        background: #f3f3f5;
+        border-radius: 12px;
+        padding: 10px 15px;
+        min-width: 160px;
+      }
+
+      .filter-box select {
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      /* ===== Tabs ===== */
+      .custom-tabs {
+        display: inline-flex;
+        gap: 6px;
+        margin-top: 20px;
+        background: #f3f3f5;
+        padding: 6px;
+        width: auto;
+        height: auto;
+        border-radius: 14px;
+      }
+
+      .custom-tab {
+        padding: 6px 16px;
+        border-radius: 999px;
+        color: #0a0a0a;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        background: transparent;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .custom-tab.active {
+        background: #ffffff;
+        color: #0a0a0a;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      /* ===== Card & Table ===== */
+      .card-box {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        border: 0.8px solid #0000001a;
+        margin-top: 15px;
+        margin-bottom: 50px;
+      }
+
+      .table thead th {
+        font-size: 14px;
+        color: #0a0a0a;
+        font-weight: 600;
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #eee;
+      }
+
+      .table tbody td {
+        vertical-align: middle;
+        font-size: 14px;
+      }
+
+      /* ===== Status & Badges ===== */
+      .status-badge {
+        padding: 4px 10px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+      }
+
+      .status-active {
+        background: #030213;
+      }
+      .status-suspended {
+        background: #d4183d;
+      }
+      .status-inactive {
+        background: #eceef2;
+        color: #030213;
+      }
+      .service-tag {
+        background: #eceef2;
+        border-radius: 14px;
+        padding: 4px 10px;
+        font-size: 11px;
+        display: inline-block;
+        margin: 2px;
+        color: #030213;
+      }
+
+      .action-view {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        color: #0a0a0a;
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .dataTables_wrapper .dataTables_paginate {
+        display: flex !important;
+        justify-content: center !important;
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      .dataTables_wrapper .dataTables_paginate .pagination {
+        justify-content: center !important;
+      }
+
+      .dataTables_wrapper .dataTables_paginate .page-item {
+        margin: 0 4px;
+      }
+      /* ===== Details MODAL DESIGN ===== */
+      .custom-modal-content {
+        border-radius: 16px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      .custom-modal-header {
+        border-bottom: none;
+        padding: 24px 24px 0 24px;
+      }
+      .custom-modal-body {
+        padding: 24px;
+      }
+      
+      /* The Detail Grid Layout */
+      .detail-group {
+        margin-bottom: 24px;
+      }
+      .detail-header {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        color: #0A0A0A;
+      }
+      .detail-row {
+        display: flex;
+        margin-bottom: 12px;
+        align-items: flex-start;
+      }
+      .detail-label {
+        width: 40%;
+        color: #717182;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .detail-value {
+        width: 60%;
+        color: #0A0A0A;
+        font-weight: 400;
+        font-size: 16px;
+      }
+  </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo"><span>LS</span> LockSmith Platform</div>
+
+      <div class="nav-links">
+        <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
+        <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+        <a href="jobHistory.html" href="#"><i class="fa-solid fa-list-ul"></i> Job History</a>
+        <a href="dispatcherCompanies.html" ><i class="fa-regular fa-map"></i> Companies</a>
+      </div>
+
+      <div class="profile"><i class="fa fa-user"></i> Dispatcher</div>
+
+      <div class="toggle-sidebar" id="toggleSidebar">
+        <i class="fa fa-bars"></i>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
+      <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+      <a href="jobHistory.html"
+        ><i class="fa-solid fa-list-ul"></i> Job History</a
+      >
+      <a href="dispatcherCompanies.html"
+        ><i class="fa-regular fa-map"></i> Companies</a
+      >
+    </aside>
+
+    <!-- MAIN CONTENT-->
+    <main class="mainContent" id="mainContent">
+      <!-- Search + Filters -->
+      <div class="search-filter-wrapper">
+        <div class="search-box">
+          <i class="fas fa-search text-muted"></i>
+          <input
+            type="text"
+            id="globalSearch"
+            placeholder="Search by name, ID, phone, or email..."
+          />
+        </div>
+
+        <div class="filter-box">
+          <select id="statusFilter"></select>
+        </div>
+
+        <div class="filter-box">
+          <select id="cityFilter">
+            <option value="">All Cities</option>
+            <option>Downtown District</option>
+            <option>North Zone</option>
+            <option>West Side</option>
+            <option>East End</option>
+          </select>
+        </div>
+
+        <div class="filter-box">
+          <select id="serviceFilter">
+            <option value="">All Services</option>
+            <option>Plumbing</option>
+            <option>Heating</option>
+            <option>Electrical</option>
+            <option>HVAC</option>
+            <option>Locksmith</option>
+          </select>
+        </div>
+      </div>
+      <!-- Tabs -->
+      <div class="custom-tabs">
+        <div class="custom-tab active" data-tab="companies">Companies</div>
+        <div class="custom-tab" data-tab="customers">Customers</div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="card-box">
+        <div class="mb-4">
+          <h5 id="listingTitle" class="fw-bold m-0">Companies Listing</h5>
+          <p id="listingCount" class="text-muted">0 found</p>
+        </div>
+
+        <!-- Companies Table -->
+        <div id="companiesTableWrapper" class="table-responsive mt-3">
+          <table id="companiesTable" class="table w-100">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Company ID</th>
+                <th>City / Area</th>
+                <th>Service Types</th>
+                <th>Active Technicians</th>
+                <th>Status</th>
+                <th>Contact Person</th>
+                <th>Phone</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+        <!-- Customers Table -->
+        <div id="customersTableWrapper" class="table-responsive mt-3">
+          <table id="customersTable" class="table w-100">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Customer ID</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>City/Area</th>
+                <th>Number Of Jobs</th>
+                <th>Last Job Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== DYNAMIC DETAILS MODAL ===== -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content custom-modal-content">
+          <!-- Header -->
+          <div class="modal-header custom-modal-header d-block">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="modal-title fw-bold" id="modalTitle">Details</h5>
+                <p class="text-muted small mb-0" id="modalSubtitle">Read-only view of information</p>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+          </div>
+          <!-- Body -->
+          <div class="modal-body custom-modal-body" id="modalBodyContent">
+          <!-- Content injected via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      /* ===== Mock Data (Expanded for Pagination) ===== */
+      const companies = [
+        {
+          name: "ABC Plumbing",
+          id: "CMP-001",
+          city: "Downtown District",
+          services: ["Plumbing", "Heating"],
+          tech: 12,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0101",
+        },
+        {
+          name: "ElectroTech",
+          id: "CMP-002",
+          city: "North Zone",
+          services: ["Electrical", "HVAC"],
+          tech: 8,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0102",
+        },
+        {
+          name: "CoolBreeze",
+          id: "CMP-003",
+          city: "West Side",
+          services: ["HVAC", "Refrigeration"],
+          tech: 15,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0103",
+        },
+        {
+          name: "Premier Electric",
+          id: "CMP-004",
+          city: "Downtown District",
+          services: ["Electrical"],
+          tech: 6,
+          status: "Suspended",
+          person: "John Doe",
+          phone: "555-0104",
+        },
+        {
+          name: "QuickFix Lock",
+          id: "CMP-005",
+          city: "East End",
+          services: ["Locksmith"],
+          tech: 3,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0105",
+        },
+        {
+          name: "City Heating",
+          id: "CMP-006",
+          city: "North Zone",
+          services: ["Heating"],
+          tech: 9,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0106",
+        },
+        {
+          name: "Metro Plumbers",
+          id: "CMP-007",
+          city: "West Side",
+          services: ["Plumbing"],
+          tech: 11,
+          status: "Suspended",
+          person: "John Doe",
+          phone: "555-0107",
+        },
+        {
+          name: "Alpha HVAC",
+          id: "CMP-008",
+          city: "Downtown District",
+          services: ["HVAC"],
+          tech: 20,
+          status: "Active",
+          person: "John Doe",
+          phone: "555-0108",
+        },
+      ];
+
+      const customers = [
+        {
+          name: "Adam Wilson",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "Adam Wilson",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "John Doe",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Inactive",
+        },
+        {
+          name: "John Doe",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "Adam Wilson",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "Adam Wilson",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+        {
+          name: "Adam Wilson",
+          id: "CUS-001",
+          phone: "555-1111",
+          email: "adam@mail.com",
+          city: "North Zone",
+          jobs: 6,
+          date: "2024-02-18",
+          status: "Active",
+        },
+      ];
+
+      let currentTab = "companies";
+      let companiesTable, customersTable;
+
+      $(document).ready(function () {
+        // --- 1. Init Companies Table ---
+        let companiesTable = $("#companiesTable").DataTable({
+          data: companies,
+          dom: "rtp",
+          pageLength: 5,
+          ordering: true,
+          columns: [
+            { data: "name" },
+            { data: "id" },
+            { data: "city" },
+            {
+              data: "services",
+              render: (s) =>
+                s.map((x) => `<span class="service-tag">${x}</span>`).join(""),
+            },
+            { data: "tech" },
+            {
+              data: "status",
+              render: (s) =>
+                `<span class="status-badge ${s == "Active" ? "status-active" : "status-suspended"}">${s}</span>`,
+            },
+            { data: "person" },
+            { data: "phone" },
+            {
+              data: null,
+              render: () =>
+                `<div class="action-view"><i class="fa fa-eye"></i> View</div>`,
+            },
+          ],
+        });
+
+        // --- 2. Init Customers Table ---
+        let customersTable = $("#customersTable").DataTable({
+          data: customers,
+          dom: "rtp",
+          pageLength: 5,
+          columns: [
+            { data: "name" },
+            { data: "id" },
+            { data: "phone" },
+            { data: "email" },
+            { data: "city" },
+            { data: "jobs" },
+            { data: "date" },
+            {
+              data: "status",
+              render: (s) =>
+                `<span class="status-badge ${s == "Active" ? "status-active" : "status-inactive"}">${s}</span>`,
+            },
+            {
+              data: null,
+              render: () =>
+                `<div class="action-view"><i class="fa fa-eye"></i> View</div>`,
+            },
+          ],
+        });
+
+         /* ===== MODAL LOGIC ===== */
+        
+        // Attach Click Event for Companies
+        $('#companiesTable tbody').on('click', '.action-view', function () {
+            let data = companiesTable.row($(this).parents('tr')).data();
+            openModal('company', data);
+        });
+
+        // Attach Click Event for Customers
+        $('#customersTable tbody').on('click', '.action-view', function () {
+            let data = customersTable.row($(this).parents('tr')).data();
+            openModal('customer', data);
+        });
+
+        function openModal(type, data) {
+            const $modalBody = $('#modalBodyContent');
+            $modalBody.empty(); 
+
+            if (type === 'company') {
+                // Set Header
+                $('#modalTitle').text('Company Details');
+                $('#modalSubtitle').text('Read-only view of company information');
+
+                // Generate Services HTML
+                const servicesHtml = data.services.map(s => 
+                    `<span class="badge bg-light text-dark border me-1">${s}</span>`
+                ).join('');
+
+                // Generate Status Badge
+                const statusClass = data.status === 'Active' ? 'bg-dark' : 'bg-danger';
+
+                // Build HTML Structure
+                const html = `
+                    <!-- Section 1: Basic Info -->
+                    <div class="detail-group">
+                        <h6 class="detail-header">Basic Information</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">Company Name</div>
+                            <div class="detail-value">${data.name}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Company ID</div>
+                            <div class="detail-value">${data.id}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value"><span class="badge ${statusClass} rounded-pill">${data.status}</span></div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Joined Date</div>
+                            <div class="detail-value">${data.date || 'N/A'}</div>
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Location & Services -->
+                    <div class="detail-group">
+                        <h6 class="detail-header">Location & Services</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">City / Area</div>
+                            <div class="detail-value">${data.city}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Address</div>
+                            <div class="detail-value">${data.address || 'N/A'}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Service Types</div>
+                            <div class="detail-value">${servicesHtml}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Active Technicians</div>
+                            <div class="detail-value">${data.tech}</div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Contact Info -->
+                    <div class="detail-group mb-0">
+                        <h6 class="detail-header">Contact Information</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">Contact Person</div>
+                            <div class="detail-value">${data.person}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Phone</div>
+                            <div class="detail-value">${data.phone}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value text-break">${data.email || 'N/A'}</div>
+                        </div>
+                    </div>
+                `;
+                $modalBody.html(html);
+
+            } else if (type === 'customer') {
+                // Set Header
+                $('#modalTitle').text('Customer Details');
+                $('#modalSubtitle').text('Read-only view of customer information');
+
+                const statusClass = data.status === 'Active' ? 'bg-dark' : 'bg-secondary';
+
+                const html = `
+                    <div class="detail-group">
+                        <h6 class="detail-header">Basic Information</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">Customer Name</div>
+                            <div class="detail-value">${data.name}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Customer ID</div>
+                            <div class="detail-value">${data.id}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Status</div>
+                            <div class="detail-value"><span class="badge ${statusClass} rounded-pill">${data.status}</span></div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Joined Date</div>
+                            <div class="detail-value">${data.date || 'N/A'}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-group">
+                        <h6 class="detail-header">Contact & Location</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">Phone</div>
+                            <div class="detail-value">${data.phone}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Email</div>
+                            <div class="detail-value">${data.email}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">City / Area</div>
+                            <div class="detail-value">${data.city}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Address</div>
+                            <div class="detail-value">${data.address || 'N/A'}</div>
+                        </div>
+                    </div>
+
+                    <div class="detail-group mb-0">
+                        <h6 class="detail-header">Job History</h6>
+                        <div class="detail-row">
+                            <div class="detail-label">Number of Jobs</div>
+                            <div class="detail-value">${data.jobs}</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Last Job Date</div>
+                            <div class="detail-value">${data.date}</div>
+                        </div>
+                    </div>
+                `;
+                $modalBody.html(html);
+            }
+
+            // Show Modal
+            const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+            modal.show();
+        }
+
+        /* ===== INITIAL UI STATE ===== */
+          $("#companiesTableWrapper").show();
+          $("#customersTableWrapper").hide();
+        setStatusOptions();
+        updateHeader();
+
+        /* ===== 3. Logic Filters ===== */
+
+        //Global Search
+        $("#globalSearch").on("keyup", function () {
+          if (currentTab === "companies") {
+            companiesTable.search(this.value).draw();
+          } else {
+            customersTable.search(this.value).draw();
+          }
+        });
+
+        // Status Filter
+        $("#statusFilter").on("change", function () {
+          let v = this.value;
+
+          if (currentTab === "companies") {
+            companiesTable
+              .column(5)
+              .search(v ? `^${v}$` : "", true, false)
+              .draw();
+          } else {
+            customersTable
+              .column(7)
+              .search(v ? `^${v}$` : "", true, false)
+              .draw();
+          }
+          updateHeader();
+        });
+
+        $("#cityFilter").on("change", function () {
+          let v = this.value;
+          if (currentTab === "companies") {
+            companiesTable.column(2).search(v).draw();
+          } else {
+            customersTable.column(4).search(v).draw();
+          }
+          updateHeader();
+        });
+
+        $("#serviceFilter").on("change", function () {
+          if (currentTab === "companies") {
+            companiesTable.column(3).search(this.value).draw();
+          }
+          updateHeader();
+        });
+
+        /* ===== Logic Tabs ===== */
+        $(".custom-tab").on("click", function () {
+          $(".custom-tab").removeClass("active");
+          $(this).addClass("active");
+
+          currentTab = $(this).data("tab");
+
+          // reset filters
+          $("#globalSearch").val("");
+          $("#cityFilter").val("");
+          $("#serviceFilter").val("");
+
+          companiesTable.search("").columns().search("").draw();
+          customersTable.search("").columns().search("").draw();
+
+          if (currentTab === "companies") {
+            $("#companiesTableWrapper").show();
+            $("#customersTableWrapper").hide();
+            $("#serviceFilter")
+              .prop("disabled", false)
+              .parent()
+              .css("opacity", "1");
+          } else {
+            $("#companiesTableWrapper").hide();
+            $("#customersTableWrapper").show();
+            $("#serviceFilter")
+              .prop("disabled", true)
+              .val("")
+              .parent()
+              .css("opacity", ".5");
+          }
+
+          setStatusOptions();
+          updateHeader();
+        });
+
+        /* ================= FUNCTIONS ================= */
+        function updateHeader() {
+          if (currentTab === "companies") {
+            const count = companiesTable.rows({ filter: "applied" }).count();
+            $("#listingTitle").text("Companies Listing");
+            $("#listingCount").text(`${count} companies found`);
+          } else {
+            const count = customersTable.rows({ filter: "applied" }).count();
+            $("#listingTitle").text("Customers Listing");
+            $("#listingCount").text(`${count} customers found`);
+          }
+        }
+
+        function setStatusOptions() {
+          let html = `<option value="">All Status</option>`;
+          if (currentTab === "companies") {
+            html += `<option value="Active">Active</option><option value="Suspended">Suspended</option>`;
+          } else {
+            html += `<option value="Active">Active</option><option value="Inactive">Inactive</option>`;
+          }
+          $("#statusFilter").html(html);
+        }
+      });
+    </script>
+  </body>
+</html>

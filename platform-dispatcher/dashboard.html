@@ -1,0 +1,155 @@
+  <!doctype html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dispatcher Dashboard</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo"><span>LS</span> LockSmith Platform</div>
+
+      <div class="nav-links" id="navLinks">
+        <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
+        <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+        <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
+        <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
+      </div>
+
+      <div class="profile"><i class="fa fa-user"></i> Dispatcher</div>
+      <div class="toggle-sidebar" id="toggleSidebar">
+        <i class="fa fa-bars"></i>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR  (Mobile Screen)-->
+    <aside class="sidebar" id="sidebar">
+      <a href="dashboard.html" ><i class="fa fa-house"></i> Dashboard</a>
+      <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+      <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
+      <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="mainContent" id="mainContent">
+      <div class="header">
+        <div>
+          <h1>Dispatcher Dashboard</h1>
+          <p>Manage and track locksmith service requests</p>
+        </div>
+        <a href="newJob.html" class="add-btn"><i class="fa fa-plus"></i> New Job</a>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <!-- Card 1  -->
+        <div class="card">
+          <h3>Total Jobs</h3>
+          <div class="card-content">
+            <div class="num">3</div>
+            <div class="icon-box blue">
+              <i class="fa fa-arrow-trend-up"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2  -->
+        <div class="card">
+          <h3>Pending</h3>
+          <div class="card-content">
+            <div class="num">1</div>
+            <div class="icon-box orange">
+              <i class="fa fa-clock"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3  -->
+        <div class="card">
+          <h3>Completed</h3>
+          <div class="card-content">
+            <div class="num">1</div>
+            <div class="icon-box green">
+              <i class="fa fa-check"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4  -->
+        <div class="card">
+          <h3>Urgent</h3>
+          <div class="card-content">
+            <div class="num">1</div>
+            <div class="icon-box red">
+              <i class="fa fa-exclamation"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOBS -->
+      <div class="jobs">
+        <h2>Recent Jobs</h2>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="d-flex gap-5">
+              <p>John Anderson</p>
+              <div>
+                <span class="badge urgent">Urgent</span>
+                <span class="badge sent">Sent</span>
+              </div>
+            </div>
+            <div class="job-meta">
+              Door • 100 Park Ave, Manhattan • QuickLock Services
+            </div>
+          </div>
+          <div class="job-right">
+            <div class="price">$85</div>
+            <div class="date">12/02/2026</div>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="d-flex gap-5">
+              <p>Sarah Martinez</p>
+              <div><span class="badge completed">Completed</span></div>
+            </div>
+            <div class="job-meta">
+              Car • 250 Broadway, New York • SecureAccess Pro
+            </div>
+          </div>
+          <div class="job-right">
+            <div class="price">$120</div>
+            <div class="date">11/02/2026</div>
+          </div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="d-flex gap-5">
+              <p>Michael Chen</p>
+              <div><span class="badge completed">Completed</span></div>
+            </div>
+            <div class="job-meta">
+              Safe • 500 5th Ave, Manhattan • LockTech Experts
+            </div>
+          </div>
+          <div class="job-right">
+            <div class="price">$150</div>
+            <div class="date">12/02/2026</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Script Files -->
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

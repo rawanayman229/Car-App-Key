@@ -1,0 +1,376 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Details</title>
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Internal Styles -->
+    <style>
+      /* PAGE LAYOUT */
+      .details-grid {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      /* left column */
+      .details-left {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* right column */
+      .details-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card-box {
+        background: #ffff;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .card-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--title-color);
+      }
+
+      .info-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 18px;
+      }
+
+      .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #F3F4F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4A5565;
+      }
+
+      .label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #6A7282;
+      }
+      .value {
+        font-size: 16px;
+        font-weight: 400;
+        color: #101828;
+      }
+
+      .status-pill {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .status-list button {
+        width: 100%;
+        border: none;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #f3f4f6;
+        text-align: left;
+      }
+      .status-list button.active {
+        background: #ffedd4;
+        color: #ca3500;
+        font-weight: 500;
+      }
+      .info-row a , .card-box a{
+        text-decoration: none;
+      }
+
+      .note-input {
+        width: 100%; 
+        border: 0.8px solid var(--card-border);
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+
+      .note {
+        display: flex;
+        gap: 3px;
+        background: #f9fafb;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .back {
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+       /* === RESPONSIVE STYLES (TABLET & MOBILE) === */
+      @media (max-width: 992px) {
+        .mainContent {
+            margin-left: 0; 
+        }
+
+        .details-grid {
+          flex-direction: column;
+        }
+
+        .details-left,
+        .details-right {
+          width: 100%;
+          flex: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="logo"><span>LS</span> LockSmith Platform</div>
+
+      <div class="nav-links">
+        <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
+        <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+        <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
+        <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
+      </div>
+
+      <div class="profile"><i class="fa fa-user"></i> Dispatcher</div>
+
+      <div class="toggle-sidebar" id="toggleSidebar">
+        <i class="fa fa-bars"></i>
+      </div>
+    </nav>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
+      <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
+      <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
+      <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="mainContent" id="mainContent">
+      <!-- HEADER -->
+      <div class="header">
+        <div>
+          <h1>
+            <i class="fa fa-arrow-left back" onclick="history.back()"></i>
+            Job Details
+          </h1>
+          <p>ID: j1</p>
+        </div>
+
+        <div>
+          <span class="badge urgent ">Urgent</span>
+          <span class="badge sent">Sent</span>
+        </div>
+      </div>
+
+      <!-- Job Details Content -->
+      <div class="details-grid">
+      <!-- Left side content -->
+      <div class="details-left">
+          <!-- CUSTOMER -->
+          <div class="card-box">
+            <div class="card-title">Customer Information</div>
+
+            <div class="info-row">
+              <div class="icon-circle">J</div>
+              <div>
+                <div class="label">Customer Name</div>
+                <div class="value">John Anderson</div>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="icon-circle"><i class="fa fa-phone"></i></div>
+              <div>
+                <div class="label">Phone (Masked)</div>
+                <div class="value">(555) ***-2222</div>
+                <a href="#">Call Customer</a>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <div class="icon-circle"><i class="fa fa-location-dot"></i></div>
+              <div>
+                <div class="label">Address</div>
+                <div class="value">100 Park Ave, Manhattan</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- JOB INFO -->
+          <div class="card-box">
+            <div class="card-title">Job Information</div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Item Type</div>
+                <div class="value">Door</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Service Detail</div>
+                <div class="value">Key Code</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Created At</div>
+                <div class="value">12/02/2026 17:01</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Preliminary Price</div>
+                <div class="value">$85</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="label">Description</div>
+              <div class="note">
+                Locked out of apartment, need emergency access
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTES -->
+          <div class="card-box">
+            <div class="d-flex justify-content-between mb-2">
+              <div class="card-title mb-0">Notes & Activity</div>
+              <a href="#">Cancel</a>
+            </div>
+
+            <textarea class="note-input" placeholder="Enter note..."></textarea>
+
+            <button class="add-btn">
+              <i class="fa fa-paper-plane"></i> Add Note
+            </button>
+          </div>
+        </div>
+
+        </div>
+        </main>
+    </main>
+
+    <script src="script.js"></script>
+
+    <!-- Internal Script -->
+  <script>
+  // Grab query params
+  const params = new URLSearchParams(window.location.search);
+  const jobId = params.get("id");
+
+  // Example job data 
+    const jobsData = {
+    j1: {
+      customer: {
+        name: "John Anderson",
+        phone: "(555) 111-2222",
+        address: "100 Park Ave, Manhattan",
+      },
+      job: {
+        type: "Door",
+        detail: "Key Code",
+        created: "12/02/2026 17:01",
+        price: "$85",
+        description: "Locked out of apartment, need emergency access",
+        status: ["Urgent", "Sent"]
+      },
+      company: {
+        name: "QuickLock Services",
+        rating: "★ 4.8 • 234 jobs",
+        phone: "(555) 123-4567",
+        address: "123 Main St, Downtown",
+        status: "Available"
+      },
+      notes: [
+        "Customer called at 2:30 PM",
+        "Urgent lockout situation"
+      ]
+    },
+
+    j2: {
+      customer: { name: "Sarah Martinez", phone: "(555) 333-4444", address: "250 Broadway, New York" },
+      job: { type: "Car", detail: "Lost keys", created: "11/02/2026 10:20", price: "$120", description: "Lost car keys, need replacement", status: ["Completed"] },
+      company: { name: "SecureAccess Pro", rating: "★ 4.6 • 190 jobs", phone: "(555) 567-8901", address: "456 Park Ave", status: "Available" },
+      notes: ["Called company to replace keys"]
+    }
+  };
+
+  // Render function
+  function renderJob(jobId) {
+    const job = jobsData[jobId];
+    if (!job) return;
+
+    // Header
+    document.querySelector(".header p").innerText = `ID: ${jobId}`;
+    const statusContainer = document.querySelector(".header .status-pill");
+    statusContainer.remove();
+    const headerDiv = document.querySelector(".header");
+    job.job.status.forEach((s) => {
+      const span = document.createElement("span");
+      span.className = `status-pill status-${s.toLowerCase().replace(" ", "-")}`;
+      span.innerText = s;
+      headerDiv.appendChild(span);
+    });
+
+    // Customer info
+    document.querySelector(".details-left .card-box .value").innerText = job.customer.name;
+    document.querySelectorAll(".details-left .info-row .value")[1].innerText = job.customer.phone;
+    document.querySelectorAll(".details-left .info-row .value")[2].innerText = job.customer.address;
+
+    // Job info
+    const jobInfoValues = document.querySelectorAll(".details-left .card-box:nth-of-type(2) .value");
+    jobInfoValues[0].innerText = job.job.type;
+    jobInfoValues[1].innerText = job.job.detail;
+    jobInfoValues[2].innerText = job.job.created;
+    jobInfoValues[3].innerText = job.job.price;
+    document.querySelector(".details-left .card-box:nth-of-type(2) .note").innerText = job.job.description;
+
+    // Notes
+    const notesContainer = document.querySelector(".details-left .card-box:nth-of-type(3)");
+    notesContainer.querySelectorAll(".note").forEach(n => n.remove());
+    job.notes.forEach(n => {
+      const div = document.createElement("div");
+      div.className = "note";
+      div.innerText = n;
+      notesContainer.appendChild(div);
+    });
+
+    // Company info
+    const companyBox = document.querySelector(".details-right .card-box");
+    companyBox.querySelector(".value").innerText = job.company.name;
+    companyBox.querySelector(".label").innerText = job.company.rating;
+    const vals = companyBox.querySelectorAll(".value");
+    vals[1].innerText = job.company.phone;
+    vals[2].innerText = job.company.address;
+    companyBox.querySelector(".badge").innerText = job.company.status;
+  }
+
+  renderJob(jobId);
+</script>
+  </body>
+</html>

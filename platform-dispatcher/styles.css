@@ -1,0 +1,354 @@
+:root {
+  --primary-color: #155DFC;
+  --bg-light: #F9FAFB;
+  --title-color: #101828;
+  --subtitle-color:  #4A5565;
+  --card-border: #E5E7EB;
+  --card-bg: #FFFFFF;
+  --navbar-height: 70px;
+}
+
+/* ================= GLOBAL ================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: var(--bg-light);
+  overflow-x: hidden;
+}
+
+/* ================= NAVBAR ================= */
+.navbar {
+  background: #fff;
+  height: var(--navbar-height);
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.logo span {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+}
+
+/* Links in Navbar */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--subtitle-color);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+.nav-links a:hover{
+  background: #EFF6FF;
+  color: var(--primary-color);
+}
+.nav-links a.active {
+  background: #EFF6FF;
+  color: var(--primary-color);
+}
+
+/* Profile Section */
+.profile {
+  background: #F3F4F6;
+  color: #364153;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  }
+
+/* Hamburger Icon */
+.toggle-sidebar {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--title-color);
+  padding: 5px;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  position: fixed;
+  top: var(--navbar-height);
+  left: -250px;
+  width: 250px;
+  height: calc(100vh - var(--navbar-height));
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 4px 0 10px rgba(0,0,0,0.05);
+  transition: left 0.3s ease-in-out;
+  z-index: 999;
+}
+
+.sidebar.show {
+  left: 0;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--title-color);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+  background: #eff6ff;
+  color: var(--primary-color);
+}
+
+/* ================= CONTENT & LAYOUT ================= */
+.mainContent {
+  width: 100%;
+  padding: 50px;
+    }
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.header h1 { 
+  font-size: 24px; 
+  font-weight: 700;
+  color: var(--title-color);
+}
+.header p { 
+  color: var(--subtitle-color); 
+  font-size: 16px; 
+  font-weight: 400;
+  margin-top: 4px; 
+}
+
+.add-btn {
+  text-decoration: none;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ================= STATS & CARDS ================= */
+.stats {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.card {
+  background: #ffffff;
+  width: calc(25% - 15px);
+  height: 110px;
+  padding: 20px;
+  border-radius: 10px; 
+  border: 0.8px solid var(--card-border);
+  flex: 0 0 auto;
+}
+.card-content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.card h3 {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--subtitle-color); 
+}
+
+.card .num {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--title-color);
+  line-height: 1;
+}
+
+.icon-box {
+  width: 45px; 
+  height: 45px;
+  border-radius: 10px;
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  font-size: 18px;
+}
+.blue { background: #DBEAFE; color: #155DFC; }
+.orange { background: #FFEDD4; color: #F54900; }
+.green { background: #DCFCE7; color: #00A63E; }
+.red { background: #FFE2E2; color: #E7000B; }
+
+/* ================= JOBS LIST ================= */
+.jobs {
+  background: var(--card-bg);
+  border-radius: 10px;
+  border: 0.8px solid var(--card-border);
+}
+
+.jobs h2 {
+  color: var(--title-color);
+  padding: 15px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.job {
+  padding: 15px 20px;
+  border-bottom: 0.8px solid var(--card-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.job:last-child { 
+  border-bottom: none; 
+}
+
+.job-left p { 
+  color: var(--title-color);
+  font-size: 16px;
+  font-weight: 400;
+  display: block; 
+  margin-bottom: 4px; 
+}
+
+.badge { 
+  padding: 8px;
+  border-radius: 15px; 
+  font-size: 12px; 
+  font-weight: 400; 
+  margin-right: 5px; 
+}
+.urgent { background: #FFE2E2; color: #C10007; }
+.sent { background: #FFEDD4; color: #CA3500; }
+.completed { background: #DCFCE7; color: #008236; }
+.in-progress { background: #F3E8FF; color: #8200DB; }
+
+.job-meta { 
+  font-size: 14px;
+  font-weight: 400; 
+  color: var(--subtitle-color); 
+  margin-top: 4px; 
+}
+
+.job-right { 
+  text-align: right;
+  }
+
+.price { 
+  font-size: 16px; 
+  font-weight: 700;
+  color: var(--title-color); 
+}
+.date { 
+  font-size: 14px;
+  font-weight: 400; 
+  color: var(--subtitle-color); 
+}
+/* ===== Validation Styles ===== */
+.input-error{
+  border: 1.5px solid #dc2626 !important;
+  background: #fff5f5;
+}
+
+.error-text{
+  font-size: 12px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: none;
+}
+  .required::after{
+    content:" *";
+    color:red;
+  }
+
+/* ================= RESPONSIVE DESIGN (FIXES) ================= */
+@media (max-width: 768px) {
+  .nav-links, 
+  .profile {
+    display: none;
+  }
+
+  .toggle-sidebar {
+    display: block;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+    .stats {
+    flex-direction: column; 
+  }
+    .card {
+    width: 100%;               
+    height: auto;            
+  }
+
+  .job {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .job-right {
+    text-align: left;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .container.shift {
+    margin-left: 0;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+}
