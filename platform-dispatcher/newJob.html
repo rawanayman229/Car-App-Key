@@ -1,386 +1,406 @@
-    <!doctype html>
-    <html lang="en">
-    <head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>New Job</title>
+    <title>Create New Job</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+  </head>
 
-    <!-- Internal Styles for forms -->
-    <style>
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;  
-            margin-top: 20px;
-            align-items: flex-start;
-        }
-
-        /* FLEX COLUMNS */
-        .form-col {
-            flex: 1 1 400px;
-            background: #fff;
-            border: 0.8px solid #D1D5DC;
-            border-radius: 10px;
-            padding: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            max-width: 100%;
-        }
-
-        /* Typography */
-        h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color:  var(--title-color);
-            margin-bottom: 24px;
-        }
-
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: 400;
-            color: #364153;
-            margin-bottom: 6px;
-        }
-
-        /* Custom Input Styling */
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-control-custom {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 14px;
-            color: #0A0A0A80;
-            background: #fff;
-            border: 0.8px solid #D1D5DC;
-            border-radius: 10px;
-            outline: none;
-            padding-left:42px; 
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-     /* Icon inside input */
-     .form-group .input-icon{
-            position:absolute;
-            left:14px;
-            top:45px;
-            font-size:15px;
-            color:#99A1AF;
-            pointer-events:none;
-            transition:0.2s;
-     }
-
-     /* Hide icon on focus */
-       .form-control-custom:focus + .input-icon{
-            opacity:0;
-            transform:scale(0.8);
-       }
-
-      /* Hide icon when typing */
-       .form-control-custom:not(:placeholder-shown) + .input-icon{
-            opacity:0;
-       }
-
-       /* For textarea */
-        textarea.form-control-custom + .input-icon{
-            top:42px; 
-       }  
-
-        /* Inputs with Icons */
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-wrapper i {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #0A0A0A80;
-            font-size: 16px;
-        }
-
-        .input-wrapper input.has-icon {
-            padding-left: 42px;
-        }
-
-        /* Urgency Radio Group */
-       .urgency-group{
-            display:flex;
-            flex-direction:row;                         
-            align-items:center;
-            gap:24px;
-            flex-wrap:nowrap;
-        }
-        /* Radio label */
-        .radio-label{
-            display:flex;
-            align-items:center;
-            gap:8px;
-            cursor:pointer;
-            font-size:14px;
-            color:#364153;
-        }
-        /* Radio input */
-        .radio-label input{
-            accent-color:var(--primary-color);
-            cursor:pointer;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #364153;
-        }
-
-        .urgent-text{
-            color:#E7000B;
-            font-weight:600;
-            display:flex;
-            align-items:center;
-            gap:6px;
-        }
-
-        /* Buttons */
-        .form-actions {
-            margin-top: 20px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .btn-submit {
-            background-color: #483EF7;
-            color: #fff;
-            width: 49%;
-            padding: 12px ;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-submit:hover {
-            background-color: #1e293b;
-        }
-        </style>
-
-    </head>
-    <body>
+  <body>
     <!-- NAVBAR -->
-      <nav class="navbar">
+    <nav class="navbar">
       <div class="logo"><span>LS</span> LockSmith Platform</div>
 
       <div class="nav-links" id="navLinks">
         <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
-        <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
-        <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
-        <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
-        <a href="customers.html" >Customers</a>
-        </div>
+        <a href="newJob.html" class="active"
+          ><i class="fa fa-plus"></i> New Job</a
+        >
+        <a href="jobHistory.html"
+          ><i class="fa-solid fa-list-ul"></i> Job History</a
+        >
+        <a href="dispatcherCompanies.html"
+          ><i class="fa-regular fa-map"></i> Companies</a
+        >
+        <a href="customers.html">Customers</a>
+      </div>
 
       <div class="profile"><i class="fa fa-user"></i> Dispatcher</div>
       <div class="toggle-sidebar" id="toggleSidebar">
         <i class="fa fa-bars"></i>
       </div>
-      </nav>
+    </nav>
 
-    <!-- SIDEBAR  (Mobile Screen)-->
+    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
-      <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
-      <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
-      <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
-      <a href="customers.html" >Customers</a>
+      <a href="newJob.html" class="active"
+        ><i class="fa fa-plus"></i> New Job</a
+      >
+      <a href="jobHistory.html"
+        ><i class="fa-solid fa-list-ul"></i> Job History</a
+      >
+      <a href="dispatcherCompanies.html"
+        ><i class="fa-regular fa-map"></i> Companies</a
+      >
+      <a href="customers.html">Customers</a>
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main class="mainContent" id="mainContent">
+    <main class="mainContent">
+      <!-- HEADER -->
       <div class="header">
         <div>
           <h1>Create New Job</h1>
-          <p>Register a new customer service request</p>
+          <p>Fill in the details to create a new service job</p>
         </div>
       </div>
 
-      <!-- Forms Section -->
-       <form id="newJobForm" novalidate>
-            <div class="form-row">
-                
-                <!-- LEFT CARD: Customer Information -->
-                <div class="form-col">
-                    <h3>Customer Information</h3>
-                    
-                    <!-- Name -->
-                    <div class="form-group">
-                        <label for="custName">Customer Name <span class="required"></span></label>
-                        <input type="text" id="custName" class="form-control-custom" placeholder="John Doe" required>
-                        <div class="error-text">Name is required</div>
-                    </div>
+      <!-- FORM -->
+      <form id="newJobForm" class="job-form-wrapper">
+        <!-- ================= Customer Information ================= -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-title">
+              <i class="fa-regular fa-user"></i>
+              <div>
+                <h3>Customer Information</h3>
+                <p>Select an existing customer or add a new one</p>
+              </div>
+            </div>
+          </div>
 
-                    <!-- Phone (Masked) -->
-                    <div class="form-group">
-                        <label for="custPhone">Phone Number <span class="required"></span>(Masked)</label>
-                        <input type="tel" id="custPhone" class="form-control-custom has-icon" placeholder="(555) 123-4567" maxlength="14" required>
-                        <i class="fa fa-phone input-icon"></i>
-                        <div class="error-text">Valid phone number is required</div>
-                    </div>
+          <div class="form-card-body">
+            <label class="required">Customer</label>
 
-                    <!-- Address -->
-                    <div class="form-group">
-                        <label for="custAddress">Address <span class="required"></span></label>
-                        <input type="text" id="custAddress" class="form-control-custom has-icon" placeholder="123 Main St, New York, NY" required>
-                        <i class="fa fa-location-dot input-icon"></i>
-                        <div class="error-text">Address is required</div>
-                    </div>
-                </div>
+            <div class="customer-row">
+              <select id="customerSelect" class="form-input">
+                <option value="">Search customer by name or phone</option>
+              </select>
 
-                <!-- RIGHT CARD: Job Details -->
-                <div class="form-col">
-                    <h3>Job Details</h3>
+              <button
+                type="button"
+                class="btn-add"
+                data-bs-toggle="modal"
+                data-bs-target="#addCustomerModal">
+                <i class="fa fa-plus"></i> Add New
+              </button>
+            </div>
+          </div>
+        </div>
 
-                    <!-- Service Type -->
-                    <div class="form-group">
-                        <label for="serviceType">Service Type <span class="required"></span></label>
-                        <input type="text" id="serviceType" class="form-control-custom" required>
-                        <div class="error-text">Service Type is required</div>
-                    </div>
+        <!-- ================= Item Information ================= -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-title">
+              <i class="fa-solid fa-cube"></i>
+              <div>
+                <h3>Item Information</h3>
+                <p>Select the type of item and specify details</p>
+              </div>
+            </div>
+          </div>
 
-                    <!-- Service Detail -->
-                    <div class="form-group">
-                        <label for="serviceDetail">Service Detail <span class="required"></span></label>
-                        <input type="text" id="serviceDetail" class="form-control-custom" required>
-                        <div class="error-text">Detail is required</div>
-                    </div>
+          <div class="form-card-body d-flex flex-column">
+            <label class="required">Item Type</label>
+            <select id="itemType" class="form-input">
+              <option value="Door">Door</option>
+              <option value="Car">Car</option>
+            </select>
+            <p>Please select a customer first</p>
+          </div>
+        </div>
 
-                    <!-- Description -->
-                    <div class="form-group">
-                        <label for="description">Description <span class="required"></span></label>
-                        <textarea id="description" class="form-control-custom" rows="3" placeholder="Describe the service needed..." required></textarea>
-                        <div class="error-text">Description is required</div>
-                    </div>
+        <!-- ================= Job Details ================= -->
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-title">
+              <i class="fa-regular fa-calendar"></i>
+              <div>
+                <h3>Job Details</h3>
+                <p>Specify service type, priority, and schedule</p>
+              </div>
+            </div>
+          </div>
 
-                    <!-- Urgency -->
-                    <div class="form-group">
-                        <label>Urgency <span class="required"></span></label>
-                        <div class="urgency-group">
-                            <label class="radio-label">
-                                <input type="radio" name="urgency" value="normal" checked>
-                                Normal
-                            </label>
-                            <label class="radio-label">
-                                <input type="radio" name="urgency" value="urgent">
-                                <i class="fa fa-circle-exclamation urgent-text"></i> Urgent
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Price -->
-                    <div class="form-group">
-                        <label for="price">Preliminary Price <span class="required"></span></label>
-                        <input type="number" id="price" class="form-control-custom has-icon" placeholder="0.00" step="0.01" required>
-                        <i class="fa fa-dollar-sign input-icon"></i>
-                        <div class="error-text">Price is required</div>
-                    </div>
-                </div>
+          <div class="form-card-body flex-row">
+            <div class="flex-col-50">
+              <label class="required">Service Type</label>
+              <select id="serviceType" class="form-input">
+                <option value="">Select service type</option>
+                <option>Lock Installation</option>
+                <option>Lock Repair</option>
+              </select>
             </div>
 
-            <!-- Submit Button -->
-            <div class="form-actions">
-                <button type="submit" class="btn-submit">Save</button>
+            <div class="flex-col-50">
+              <label class="required">Priority</label>
+              <select id="priority" class="form-input">
+                <option value="Normal">Normal</option>
+                <option value="Urgent">Urgent</option>
+              </select>
             </div>
-        </form>
 
+            <div class="flex-col-100">
+              <label>Scheduled Date & Time</label>
+              <input
+                type="datetime-local"
+                id="scheduledAt"
+                class="form-input"
+              />
+            </div>
+
+            <div class="flex-col-100">
+              <label>Notes</label>
+              <textarea
+                id="notes"
+                class="form-textarea"
+                placeholder="Additional information about the job..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= Actions ================= -->
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-cancel">
+            Cancel
+          </button>
+          <button type="button" id="createBtn" class="btn-primary-action">
+            Create Job
+          </button>
+        </div>
+      </form>
     </main>
 
-    <!-- Script Files -->
+    <!-- =================ADD CUSTOMER MODAL ================= -->
+    <div
+      class="modal fade"
+      id="addCustomerModal"
+      tabindex="-1"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <!-- Header -->
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Customer</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body">
+            <p class="text-muted mb-3">Enter the customer's details below.</p>
+
+            <div class="mb-3">
+              <label for="newCustomerName" class="form-label required">Full Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="newCustomerName"
+                placeholder="e.g. John Smith"/>
+            </div>
+
+            <div class="mb-3">
+              <label for="newCustomerPhone" class="form-label required"
+                >Phone Number</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="newCustomerPhone"
+                placeholder="e.g. 555-0123"/>
+            </div>
+
+            <div class="mb-3">
+              <label for="newCustomerAddress" class="form-label required">Address</label>
+              <input
+                type="text"
+                class="form-control"
+                id="newCustomerAddress"
+                placeholder="e.g. 123 Market St, San Francisco"/>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-light border"
+              data-bs-dismiss="modal">
+              Cancel
+            </button>
+            <button type="button" id="saveCustomerBtn" class="btn btn-primary">
+              Add Customer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 
-    <!-- Internal Script to validate form and handle submission -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. Phone Masking Logic
-            const phoneInput = document.getElementById('custPhone');
-            
-            phoneInput.addEventListener('input', function (e) {
-                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-                e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
-            });
+      <!-- Internal Js -->
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        /* ================= Elements ================= */
+        const form = document.getElementById("newJobForm");
 
-            // 2. Form Validation Logic
-            const form = document.getElementById('newJobForm');
+        const customerSelect = document.getElementById("customerSelect");
+        const itemType = document.getElementById("itemType");
+        const serviceType = document.getElementById("serviceType");
+        const priority = document.getElementById("priority");
 
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                let isValid = true;
+        const cancelBtn = document.getElementById("cancelBtn");
+        const createBtn = document.getElementById("createBtn");
 
-                // Helper function to show/hide errors
-                const validateField = (id) => {
-                    const el = document.getElementById(id);
-                    const errorMsg = el.parentElement.querySelector('.error-text');
-                    
-                    if (!el.value.trim()) {
-                        el.classList.add('input-error');
-                        if(errorMsg) errorMsg.style.display = 'block';
-                        isValid = false;
-                    } else {
-                        el.classList.remove('input-error');
-                        if(errorMsg) errorMsg.style.display = 'none';
-                    }
-                };
+        // Modal elements
+        const saveCustomerBtn = document.getElementById("saveCustomerBtn");
+        const newCustomerName = document.getElementById("newCustomerName");
+        const newCustomerPhone = document.getElementById("newCustomerPhone");
+        const newCustomerAddress =
+        document.getElementById("newCustomerAddress");
+        const addCustomerModalEl = document.getElementById("addCustomerModal");
 
-                // Validate specific fields
-                validateField('custName');
-                validateField('custPhone');
-                validateField('custAddress');
-                validateField('serviceType');
-                validateField('serviceDetail');
-                validateField('description');
-                validateField('price');
+        const addCustomerModal = new bootstrap.Modal(addCustomerModalEl);
 
-                if (isValid) {
-                    // Success Action
-                    alert('Job Created Successfully!');
-                    
-                    // Optional: Get form data object
-                    const formData = {
-                        name: document.getElementById('custName').value,
-                        phone: document.getElementById('custPhone').value,
-                        address: document.getElementById('custAddress').value,
-                        serviceType: document.getElementById('serviceType').value,
-                        urgency: document.querySelector('input[name="urgency"]:checked').value,
-                        price: document.getElementById('price').value
-                    };
-                    console.log('Form Data:', formData);
-                    
-                    // Reset form
-                    form.reset();
-                }
-            });
+        /* ================= Navigation ================= */
 
-            // Remove error styling when user starts typing
-            const inputs = document.querySelectorAll('.form-control-custom');
-            inputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    if(this.classList.contains('input-error')) {
-                        this.classList.remove('input-error');
-                        const msg = this.parentElement.querySelector('.error-text');
-                        if(msg) msg.style.display = 'none';
-                    }
-                });
-            });
+        cancelBtn.addEventListener("click", () => {
+          window.location.href = "dashboard.html";
         });
+
+    createBtn.addEventListener("click", () => {
+    if (!validateForm()) return;
+     // Show success alert
+    alert("Job added successfully");
+    window.location.href = "jobHistory.html";
+    });
+        /* ================= Add Customer Logic ================= */
+
+        saveCustomerBtn.addEventListener("click", () => {
+          const name = newCustomerName.value.trim();
+          const phone = newCustomerPhone.value.trim();
+          const address = newCustomerAddress.value.trim();
+
+          if (!name || !phone || !address) {
+            alert("Please fill in all customer fields.");
+            return;
+          }
+
+          // Prevent duplicates by phone
+          const exists = [...customerSelect.options].some((opt) =>
+            opt.textContent.includes(phone),
+          );
+
+          if (exists) {
+            alert("Customer already exists.");
+            return;
+          }
+
+          // Create option
+          const option = document.createElement("option");
+          option.value = phone;
+          option.textContent = `${name} (${phone})`;
+
+          customerSelect.appendChild(option);
+          customerSelect.value = phone;
+
+          // Reset inputs
+          newCustomerName.value = "";
+          newCustomerPhone.value = "";
+          newCustomerAddress.value = "";
+
+          // Close modal
+          addCustomerModal.hide();
+        });
+
+        // Autofocus first input when modal opens
+        addCustomerModalEl.addEventListener("shown.bs.modal", () => {
+          newCustomerName.focus();
+        });
+
+        /* ================= Validation System ================= */
+
+        const requiredFields = [
+          { el: customerSelect, name: "Customer" },
+          { el: itemType, name: "Item Type" },
+          { el: serviceType, name: "Service Type" },
+          { el: priority, name: "Priority" },
+        ];
+
+        function showError(input, message) {
+          input.classList.add("input-error");
+
+          let error = input.parentElement.querySelector(".error-text");
+          if (!error) {
+            error = document.createElement("div");
+            error.className = "error-text";
+            error.innerText = message;
+            input.parentElement.appendChild(error);
+          }
+
+          error.style.display = "block";
+        }
+
+        function clearError(input) {
+          input.classList.remove("input-error");
+          const error = input.parentElement.querySelector(".error-text");
+          if (error) error.style.display = "none";
+        }
+
+        function validateForm() {
+          let isValid = true;
+
+          requiredFields.forEach((field) => {
+            if (!field.el.value || field.el.value.trim() === "") {
+              showError(field.el, `${field.name} is required`);
+              isValid = false;
+            } else {
+              clearError(field.el);
+            }
+          });
+
+          return isValid;
+        }
+
+        /* ================= Form Submit ================= */
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          if (!validateForm()) {
+            const firstError = document.querySelector(".input-error");
+            if (firstError) {
+              firstError.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
+            }
+            return;
+          }
+
+          alert("Job Created Successfully");
+          form.reset();
+        });
+
+        /* ================= Live Validation ================= */
+
+        requiredFields.forEach((field) => {
+          field.el.addEventListener("change", () => {
+            if (field.el.value) {
+              clearError(field.el);
+            }
+          });
+        });
+      });
     </script>
-    </body>
-    </html>
+  </body>
+</html>

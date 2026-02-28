@@ -1,0 +1,128 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Map</title>
+
+    <!-- CSS Links-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h4>LockTech Dispatch</h4>
+          <p>Company Dashboard</p>
+        </div>
+        <button class="btn d-lg-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="menu flex-grow-1">
+        <li>
+          <a href="active-jobs.html"
+            ><i class="fa-solid fa-table-cells-large"></i> Active Jobs</a
+          >
+        </li>
+        <li>
+          <a href="incoming-jobs.html"
+            ><i class="fa-solid fa-inbox"></i> Incoming Jobs
+          </a>
+        </li>
+        <li>
+          <a href="technicians.html"
+            ><i class="fa-solid fa-user-group"></i> Technicians
+          </a>
+        </li>
+        <li>
+          <a href="map.html"><i class="fa-regular fa-map"></i> Live Map</a>
+        </li>
+        <li>
+          <a href="chat.html"
+            ><i class="fa-regular fa-message"></i> Chat & Calls</a
+          >
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ===== Top Navbar ===== -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+      <!-- Mobile Toggle & Search Wrapper -->
+      <div class="d-flex align-items-center flex-grow-1">
+        <!-- Mobile Toggle Button -->
+        <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search jobs, technicians..." />
+        </div>
+      </div>
+
+      <!-- Right: Notifications & Profile -->
+      <div class="navbar-right d-flex align-items-center gap-4">
+        <!-- Notification Button Tab -->
+        <a
+          href="../platform-admin/notifications.html"
+          class="notification-btn"
+          title="View Notifications"
+        >
+          <i class="far fa-bell"></i>
+          <span class="notification-badge">4</span>
+        </a>
+
+        <!-- User Profile (Initials) -->
+        <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">AD</div>
+
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Alex Dispatcher</h6>
+            <small class="text-muted">Dispatcher</small>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content Wrapper ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+      <!-- Header -->
+      <div class="d-flex flex-column justify-content-left mb-4">
+        <h3 class="page-title">Live Map</h3>
+        <p class="page-subtitle text-muted">
+        Real-time tracking of technicians and job locations.
+        </p>
+      </div>
+
+
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+  </body>
+</html>

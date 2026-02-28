@@ -308,6 +308,313 @@ body {
     color:red;
   }
 
+
+  /* Start Of Add New Job Page */
+  /* ===== FORM LAYOUT  ===== */
+.job-form-wrapper{
+  max-width: 100%;
+}
+
+/* Card */
+.form-card{
+  background:#fff;
+  border-radius:14px;
+  border:0.8px solid var(--card-border);
+  padding:22px;
+  margin-bottom:20px;
+}
+
+.form-card-header{
+  margin-bottom:10px;
+}
+
+.form-title{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+
+.form-title i{
+  font-size:18px;
+  color:#0A0A0A;
+  margin-top:4px;
+}
+
+.form-title h3{
+  font-size:16px;
+  font-weight:700;
+  color:var(--title-color);
+  margin:0;
+}
+
+.form-title p{
+  font-size:14px;
+  color:var(--subtitle-color);
+  margin-top:4px;
+}
+
+/* Inputs */
+.form-input{
+  width:70%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:0.8px solid #00000000;
+  font-size:14px;
+  outline:none;
+  background:#F3F3F5;
+  color: #717182;
+}
+
+.form-textarea{
+  width:100%;
+  min-height:100px;
+  padding:12px 14px;
+  border-radius:10px;
+  border:0.8px solid #00000000;
+  font-size:14px;
+  outline:none;
+  background:#F3F3F5;
+}
+
+/* Customer Row */
+.customer-row{
+  display:flex;
+  gap:12px;
+}
+
+.btn-add{
+  background:#ECEEF2;
+  padding:10px 16px;
+  border-radius:8px;
+  border: none;
+  font-size:14px;
+  font-weight: 500;
+  color:#030213;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+
+/* Job Details Layout */
+.flex-row{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.flex-col-50{
+  flex:0 0 calc(50% - 8px);
+  display:flex;
+  flex-direction:column;
+}
+
+.flex-col-100{
+  flex:0 0 100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Actions */
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+  margin-top:20px;
+}
+
+.btn-cancel{
+  background:#fff;
+  border:1px solid #E5E7EB;
+  padding:12px 22px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:500;
+  color: #0A0A0A;
+  cursor:pointer;
+}
+
+.btn-primary-action{
+  background:#483EF7;
+  color:#fff;
+  border:none;
+  padding:12px 26px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:500;
+  cursor:pointer;
+}
+ /* End Of Add New Job Page */
+
+ /* Start Of Details Job Page */
+    /* PAGE LAYOUT */
+      .details-grid {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      /* left column */
+      .details-left {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* right column */
+      .details-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card-box {
+        background: #ffff;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .card-title {
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--title-color);
+      }
+
+      .info-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 18px;
+      }
+
+      .icon-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: #F3F4F6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #4A5565;
+      }
+
+      .label {
+        font-size: 14px;
+        font-weight: 500;
+        color: #6A7282;
+      }
+      .value {
+        font-size: 16px;
+        font-weight: 400;
+        color: #101828;
+      }
+
+      .status-pill {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .status-list button {
+        width: 100%;
+        border: none;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #f3f4f6;
+        text-align: left;
+      }
+      .status-list button.active {
+        background: #ffedd4;
+        color: #ca3500;
+        font-weight: 500;
+      }
+      .info-row a , .card-box a{
+        text-decoration: none;
+      }
+
+      .note-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; 
+      gap: 10px; 
+        }
+
+      .note-input {
+        width: 100%; 
+        border: 0.8px solid var(--card-border);
+        background: #F3F3F5;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 10px;
+      }
+
+      .note {
+        display: flex;
+        gap: 3px;
+        background: #f9fafb;
+        padding: 12px;
+        border-radius: 10px;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .add-note{
+        display: flex;
+        gap: 10px;
+        border-radius: 10px;
+        border: none;
+        background: #155DFC;
+        color: #ffff;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 12px;
+        cursor: pointer;
+      }
+
+      .note-card{
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 0.8px solid var(--card-border);
+      border-radius: 10px;
+      background: #F3F3F5;
+      }
+
+      .back {
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      
+  /* End Of Details Job Page */
+
+  /* Start Of Companies Page */
+  
+  /* End Of Companies Page */
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+  .customer-row{
+    flex-direction:column;
+  }
+
+  .flex-col-50{
+    flex:0 0 100%;
+  }
+
+  .job-form-wrapper{
+    max-width:100%;
+  }
+
+}
+  /* End OF Add New Job Page */
+
 /* ================= RESPONSIVE DESIGN (FIXES) ================= */
 @media (max-width: 768px) {
   .nav-links, 

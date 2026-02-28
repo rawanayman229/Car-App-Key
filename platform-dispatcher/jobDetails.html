@@ -8,137 +8,6 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
-
-    <!-- Internal Styles -->
-    <style>
-      /* PAGE LAYOUT */
-      .details-grid {
-        display: flex;
-        gap: 20px;
-        align-items: flex-start;
-      }
-
-      /* left column */
-      .details-left {
-        flex: 2;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      /* right column */
-      .details-right {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .card-box {
-        background: #ffff;
-        border: 1px solid var(--card-border);
-        border-radius: 12px;
-        padding: 20px;
-      }
-
-      .card-title {
-        font-weight: 600;
-        margin-bottom: 15px;
-        color: var(--title-color);
-      }
-
-      .info-row {
-        display: flex;
-        gap: 15px;
-        margin-bottom: 18px;
-      }
-
-      .icon-circle {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        background: #F3F4F6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #4A5565;
-      }
-
-      .label {
-        font-size: 14px;
-        font-weight: 500;
-        color: #6A7282;
-      }
-      .value {
-        font-size: 16px;
-        font-weight: 400;
-        color: #101828;
-      }
-
-      .status-pill {
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .status-list button {
-        width: 100%;
-        border: none;
-        padding: 12px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        background: #f3f4f6;
-        text-align: left;
-      }
-      .status-list button.active {
-        background: #ffedd4;
-        color: #ca3500;
-        font-weight: 500;
-      }
-      .info-row a , .card-box a{
-        text-decoration: none;
-      }
-
-      .note-input {
-        width: 100%; 
-        border: 0.8px solid var(--card-border);
-        border-radius: 10px;
-        padding: 12px;
-        margin-bottom: 10px;
-      }
-
-      .note {
-        display: flex;
-        gap: 3px;
-        background: #f9fafb;
-        padding: 12px;
-        border-radius: 10px;
-        margin-top: 10px;
-        font-size: 14px;
-      }
-
-      .back {
-        cursor: pointer;
-        margin-right: 10px;
-      }
-
-       /* === RESPONSIVE STYLES (TABLET & MOBILE) === */
-      @media (max-width: 992px) {
-        .mainContent {
-            margin-left: 0; 
-        }
-
-        .details-grid {
-          flex-direction: column;
-        }
-
-        .details-left,
-        .details-right {
-          width: 100%;
-          flex: none;
-        }
-      }
-    </style>
   </head>
 
   <body>
@@ -179,7 +48,7 @@
             <i class="fa fa-arrow-left back" onclick="history.back()"></i>
             Job Details
           </h1>
-          <p>ID: j1</p>
+          <p>Job ID: JOB-2024-001234</p>
         </div>
 
         <div>
@@ -194,37 +63,30 @@
       <div class="details-left">
           <!-- CUSTOMER -->
           <div class="card-box">
-            <div class="card-title">Customer Information</div>
-
-            <div class="info-row">
-              <div class="icon-circle">J</div>
-              <div>
+            <div class="card-title"><i class="fa-regular fa-user"></i> Customer Information</div>
+            <div class="row mb-3">
+              <div class="col">
                 <div class="label">Customer Name</div>
                 <div class="value">John Anderson</div>
               </div>
-            </div>
 
-            <div class="info-row">
-              <div class="icon-circle"><i class="fa fa-phone"></i></div>
-              <div>
-                <div class="label">Phone (Masked)</div>
+                <div class="col">
+                <div class="label">Phone Number</div>
                 <div class="value">(555) ***-2222</div>
-                <a href="#">Call Customer</a>
               </div>
             </div>
 
             <div class="info-row">
-              <div class="icon-circle"><i class="fa fa-location-dot"></i></div>
               <div>
                 <div class="label">Address</div>
-                <div class="value">100 Park Ave, Manhattan</div>
+                <div class="value">123 Market St, San Francisco, CA 94102</div>
               </div>
             </div>
           </div>
 
           <!-- JOB INFO -->
           <div class="card-box">
-            <div class="card-title">Job Information</div>
+            <div class="card-title"><i class="fa-regular fa-file-lines"></i> Job Information</div>
 
             <div class="row mb-3">
               <div class="col">
@@ -233,49 +95,136 @@
               </div>
 
               <div class="col">
-                <div class="label">Service Detail</div>
-                <div class="value">Key Code</div>
+                <div class="label">Service Type</div>
+                <div class="value">Lockout Service</div>
               </div>
             </div>
 
             <div class="row mb-3">
               <div class="col">
-                <div class="label">Created At</div>
-                <div class="value">12/02/2026 17:01</div>
+                <div class="label">Service Detail</div>
+                <div class="value">Car key locked inside</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Description</div>
+                <div class="value">Customer locked keys inside Toyota Camry at downtown parking lot</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Needs Key</div>
+                <div class="value">No</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Needs Code</div>
+                <div class="value">Yes</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Base Price</div>
+                <div class="value">$75.00</div>
               </div>
 
               <div class="col">
                 <div class="label">Preliminary Price</div>
-                <div class="value">$85</div>
+                <div class="value">$95.00</div>
               </div>
             </div>
 
-            <div>
-              <div class="label">Description</div>
-              <div class="note">
-                Locked out of apartment, need emergency access
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Final Price</div>
+                <div class="value">$95.00</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Created At</div>
+                <div class="value">12/02/2026 17:01</div>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- Assignment & Relations -->
+          <div class="card-box">
+            <div class="card-title"><i class="fa-solid fa-user-group"></i> Assignment & Relations</div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Assigned Company</div>
+                <div class="value">QuickLock Services Inc.</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Assigned Technician</div>
+                <div class="value">Mike Johnson</div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <div class="label">Platform Dispatcher</div>
+                <div class="value">Sarah Williams</div>
+              </div>
+
+              <div class="col">
+                <div class="label">Company Dispatcher</div>
+                <div class="value">Emily Davis</div>
               </div>
             </div>
           </div>
 
           <!-- NOTES -->
-          <div class="card-box">
-            <div class="d-flex justify-content-between mb-2">
-              <div class="card-title mb-0">Notes & Activity</div>
-              <a href="#">Cancel</a>
-            </div>
+        <div class="card-box">
+        <div class="d-flex flex-column mb-2">
+        <div class="card-title mb-0"><i class="fa-regular fa-message"></i> Notes & Activity</div>
+          <p class="text-muted">Add internal notes about this job</p>
+        </div>
 
-            <textarea class="note-input" placeholder="Enter note..."></textarea>
+      <div class="note-wrapper">
+       <textarea class="note-input" placeholder="Add a note about this job..."></textarea>
+       <button class="add-note">
+       <i class="fa fa-paper-plane"></i> Add Note
+      </button>
+      </div>
 
-            <button class="add-btn">
-              <i class="fa fa-paper-plane"></i> Add Note
-            </button>
+      <!-- Previous Notes -->
+        <div class="d-flex flex-column mb-2">
+        <div class="card-title mb-2">Previous Notes</div>
+        <!-- row1 -->
+        <div class="note-card">
+          <div class="d-flex flex-row justify-content-between">
+          <p class="value">Sarah Williams</p>
+          <p class="text-muted">Feb 20, 2024, 09:35 AM</p>
           </div>
+          <p class="text-muted">Platform Dispatcher</p>
+          <p class="value">Customer mentioned urgent need due to meeting at 2 PM</p>
+        </div>
+
+        <!-- row2 -->
+        <div class="note-card">
+          <div class="d-flex flex-row justify-content-between">
+          <p class="value">Emily Davis</p>
+          <p class="text-muted">Feb 20, 2024, 09:35 AM</p>
+          </div>
+          <p class="text-muted">Company Dispatcher</p>
+          <p class="value">Customer mentioned urgent need due to meeting at 2 PM</p>
+        </div>
+        </div>
         </div>
 
         </div>
-        </main>
-    </main>
+        
+
+        </div>
+      </main>
 
     <script src="script.js"></script>
 

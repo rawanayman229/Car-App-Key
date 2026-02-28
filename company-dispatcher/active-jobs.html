@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Active Jobs Dashboard</title>
+
+    <!-- CSS Links-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h4>LockTech Dispatch</h4>
+          <p>Company Dashboard</p>
+        </div>
+        <button class="btn d-lg-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="menu flex-grow-1">
+        <li><a href="active-jobs.html"><i class="fa-solid fa-table-cells-large"></i> Active Jobs</a></li>
+        <li><a href="incoming-jobs.html"><i class="fa-solid fa-inbox"></i> Incoming Jobs </a></li>
+        <li><a href="technicians.html"><i class="fa-solid fa-user-group"></i> Technicians </a></li>
+        <li><a href="map.html"><i class="fa-regular fa-map"></i> Live Map</a></li>
+        <li><a href="chat.html"><i class="fa-regular fa-message"></i> Chat & Calls</a></li>
+      </ul>
+    </aside>
+
+    <!-- ===== Top Navbar ===== -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+      
+      <!-- Mobile Toggle & Search Wrapper -->
+      <div class="d-flex align-items-center flex-grow-1">
+        <!-- Mobile Toggle Button -->
+        <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search jobs, technicians..." />
+        </div>
+      </div>
+
+      <!-- Right: Notifications & Profile -->
+      <div class="navbar-right d-flex align-items-center gap-4">
+        
+        <!-- Notification Button Tab -->
+        <a href="../platform-admin/notifications.html" class="notification-btn" title="View Notifications">
+          <i class="far fa-bell"></i>
+          <span class="notification-badge">4</span>
+        </a>
+
+        <!-- User Profile (Initials) -->
+        <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">AD</div>
+          
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Alex Dispatcher</h6>
+            <small class="text-muted">Dispatcher</small>
+          </div>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- ===== Main Content Wrapper ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+        
+        <!-- Header -->
+        <div class="d-flex flex-column justify-content-left mb-4">
+          <h3 class="page-title">Active Jobs Dashboard</h3>
+          <p class="page-subtitle text-muted">
+            Monitor and manage all jobs in progress.
+          </p>
+        </div>
+
+    <!-- Status Cards -->
+        <div class="row g-4 mb-4">
+            <!-- Card1 -->
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
+            <div class="stat-card">
+              <div class="info">
+                <p class="icon-box"><i class="fa-solid fa-suitcase blue"></i></p>
+                <h3>3</h3>
+                <span class="text-muted">Jobs in progress</span>
+              </div>
+              <p class="text-muted">Active</p>
+            </div>
+          </div>
+
+           <!-- Card2 -->
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
+            <div class="stat-card">
+              <div class="info">
+                <p class="icon-box"><i class="fa-solid fa-circle-exclamation orange"></i></p>
+                <h3>4</h3>
+                <span class="text-muted">Awaiting assignment</span>
+              </div>
+              <p class="text-muted">Pending</p>
+            </div>
+          </div>
+
+          <!-- Card3 -->
+         <div class="col-12 col-sm-6 col-md-4 col-xl">
+            <div class="stat-card">
+              <div class="info">
+                <p class="icon-box"><i class="fa-regular fa-circle-check green"></i></p>
+                <h3>0</h3>
+                <span class="text-muted">Completed jobs</span>
+              </div>
+              <p class="text-muted">Today</p>
+            </div>
+          </div>
+
+           <!-- Card4 -->
+         <div class="col-12 col-sm-6 col-md-4 col-xl">
+            <div class="stat-card">
+              <div class="info">
+                <p class="icon-box"><i class="fa-regular fa-user purple"></i></p>
+                <h3>3</h3>
+                <span class="text-muted">Free technicians</span>
+              </div>
+              <p class="text-muted">Available</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- End Of Status Cards -->
+
+        <!-- ================= Active Jobs Section ================= -->
+    <div class="active-jobs-section mt-4">
+
+    <!-- Section Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="fw-bold m-0">Active Jobs</h5>
+    <a href="#" class="text-primary fw-medium text-decoration-none">View All</a>
+    </div>
+
+    <!-- Job Card 1 -->
+    <div class="job-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+      
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <h6 class="fw-bold m-0">Lock Installation - Commercial</h6>
+          <span class="badge-soft badge-soft-warning">In Progress</span>
+        </div>
+        <p class="text-muted small mb-3">
+          Install new high-security locks on office suite. 4 doors total.
+        </p>
+
+        <div class="job-meta d-flex flex-wrap justify-content-between">
+          <span><i class="fa-regular fa-user me-2"></i>Tech Solutions Inc.</span>
+          <span><i class="fa-solid fa-location-dot me-2"></i>850 3rd Ave</span>
+          <span><i class="fa-regular fa-clock me-2"></i>1:00 PM</span>
+         <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">SC</div>
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Sarah Chen</h6>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="job-price">
+    <p class="text-muted small" >Lock Installation</p>
+    <p class="fw-bold">$450</p>
+    </div>
+    </div>
+
+    <!-- Job Card 2 -->
+    <div class="job-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+      
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <h6 class="fw-bold m-0">Rekey Service - Apartment</h6>
+          <span class="badge-soft badge-soft-warning">In Progress</span>
+        </div>
+        <p class="text-muted small mb-3">
+          Rekey 3 locks after tenant move-out.
+        </p>
+
+        <div class="job-meta d-flex flex-wrap justify-content-between">
+          <span><i class="fa-regular fa-user me-2"></i>Amanda Foster</span>
+          <span><i class="fa-solid fa-location-dot me-2"></i>850 3rd Ave</span>
+          <span><i class="fa-regular fa-clock me-2"></i>1:00 PM</span>
+         <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">LT</div>
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Lisa Thompson</h6>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="job-price">
+    <p class="text-muted small" >Lock Installation</p>
+    <p class="fw-bold">$450</p>
+    </div>
+    </div>
+
+    <!-- Job Card 3 -->
+    <div class="job-card">
+    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+      
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <h6 class="fw-bold m-0">Smart Lock Installation</h6>
+          <span class="badge-soft badge-soft-warning">ASSIGNED</span>
+        </div>
+        <p class="text-muted small mb-3">
+          Install smart lock system with mobile app integration.
+        </p>
+
+        <div class="job-meta d-flex flex-wrap justify-content-between">
+          <span><i class="fa-regular fa-user me-2"></i>Kevin Brown</span>
+          <span><i class="fa-solid fa-location-dot me-2"></i>850 3rd Ave</span>
+          <span><i class="fa-regular fa-clock me-2"></i>1:00 PM</span>
+          <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">ER</div>
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Emily Rodriguez</h6>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <div class="job-price">
+    <p class="text-muted small" >Lock Installation</p>
+    <p class="fw-bold">$320</p>
+    </div>
+    </div>
+    </div>
+    <!-- ================= End Active Jobs Section ================= -->
+
+    <!-- ================= Urgent Attention + Available Technicians ================= -->
+    <div class="row g-4 mt-4">
+
+    <!-- ================= Urgent Attention Required ================= -->
+    <div class="col-lg-6">
+    <div class="urgent-section">
+      <div class="section-header d-flex justify-content-between align-items-center">
+        <h5>Urgent Attention Required</h5>
+      </div>
+
+      <!-- Urgent Card 1 -->
+      <div class="urgent-card">
+        <div class="d-flex gap-3">
+          <div class="urgent-icon">
+            <i class="fa-solid fa-exclamation"></i>
+          </div>
+
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <h6>Residential Lockout - Apartment</h6>
+            </div>
+            <p class="text-muted mb-1">245 W 47th St, New York, NY 10036</p>
+            <p class="urgent-time m-0">Scheduled: 2:30 PM</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Urgent Card 2 -->
+      <div class="urgent-card">
+        <div class="d-flex gap-3">
+          <div class="urgent-icon">
+            <i class="fa-solid fa-exclamation"></i>
+          </div>
+
+          <div class="flex-grow-1">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <h6>Car Lockout - Parking Lot</h6>
+            </div>
+            <p class="text-muted mb-1">1633 Broadway, New York, NY 10019</p>
+            <p class="urgent-time m-0">Scheduled: 2:45 PM</p>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+  <!-- ================= Available Technicians ================= -->
+  <div class="col-lg-6">
+    <div class="technician-section">
+      <div class="section-header d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold m-0">Available Technicians</h5>
+        <a href="#" class="text-primary text-decoration-none fw-medium">View All</a>
+      </div>
+
+      <!-- Technician 1 -->
+      <div class="technician-card d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="tech-initials">JM</div>
+          <div>
+            <h6 class="m-0 fw-semibold">John Martinez</h6>
+            <p class="text-muted"><i class="fa-solid fa-star star-icon"></i> 4.8 • 142 jobs</p>
+          </div>
+        </div>
+        <span class="badge-status-active">Available</span>
+      </div>
+
+      <!-- Technician 2 -->
+      <div class="technician-card d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="tech-initials">MJ</div>
+          <div>
+            <h6 class="m-0 fw-semibold">Michael Johnson</h6>
+            <p class="text-muted"><i class="fa-solid fa-star star-icon"></i> 4.7 • 128 jobs</p>
+          </div>
+        </div>
+        <span class="badge-status-active">Available</span>
+      </div>
+
+      <!-- Technician 3 -->
+      <div class="technician-card d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="tech-initials">ER</div>
+          <div>
+            <h6 class="m-0 fw-semibold">Emily Rodriguez</h6>
+            <small class="text-muted"><i class="fa-solid fa-star star-icon"></i> 4.9 • 189 jobs</small>
+          </div>
+        </div>
+        <span class="badge-status-active">Available</span>
+      </div>
+
+    </div>
+  </div>
+
+    </div>
+    <!-- ================= End Sections ================= -->
+
+        
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    </body>
+    </html>

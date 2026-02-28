@@ -612,6 +612,54 @@ body.sidebar-collapsed .main-wrapper {
   z-index: 1050;
 }
 
+/* Companies Area Page */
+ /* ===== ADD Area MODAL ===== */
+  .add-area-modal{
+    border-radius: 16px;
+    background: #FFFFFF;
+  }
+   .modal-header{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+  }
+  .modal-title{
+    font-weight: 800;
+    color:#1F2937;
+  }
+  .modal-body input{
+   background: #F3F3F5;
+  }
+
+  .modal-subtitle{
+    font-size:14px;
+    color:#1F2937;
+    margin:0;
+  }
+  .modal-footer{
+    display: flex;
+    flex-direction: column;
+    border: none;
+  }
+  .create-btn{
+  width: 100%;
+  background: #2563EB;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #FFFFFF;
+  }
+  .cancel-btn {
+  width: 100%;
+  background: transparent;
+  border: 0.8px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #0A0A0A;
+  }
+
 /* --- Tablet Responsive--- */
 @media (max-width: 992px) {
   .navbar { left: 0; width: 100%; }

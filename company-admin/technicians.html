@@ -1,0 +1,403 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technicians Management</title>
+
+    <!-- CSS Links-->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../assets/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"/>
+  </head>
+
+  <body>
+    <!-- Start Of Static Section (Side Bar) -->
+
+    <!-- Sidebar Toggle Overlay (Mobile and Tablet) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar (Desktop) ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <!-- 1. Header Section -->
+      <div class="sidebar-header">
+        <!-- Logo Text -->
+        <div class="logo">
+          <h4>SecureAccess Pro</h4>
+          <p>Company Admin</p>
+        </div>
+
+        <!-- Close button (Mobile) -->
+        <button class="btn d-md-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- 2. Navigation Menu -->
+      <ul class="menu flex-grow-1">
+        <li data-page="dashboard" class="active">
+          <a href="dashboard.html">
+            <i class="fa-solid fa-table-cells-large"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li data-page="jobs">
+          <a href="jobs.html">
+            <i class="fa-solid fa-suitcase"></i>
+            Jobs
+          </a>
+        </li>
+
+        <li data-page="codes">
+          <a href="codes.html">
+            <i class="fa-solid fa-key"></i></i>
+            Code Request
+          </a>
+        </li> 
+
+        <li data-page="technicians">
+          <a href="technicians.html">
+            <i class="fa-solid fa-user-group"></i>
+            Technicians
+          </a>
+        </li>
+
+        <li data-page="financials">
+          <a href="financials.html">
+            <i class="fa-solid fa-dollar-sign"></i>
+            Financials
+          </a>
+        </li>
+
+        <li data-page="reports">
+          <a href="reports.html">
+            <i class="fa-regular fa-file-lines"></i>
+            Reports
+          </a>
+        </li>
+
+        <li data-page="company-area">
+          <a href="company-area.html">
+            <i class="fa-solid fa-building"></i>
+            Company Area
+          </a>
+        </li>
+        
+        <li data-page="settings">
+          <a href="settings.html">
+            <i class="fa-solid fa-gear"></i>
+            Settings
+          </a>
+        </li>
+      </ul>
+      <!-- 3. Sidebar Footer (User Profile) -->
+      <div class="sidebar-footer">
+        <div class="d-flex align-items-center gap-3">
+          <!-- Avatar Circle -->
+          <div class="user-avatar" id="userAvatar">AU</div>
+
+          <!-- Text Info -->
+          <div class="user-info">
+            <h6 id="sidebarUsername">Admin User</h6>
+            <small id="sidebarEmail">Elite Locksmith Co.</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- End OF Sidebar -->
+
+    <!-- ===== Main Wrapper (Content) ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+      <!-- Mobile Header (Visible only on mobile/tablet to toggle sidebar) -->
+      <div
+        class="d-lg-none p-3 bg-white border-bottom d-flex align-items-center justify-content-between sticky-top">
+        <h5 class="m-0 fw-bold text-dark">SecureAccess Pro</h5>
+        <button class="btn btn-light" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <!-- Main Content Area -->
+      <!-- Header -->
+      <div class="d-flex flex-column justify-content-left">
+        <h3 class="page-title">Technicians Management</h3>
+        <p class="page-subtitle">Monitor technician status and performance</p>
+      </div>
+
+      <div class="row content gap-3 align-items-center mb-3">
+        <!-- Search -->
+        <div class="col-lg-12">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="customSearch" placeholder="Search technicians..." />
+          </div>
+        </div>
+      </div>
+
+    <!-- Status Cards -->
+        <div class="row g-4 mb-4">
+          <div class="col-12 col-sm-6 col-md-4 col-xl">
+              <div class="stat-card">
+                <p>Available</p>                
+                <div class="info">
+                  <h3>3</h3>
+                  <p class="status-dot dot-green"></p>
+              </div>
+            </div>
+          </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-xl">
+              <div class="stat-card">
+                <p>On Job</p>                
+                <div class="info">
+                  <h3>2</h3>
+                  <p class="status-dot dot-blue"></p>
+              </div>
+            </div>
+          </div>
+
+        <div class="col-12 col-sm-6 col-md-4 col-xl">
+        <div class="stat-card">
+                <p>Offline</p>                
+                <div class="info">
+                  <h3>5</h3>
+                  <p class="status-dot dot-grey"></p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- End Of Status Cards -->
+      
+    <!-- Technicians Card List -->
+    <div class="row g-4 mb-4" id="techniciansContainer">
+        <!-- Card 1 -->
+    <div class="tech-card col-12 col-sm-6 col-md-4 col-xl"
+     data-name="john martinez"
+     data-email="j.martinez@elitelocksmith.com"
+     data-zone="manhattan"
+     data-status="on job">
+    <!-- Header -->
+    <div class="tech-header">
+    <div class="tech-user">
+      <div class="avatar">JM</div>
+      <div class="user-info">
+        <h3>John Martinez</h3>
+        <div class="status">
+          <span class="status-dot dot-blue"></span>
+          <span>On Job</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="job-badge on-job">on job</span>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="tech-details">
+    <div class="detail-item">
+      <i class="fa-regular fa-envelope"></i>
+      <span>j.martinez@elitelocksmith.com</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-phone"></i>
+      <span>+1 (555) 234-5678</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Manhattan Zone</span>
+    </div>
+  </div>
+
+
+    <!-- Stats -->
+    <div class="tech-stats">
+    <div class="stat">
+      <span>Active Jobs</span>
+      <strong>2</strong>
+    </div>
+
+    <div class="stat">
+      <span>Completed Today</span>
+      <strong>3</strong>
+    </div>
+
+    <div class="stat">
+      <span>Total Jobs</span>
+      <strong>247</strong>
+    </div>
+  </div>
+  
+    </div>
+
+    <!-- Card 2 -->
+      <div class="tech-card col-12 col-sm-6 col-md-4 col-xl"
+      data-name="sarah chen"
+      data-email="s.chen@elitelocksmith.com"
+      data-zone="brooklyn"
+      data-status="on job">
+    <!-- Header -->
+    <div class="tech-header">
+    <div class="tech-user">
+      <div class="avatar">SC</div>
+      <div class="user-info">
+        <h3>Sarah Chen</h3>
+        <div class="status">
+          <span class="status-dot dot-blue"></span>
+          <span>On Job</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="job-badge on-job">on job</span>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="tech-details">
+    <div class="detail-item">
+      <i class="fa-regular fa-envelope"></i>
+      <span>s.chen@elitelocksmith.com</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-phone"></i>
+      <span>+1 (555) 345-6789</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Brooklyn Zone</span>
+    </div>
+  </div>
+
+
+    <!-- Stats -->
+    <div class="tech-stats">
+    <div class="stat">
+      <span>Active Jobs</span>
+      <strong>2</strong>
+    </div>
+
+    <div class="stat">
+      <span>Completed Today</span>
+      <strong>2</strong>
+    </div>
+
+    <div class="stat">
+      <span>Total Jobs</span>
+      <strong>312</strong>
+    </div>
+    </div>
+    
+    </div>
+
+    <!-- Card 3  -->
+    <div class="tech-card col-12 col-sm-6 col-md-4 col-xl"
+     data-name="mike thompson"
+     data-email="m.thompson@elitelocksmith.com"
+     data-zone="queens"
+     data-status="available">
+    <!-- Header -->
+    <div class="tech-header">
+    <div class="tech-user">
+      <div class="avatar">MT</div>
+      <div class="user-info">
+        <h3>Mike Thompson</h3>
+        <div class="status">
+          <span class="status-dot dot-green"></span>
+          <span>Available</span>
+        </div>
+      </div>
+    </div>
+
+    <span class="job-badge available">available</span>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="tech-details">
+    <div class="detail-item">
+      <i class="fa-regular fa-envelope"></i>
+      <span>m.thompson@elitelocksmith.com</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-phone"></i>
+      <span>+1 (555) 456-7890</span>
+    </div>
+
+    <div class="detail-item">
+      <i class="fa-solid fa-location-dot"></i>
+      <span>Queens Zone</span>
+    </div>
+  </div>
+
+    <!-- Stats -->
+    <div class="tech-stats">
+    <div class="stat">
+      <span>Active Jobs</span>
+      <strong>0</strong>
+    </div>
+
+    <div class="stat">
+      <span>Completed Today</span>
+      <strong>4</strong>
+    </div>
+
+    <div class="stat">
+      <span>Total Jobs</span>
+      <strong>198</strong>
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    <!-- End Technicians Card List -->
+
+      </div>
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Internal Script -->
+    <script>
+      // Cards Search
+    const searchInput = document.getElementById("customSearch");
+    const cards = document.querySelectorAll(".tech-card");
+
+    searchInput.addEventListener("input", function () {
+    const query = this.value.toLowerCase().trim();
+
+    cards.forEach(card => {
+      const name = card.dataset.name;
+      const email = card.dataset.email;
+      const zone = card.dataset.zone;
+      const status = card.dataset.status;
+
+      const match =
+        name.includes(query) ||
+        email.includes(query) ||
+        zone.includes(query) ||
+        status.includes(query);
+
+      if (match) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+    });
+    </script>
+    </body>
+    </html>

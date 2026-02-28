@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Incoming Jobs</title>
+
+    <!-- CSS Links-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h4>LockTech Dispatch</h4>
+          <p>Company Dashboard</p>
+        </div>
+        <button class="btn d-lg-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="menu flex-grow-1">
+        <li>
+          <a href="active-jobs.html"
+            ><i class="fa-solid fa-table-cells-large"></i> Active Jobs</a
+          >
+        </li>
+        <li>
+          <a href="incoming-jobs.html"
+            ><i class="fa-solid fa-inbox"></i> Incoming Jobs
+          </a>
+        </li>
+        <li>
+          <a href="technicians.html"
+            ><i class="fa-solid fa-user-group"></i> Technicians
+          </a>
+        </li>
+        <li>
+          <a href="map.html"><i class="fa-regular fa-map"></i> Live Map</a>
+        </li>
+        <li>
+          <a href="chat.html"
+            ><i class="fa-regular fa-message"></i> Chat & Calls</a
+          >
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ===== Top Navbar ===== -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+      <!-- Mobile Toggle & Search Wrapper -->
+      <div class="d-flex align-items-center flex-grow-1">
+        <!-- Mobile Toggle Button -->
+        <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search jobs, technicians..." />
+        </div>
+      </div>
+
+      <!-- Right: Notifications & Profile -->
+      <div class="navbar-right d-flex align-items-center gap-4">
+        <!-- Notification Button Tab -->
+        <a
+          href="../platform-admin/notifications.html"
+          class="notification-btn"
+          title="View Notifications"
+        >
+          <i class="far fa-bell"></i>
+          <span class="notification-badge">4</span>
+        </a>
+
+        <!-- User Profile (Initials) -->
+        <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">AD</div>
+
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Alex Dispatcher</h6>
+            <small class="text-muted">Dispatcher</small>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content Wrapper ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+      <!-- Header -->
+      <div class="d-flex flex-column justify-content-left mb-4">
+        <h3 class="page-title">Incoming Jobs</h3>
+        <p class="page-subtitle text-muted">
+          4 new jobs waiting for assignment.
+        </p>
+      </div>
+
+      <!-- ================= Filters Section ================= -->
+      <div class="filter-section">
+        <!-- Header -->
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="fa-solid fa-sliders filter-icon"></i>
+          <h5 class="fw-bold m-0">Filters</h5>
+        </div>
+
+        <!-- Filter Row -->
+        <div class="row g-4">
+          <!-- Urgency -->
+          <div class="col-md-4">
+            <label class="filter-label">Urgency</label>
+            <select id="filterUrgency" class="form-select filter-select">
+              <option value="">All Urgencies</option>
+              <option>Emergency</option>
+              <option>Urgent</option>
+              <option>Normal</option>
+            </select>
+          </div>
+
+          <!-- Service Type -->
+          <div class="col-md-4">
+            <label class="filter-label">Service Type</label>
+            <select id="filterService" class="form-select filter-select">
+              <option value="">All Types</option>
+              <option>Residential Lockout</option>
+              <option>Lock Installation</option>
+              <option>Automotive Lockout</option>
+              <option>Safe Opening</option>
+              <option>Rekey Service</option>
+              <option>Master Key Systems</option>
+            </select>
+          </div>
+
+          <!-- Date -->
+          <div class="col-md-4">
+            <label class="filter-label">Date</label>
+            <select id="filterDate" class="form-select filter-select">
+              <option value="">All Dates</option>
+              <option>Today</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- ================= End Filters Section ================= -->
+
+      <!-- ================= Incoming Jobs Section ================= -->
+      <div class="active-jobs-section mt-4">
+        <!-- Job Card 1 -->
+        <div
+          class="job-card"
+          data-id="1"
+          data-urgency="Urgent"
+          data-service="Residential Lockout"
+          data-date="Today"
+          data-title="Residential Lockout - Apartment"
+          data-customer="Robert Williams"
+          data-address="245 W 47th St"
+          data-time="2:30 PM"
+          data-price="$125"
+        >
+          <div
+            class="d-flex justify-content-between align-items-start flex-wrap gap-3"
+          >
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <h6 class="fw-bold m-0">Residential Lockout - Apartment</h6>
+                <span class="badge-status-urgent">Urgent</span>
+              </div>
+              <p class="text-muted small mb-3">
+                Customer locked out of apartment. Keys left inside. Need
+                immediate assistance.
+              </p>
+
+              <div class="job-meta d-flex flex-wrap justify-content-between">
+                <span
+                  ><i class="fa-regular fa-user me-2"></i>Robert Williams</span
+                >
+                <span
+                  ><i class="fa-solid fa-location-dot me-2"></i>245 W 47th
+                  St</span
+                >
+                <span><i class="fa-regular fa-clock me-2"></i>2:30 PM</span>
+                <span><i class="fa-solid fa-dollar-sign"></i>$125</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-price">
+            <p class="text-muted samll">Residential Lockout</p>
+            <a href="#" class="assign-btn"> Assign Technician</a>
+          </div>
+        </div>
+
+        <!-- Job Card 2 -->
+        <div
+          class="job-card"
+          data-id="2"
+          data-urgency="Emergency"
+          data-service="Automotive Lockout"
+          data-date="Today"
+          data-title="Car Lockout - Parking Lot"
+          data-customer="Jennifer Martinez"
+          data-address="1633 Broadway"
+          data-time="2:45 PM"
+          data-price="$95"
+        >
+          <div
+            class="d-flex justify-content-between align-items-start flex-wrap gap-3"
+          >
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <h6 class="fw-bold m-0">Car Lockout - Parking Lot</h6>
+                <span class="badge-status-emergency">Emergency</span>
+              </div>
+              <p class="text-muted small mb-3">
+                Keys locked in car with engine running. Urgent assistance
+                needed.
+              </p>
+
+              <div class="job-meta d-flex flex-wrap justify-content-between">
+                <span
+                  ><i class="fa-regular fa-user me-2"></i>Jennifer
+                  Martinez</span
+                >
+                <span
+                  ><i class="fa-solid fa-location-dot me-2"></i>1633
+                  Broadway</span
+                >
+                <span><i class="fa-regular fa-clock me-2"></i>2:45 PM</span>
+                <span><i class="fa-solid fa-dollar-sign"></i>$95</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-price">
+            <p class="text-muted samll">Automotive Lockout</p>
+            <a href="#" class="assign-btn"> Assign Technician</a>
+          </div>
+        </div>
+
+        <!-- Job Card 3-->
+        <div
+          class="job-card"
+          data-id="3"
+          data-urgency="Normal"
+          data-service="Automotive Lockout"
+          data-date="Today"
+          data-title="Car Lockout - Parking Lot"
+          data-customer="Jennifer Martinez"
+          data-address="1633 Broadway"
+          data-time="2:45 PM"
+          data-price="$95"
+        >
+          <div
+            class="d-flex justify-content-between align-items-start flex-wrap gap-3"
+          >
+            <div class="flex-grow-1">
+              <div class="d-flex align-items-center gap-3 flex-wrap">
+                <h6 class="fw-bold m-0">Car Lockout - Parking Lot</h6>
+                <span class="badge-status-normal">Normal</span>
+              </div>
+              <p class="text-muted small mb-3">
+                Keys locked in car with engine running. Urgent assistance
+                needed.
+              </p>
+
+              <div class="job-meta d-flex flex-wrap justify-content-between">
+                <span
+                  ><i class="fa-regular fa-user me-2"></i>Jennifer
+                  Martinez</span
+                >
+                <span
+                  ><i class="fa-solid fa-location-dot me-2"></i>1633
+                  Broadway</span
+                >
+                <span><i class="fa-regular fa-clock me-2"></i>2:45 PM</span>
+                <span><i class="fa-solid fa-dollar-sign"></i>$95</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-price">
+            <p class="text-muted samll">Automotive Lockout</p>
+            <a href="#" class="assign-btn"> Assign Technician</a>
+          </div>
+        </div>
+      </div>
+      <!-- ================= End Incoming Jobs Section ================= -->
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Internal Script -->
+    <script>
+      /* ================= Incoming Jobs Filter ================= */
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const urgencyFilter = document.getElementById("filterUrgency");
+        const serviceFilter = document.getElementById("filterService");
+        const dateFilter = document.getElementById("filterDate");
+        const jobCards = document.querySelectorAll(".job-card");
+
+        function filterJobs() {
+          const selectedUrgency = urgencyFilter.value;
+          const selectedService = serviceFilter.value;
+          const selectedDate = dateFilter.value;
+
+          jobCards.forEach((card) => {
+            const cardUrgency = card.dataset.urgency;
+            const cardService = card.dataset.service;
+            const cardDate = card.dataset.date;
+
+            const matchUrgency =
+              !selectedUrgency || cardUrgency === selectedUrgency;
+            const matchService =
+              !selectedService || cardService === selectedService;
+            const matchDate = !selectedDate || cardDate === selectedDate;
+
+            if (matchUrgency && matchService && matchDate) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        }
+
+        urgencyFilter.addEventListener("change", filterJobs);
+        serviceFilter.addEventListener("change", filterJobs);
+        dateFilter.addEventListener("change", filterJobs);
+      });
+
+      /* ================= Job Details Navigation ================= */
+
+      document.querySelectorAll(".assign-btn").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const card = this.closest(".job-card");
+
+          const jobData = {
+            id: card.dataset.id,
+            title: card.dataset.title,
+            customer: card.dataset.customer,
+            address: card.dataset.address,
+            time: card.dataset.time,
+            price: card.dataset.price,
+            urgency: card.dataset.urgency,
+            service: card.dataset.service,
+          };
+
+          // Save job data
+          localStorage.setItem("selectedJob", JSON.stringify(jobData));
+
+          // Go to details page
+          window.location.href = "jobDetails.html";
+        });
+      });
+    </script>
+  </body>
+</html>

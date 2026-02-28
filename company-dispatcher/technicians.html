@@ -1,0 +1,380 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Technicians</title>
+
+    <!-- CSS Links-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h4>LockTech Dispatch</h4>
+          <p>Company Dashboard</p>
+        </div>
+        <button class="btn d-lg-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="menu flex-grow-1">
+        <li>
+          <a href="active-jobs.html"
+            ><i class="fa-solid fa-table-cells-large"></i> Active Jobs</a
+          >
+        </li>
+        <li>
+          <a href="incoming-jobs.html"
+            ><i class="fa-solid fa-inbox"></i> Incoming Jobs
+          </a>
+        </li>
+        <li>
+          <a href="technicians.html"
+            ><i class="fa-solid fa-user-group"></i> Technicians
+          </a>
+        </li>
+        <li>
+          <a href="map.html"><i class="fa-regular fa-map"></i> Live Map</a>
+        </li>
+        <li>
+          <a href="chat.html"
+            ><i class="fa-regular fa-message"></i> Chat & Calls</a
+          >
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ===== Top Navbar ===== -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+      <!-- Mobile Toggle & Search Wrapper -->
+      <div class="d-flex align-items-center flex-grow-1">
+        <!-- Mobile Toggle Button -->
+        <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search jobs, technicians..." />
+        </div>
+      </div>
+
+      <!-- Right: Notifications & Profile -->
+      <div class="navbar-right d-flex align-items-center gap-4">
+        <!-- Notification Button Tab -->
+        <a
+          href="../platform-admin/notifications.html"
+          class="notification-btn"
+          title="View Notifications"
+        >
+          <i class="far fa-bell"></i>
+          <span class="notification-badge">4</span>
+        </a>
+
+        <!-- User Profile (Initials) -->
+        <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">AD</div>
+
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Alex Dispatcher</h6>
+            <small class="text-muted">Dispatcher</small>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content Wrapper ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+      <!-- Header -->
+      <div class="d-flex flex-column justify-content-left mb-4">
+        <h3 class="page-title">Technicians</h3>
+        <p class="page-subtitle text-muted">6 technicians • 2 available.</p>
+      </div>
+
+      <!-- ================= Filters Section ================= -->
+      <div class="filter-section">
+        <!-- Header -->
+        <div class="d-flex align-items-center gap-2 mb-4">
+          <i class="fa-solid fa-filter filter-icon"></i>
+          <h5 class="fw-bold m-0">Filters</h5>
+        </div>
+
+        <!-- Filter Row -->
+        <div class="row g-4">
+          <!-- Status -->
+          <div class="col-md-6">
+            <label class="filter-label">Status</label>
+            <select id="filterStatus" class="form-select filter-select">
+              <option value="">Status</option>
+              <option>Available</option>
+              <option>Busy</option>
+              <option>Offline</option>
+            </select>
+          </div>
+
+          <!-- Skills -->
+          <div class="col-md-6">
+            <label class="filter-label">Skills</label>
+            <select id="filterSkill" class="form-select filter-select">
+              <option value="">All Skills</option>
+              <option>Residential Lockout</option>
+              <option>Lock Installation</option>
+              <option>Automotive Lockout</option>
+              <option>Safe Opening</option>
+              <option>Rekey Service</option>
+              <option>Master Key Systems</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <!-- ================= End Filters Section ================= -->
+
+      <!-- ================= Technicians Card List ================= -->
+      <div class="row g-4 mb-4" id="techniciansContainer">
+        <!-- Card 1:  -->
+        <div class="col-12 col-lg-4">
+          <div
+            class="tech-card"
+            data-status="available"
+            data-skills="residential lockout,lock installation,key duplication"
+          >
+            <!-- Header -->
+            <div class="tech-header">
+              <!-- Initials Avatar -->
+              <div class="tech-initials">JM</div>
+
+              <div class="tech-info-head">
+                <h3>John Martinez</h3>
+                <div class="status-badge available">
+                  <span class="status-dot"></span> AVAILABLE
+                </div>
+              </div>
+            </div>
+
+            <!-- Info List -->
+            <div class="tech-details-list">
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-phone"></i>
+                <span>+1-555-0101</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-star star-icon"></i>
+                <span>4.8</span>
+                <span>•</span>
+                <i class="fa-solid fa-briefcase text-muted"></i>
+                <span class="text-muted">142 jobs</span>
+              </div>
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>40.7580, -73.9855</span>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="skills-section">
+              <span class="skills-label">Skills</span>
+              <div class="skills-wrapper">
+                <span class="skill-tag">Residential Lockout</span>
+                <span class="skill-tag">Lock Installation</span>
+                <span class="skill-tag">Key Duplication</span>
+              </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="tech-actions">
+              <a href="chat.html" class="btn-message">Message</a>
+              <a href="chat.html" class="btn-call">Call</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2:  -->
+        <div class="col-12 col-lg-4">
+          <div
+            class="tech-card"
+            data-status="busy"
+            data-skills="residential lockout,lock installation,key duplication"
+          >
+            <!-- Header -->
+            <div class="tech-header">
+              <!-- Initials Avatar -->
+              <div class="tech-initials">SC</div>
+
+              <div class="tech-info-head">
+                <h3>Sarah Chen</h3>
+                <div class="status-badge busy">
+                  <span class="status-dot"></span> BUSY
+                </div>
+              </div>
+            </div>
+
+            <!-- Info List -->
+            <div class="tech-details-list">
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-phone"></i>
+                <span>+1-555-0101</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-star star-icon"></i>
+                <span>4.8</span>
+                <span>•</span>
+                <i class="fa-solid fa-briefcase text-muted"></i>
+                <span class="text-muted">142 jobs</span>
+              </div>
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>40.7580, -73.9855</span>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="skills-section">
+              <span class="skills-label">Skills</span>
+              <div class="skills-wrapper">
+                <span class="skill-tag">Residential Lockout</span>
+                <span class="skill-tag">Lock Installation</span>
+                <span class="skill-tag">Key Duplication</span>
+              </div>
+            </div>
+
+            <div class="current-job-box">
+              <p class="job-label">Current Job</p>
+              <p class="job-title">Lock Installation - Commercial</p>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="tech-actions">
+              <a href="chat.html" class="btn-message">Message</a>
+              <a href="chat.html" class="btn-call">Call</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: -->
+        <div class="col-12 col-lg-4">
+          <div
+            class="tech-card"
+            data-status="busy"
+            data-skills="residential lockout,lock installation,key duplication"
+          >
+            <!-- Header -->
+            <div class="tech-header">
+              <!-- Initials Avatar -->
+              <div class="tech-initials">MJ</div>
+
+              <div class="tech-info-head">
+                <h3>Michael Johnson</h3>
+                <div class="status-badge busy">
+                  <span class="status-dot"></span> BUSY
+                </div>
+              </div>
+            </div>
+
+            <!-- Info List -->
+            <div class="tech-details-list">
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-phone"></i>
+                <span>+1-555-0101</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-star star-icon"></i>
+                <span>4.8</span>
+                <span>•</span>
+                <i class="fa-solid fa-briefcase text-muted"></i>
+                <span class="text-muted">142 jobs</span>
+              </div>
+              <div class="tech-detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>40.7580, -73.9855</span>
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="skills-section">
+              <span class="skills-label">Skills</span>
+              <div class="skills-wrapper">
+                <span class="skill-tag">Residential Lockout</span>
+                <span class="skill-tag">Lock Installation</span>
+                <span class="skill-tag">Key Duplication</span>
+              </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="tech-actions">
+              <a href="chat.html" class="btn-message">Message</a>
+              <a href="chat.html" class="btn-call">Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Technicians Card List -->
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Internal Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const statusFilter = document.getElementById("filterStatus");
+        const skillFilter = document.getElementById("filterSkill");
+        const techCards = document.querySelectorAll(".tech-card");
+
+        function filterTechnicians() {
+          const selectedStatus = statusFilter.value.toLowerCase().trim();
+          const selectedSkill = skillFilter.value.toLowerCase().trim();
+
+          techCards.forEach((card) => {
+            const cardStatus = card.dataset.status?.toLowerCase() || "";
+            const cardSkills = card.dataset.skills?.toLowerCase() || "";
+
+            /* Match logic */
+            const matchStatus =
+              !selectedStatus || cardStatus === selectedStatus;
+            const matchSkill =
+              !selectedSkill || cardSkills.includes(selectedSkill);
+
+            if (matchStatus && matchSkill) {
+              card.closest(".col-12, .col-lg-4")?.classList.remove("d-none");
+              card.style.display = "block";
+            } else {
+              card.closest(".col-12, .col-lg-4")?.classList.add("d-none");
+              card.style.display = "none";
+            }
+          });
+        }
+
+        statusFilter.addEventListener("change", filterTechnicians);
+        skillFilter.addEventListener("change", filterTechnicians);
+      });
+    </script>
+    </body>
+    </html>

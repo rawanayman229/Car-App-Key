@@ -1,0 +1,294 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat & Calls</title>
+
+    <!-- CSS Links-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Sidebar Toggle Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <h4>LockTech Dispatch</h4>
+          <p>Company Dashboard</p>
+        </div>
+        <button class="btn d-lg-none text-muted" id="closeSidebar">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <ul class="menu flex-grow-1">
+        <li>
+          <a href="active-jobs.html"
+            ><i class="fa-solid fa-table-cells-large"></i> Active Jobs</a
+          >
+        </li>
+        <li>
+          <a href="incoming-jobs.html"
+            ><i class="fa-solid fa-inbox"></i> Incoming Jobs
+          </a>
+        </li>
+        <li>
+          <a href="technicians.html"
+            ><i class="fa-solid fa-user-group"></i> Technicians
+          </a>
+        </li>
+        <li>
+          <a href="map.html"><i class="fa-regular fa-map"></i> Live Map</a>
+        </li>
+        <li>
+          <a href="chat.html"
+            ><i class="fa-regular fa-message"></i> Chat & Calls</a
+          >
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ===== Top Navbar ===== -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+      <!-- Mobile Toggle & Search Wrapper -->
+      <div class="d-flex align-items-center flex-grow-1">
+        <!-- Mobile Toggle Button -->
+        <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Search Box -->
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search jobs, technicians..." />
+        </div>
+      </div>
+
+      <!-- Right: Notifications & Profile -->
+      <div class="navbar-right d-flex align-items-center gap-4">
+        <!-- Notification Button Tab -->
+        <a
+          href="../platform-admin/notifications.html"
+          class="notification-btn"
+          title="View Notifications"
+        >
+          <i class="far fa-bell"></i>
+          <span class="notification-badge">4</span>
+        </a>
+
+        <!-- User Profile (Initials) -->
+        <div class="user-profile d-flex align-items-center gap-3">
+          <!-- Initials Circle -->
+          <div class="user-initials">AD</div>
+
+          <!-- Text Info -->
+          <div class="user-info d-none d-md-block">
+            <h6 class="m-0">Alex Dispatcher</h6>
+            <small class="text-muted">Dispatcher</small>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content Wrapper ===== -->
+    <main class="main-wrapper" id="mainWrapper">
+      <!-- Chat Layout Container -->
+      <div class="chat-layout">
+        <!-- LEFT SIDE: List of Conversations -->
+        <div class="chat-sidebar">
+          <!-- Sidebar Header -->
+          <div class="chat-sidebar-header">
+            <h4>Messages</h4>
+            <div class="chat-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Search conversations..." />
+            </div>
+          </div>
+
+          <!-- List -->
+          <div class="conversation-list">
+            <!-- Active User -->
+            <div class="conversation-item active">
+              <div class="chat-avatar">
+                <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah" />
+              </div>
+              <div class="chat-info">
+                <div class="chat-info-top">
+                  <span class="chat-name">Sarah Chen</span>
+                  <span class="chat-time">2:10 PM</span>
+                </div>
+                <div class="chat-subject">Lock Installation - Commercial</div>
+                <div class="chat-preview">
+                  First two doors completed. All going smoothly.
+                </div>
+              </div>
+            </div>
+
+            <!-- Other User -->
+            <div class="conversation-item">
+              <div class="chat-avatar">
+                <img src="https://i.pravatar.cc/150?u=lisa" alt="Lisa" />
+              </div>
+              <div class="chat-info">
+                <div class="chat-info-top">
+                  <span class="chat-name">Lisa Thompson</span>
+                  <span class="chat-time">1:45 PM</span>
+                </div>
+                <div class="chat-subject">Rekey Service - Apartment</div>
+                <div class="chat-preview">
+                  Job complete. Customer satisfied. Moving to next.
+                </div>
+              </div>
+            </div>
+
+            <!-- Example User 3 -->
+            <div class="conversation-item">
+              <div class="chat-avatar">
+                <img src="https://i.pravatar.cc/150?u=mike" alt="Mike" />
+              </div>
+              <div class="chat-info">
+                <div class="chat-info-top">
+                  <span class="chat-name">Michael Johnson</span>
+                  <span class="chat-time">10:30 AM</span>
+                </div>
+                <div class="chat-subject">Automotive Lockout</div>
+                <div class="chat-preview">Heading to the location now.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE: Chat Window -->
+        <div class="chat-window">
+          <!-- Chat Header -->
+          <div class="chat-window-header">
+            <div class="header-user">
+              <div class="chat-avatar">
+                <img src="https://i.pravatar.cc/150?u=sarah" alt="Sarah" />
+              </div>
+              <div>
+                <h5>Sarah Chen</h5>
+                <span>Lock Installation - Commercial</span>
+              </div>
+            </div>
+            <button class="btn-icon">
+              <i class="fa-solid fa-phone"></i>
+            </button>
+          </div>
+
+          <!-- Messages Body -->
+          <div class="chat-messages">
+            <!-- Sent Message (Blue) -->
+            <div class="message-row sent">
+              <div class="bubble">
+                Great! Let me know if you need any additional parts.
+                <div class="message-time">1:06 PM</div>
+              </div>
+            </div>
+
+            <!-- Received Message (White) -->
+            <div class="message-row received">
+              <div class="bubble">
+                First two doors completed. All going smoothly.
+              </div>
+              <div class="message-time-outer">2:10 PM</div>
+            </div>
+
+            <!-- Call Log 1 -->
+            <div class="call-log-card">
+              <div class="call-icon">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <div class="call-details">
+                <div class="call-title">
+                  Voice call with Sarah Chen (Masked Number)
+                </div>
+                <div class="call-meta">
+                  <span><i class="fa-regular fa-clock"></i> 2:25</span>
+                  <span>1:00 PM</span>
+                  <a href="#" class="recording-link"
+                    ><i class="fa-solid fa-download"></i> Recording</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- Call Log 2 -->
+            <div class="call-log-card">
+              <div class="call-icon">
+                <i class="fa-solid fa-phone-volume"></i>
+              </div>
+              <div class="call-details">
+                <div class="call-title">
+                  Voice call with Sarah Chen (Masked Number)
+                </div>
+                <div class="call-meta">
+                  <span><i class="fa-regular fa-clock"></i> 0:00</span>
+                  <span>2:59 PM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Footer Input -->
+          <div class="chat-footer">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                class="chat-input"
+                placeholder="Type a message..."
+              />
+              <button class="btn-send">
+                <i class="fa-regular fa-paper-plane"></i>
+              </button>
+            </div>
+            <div class="secure-note">
+              <i class="fa-solid fa-lock"></i>
+              All communications are secured. Phone numbers are masked using
+              Twilio.
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- End of Main Wrapper -->
+
+    <!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Simple Script for Mobile Sidebar -->
+    <script>
+      $(document).ready(function () {
+        $("#toggleSidebar").on("click", function () {
+          $("#sidebar").addClass("show");
+          $("#sidebarOverlay").addClass("show");
+        });
+
+        $("#closeSidebar, #sidebarOverlay").on("click", function () {
+          $("#sidebar").removeClass("show");
+          $("#sidebarOverlay").removeClass("show");
+        });
+      });
+    </script>
+    </body>
+    </html>
