@@ -1,6 +1,6 @@
-    <!doctype html>
-    <html lang="en">
-    <head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New Job</title>
@@ -16,7 +16,7 @@
     />
   </head>
 
-    <body>
+  <body>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="logo"><span>LS</span> LockSmith Platform</div>
@@ -84,16 +84,25 @@
             <label class="required">Customer</label>
 
             <div class="customer-row">
-              <select id="customerSelect" class="form-input">
-                <option value="">Search customer by name or phone</option>
-              </select>
+              <div class="customer-search-wrapper">
+                <input
+                  type="text"
+                  id="customerSearch"
+                  class="form-input"
+                  placeholder="Search by phone number..."
+                />
+
+                <div id="customerResults" class="search-results"></div>
+
+                <!-- Hidden input to store selected customer -->
+                <input type="hidden" id="customerSelect" />
+              </div>
 
               <button
                 type="button"
                 class="btn-add"
                 data-bs-toggle="modal"
-                data-bs-target="#addCustomerModal"
-              >
+                data-bs-target="#addCustomerModal">
                 <i class="fa fa-plus"></i> Add New
               </button>
             </div>
@@ -273,9 +282,13 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         /* ================= Elements ================= */
+
         const form = document.getElementById("newJobForm");
 
-        const customerSelect = document.getElementById("customerSelect");
+        const customerSearch = document.getElementById("customerSearch");
+        const customerResults = document.getElementById("customerResults");
+        const customerSelect = document.getElementById("customerSelect"); 
+
         const itemType = document.getElementById("itemType");
         const serviceType = document.getElementById("serviceType");
         const priority = document.getElementById("priority");
@@ -293,30 +306,75 @@
 
         const addCustomerModal = new bootstrap.Modal(addCustomerModalEl);
 
-        /* ================= Dummy Customers ================= */
+        /* ================= Dummy Database (Mock API) ================= */
 
-        const dummyCustomers = [
-          { name: "John Smith", phone: "555-0123" },
-          { name: "Emily Johnson", phone: "555-0456" },
-          { name: "Michael Brown", phone: "555-0789" },
-          { name: "Sarah Davis", phone: "555-1011" },
-          { name: "David Wilson", phone: "555-2022" },
-          { name: "Olivia Martinez", phone: "555-3033" },
+        let customersDB = [
+          { id: 1, name: "John Smith", phone: "5550123", address: "New York" },
+          {
+            id: 2,
+            name: "Emily Johnson",
+            phone: "5550456",
+            address: "California",
+          },
+          { id: 3, name: "Michael Brown", phone: "01526236283", address: "Texas" },
+          { id: 4, name: "Sarah Davis", phone: "0286732633", address: "Florida" },
+          { id: 5, name: "David Wilson", phone: "9289379", address: "Nevada" },
         ];
 
-        dummyCustomers.forEach((customer) => {
-          const option = document.createElement("option");
-          option.value = customer.phone;
-          option.textContent = `${customer.name} (${customer.phone})`;
-          customerSelect.appendChild(option);
-        });
+        /* ================= API Function ================= */
 
-        /* ================= Initialize Select2 ================= */
+        function fetchCustomerByPhone(phone) {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              const results = customersDB.filter((c) =>
+                c.phone.includes(phone),
+              );
+              resolve(results);
+            }, 400);
+          });
+        }
 
-        $("#customerSelect").select2({
-          placeholder: "Search customer by name or phone",
-          allowClear: true,
-          width: "100%",
+        /* ================= Search Logic ================= */
+
+        customerSearch.addEventListener("input", async function () {
+          const phone = this.value.trim();
+
+          if (phone.length < 3) {
+            customerResults.style.display = "none";
+            return;
+          }
+
+          const results = await fetchCustomerByPhone(phone);
+
+          customerResults.innerHTML = "";
+
+          if (results.length === 0) {
+            customerResults.innerHTML =
+              "<div class='search-item'>No customer found</div>";
+            customerResults.style.display = "block";
+            return;
+          }
+
+          results.forEach((customer) => {
+            const div = document.createElement("div");
+            div.className = "search-item";
+            div.innerHTML = `
+        <strong>${customer.name}</strong><br>
+        <small>${customer.phone} - ${customer.address}</small>
+      `;
+
+            div.addEventListener("click", () => {
+              customerSearch.value =
+                customer.name + " (" + customer.phone + ")";
+              customerSelect.value = customer.id;
+              customerResults.style.display = "none";
+              clearError(customerSearch);
+            });
+
+            customerResults.appendChild(div);
+          });
+
+          customerResults.style.display = "block";
         });
 
         /* ================= Navigation ================= */
@@ -343,24 +401,22 @@
             return;
           }
 
-          // Prevent duplicates
-          const exists = [...customerSelect.options].some(
-            (opt) => opt.value === phone,
-          );
+          const exists = customersDB.some((c) => c.phone === phone);
 
           if (exists) {
             alert("Customer already exists.");
             return;
           }
 
-          // Create new option
-          const option = new Option(`${name} (${phone})`, phone, true, true);
-          customerSelect.appendChild(option);
+          const newCustomer = {
+            id: customersDB.length + 1,
+            name,
+            phone,
+            address,
+          };
 
-          // Refresh Select2 properly
-          $("#customerSelect").trigger("change");
+          customersDB.push(newCustomer);
 
-          // Reset modal inputs
           newCustomerName.value = "";
           newCustomerPhone.value = "";
           newCustomerAddress.value = "";
@@ -368,7 +424,6 @@
           addCustomerModal.hide();
         });
 
-        // Autofocus first input
         addCustomerModalEl.addEventListener("shown.bs.modal", () => {
           newCustomerName.focus();
         });
@@ -376,7 +431,7 @@
         /* ================= Validation ================= */
 
         const requiredFields = [
-          { el: customerSelect, name: "Customer" },
+          { el: customerSearch, name: "Customer" },
           { el: itemType, name: "Item Type" },
           { el: serviceType, name: "Service Type" },
           { el: priority, name: "Priority" },
@@ -406,11 +461,20 @@
           let isValid = true;
 
           requiredFields.forEach((field) => {
-            if (!field.el.value || field.el.value.trim() === "") {
-              showError(field.el, `${field.name} is required`);
-              isValid = false;
+            if (field.el === customerSearch) {
+              if (!customerSelect.value) {
+                showError(field.el, `${field.name} is required`);
+                isValid = false;
+              } else {
+                clearError(field.el);
+              }
             } else {
-              clearError(field.el);
+              if (!field.el.value || field.el.value.trim() === "") {
+                showError(field.el, `${field.name} is required`);
+                isValid = false;
+              } else {
+                clearError(field.el);
+              }
             }
           });
 
@@ -436,17 +500,7 @@
           alert("Job Created Successfully");
           form.reset();
         });
-
-        /* ================= Live Validation ================= */
-
-        requiredFields.forEach((field) => {
-          field.el.addEventListener("change", () => {
-            if (field.el.value) {
-              clearError(field.el);
-            }
-          });
-        });
       });
     </script>
-    </body>
-    </html>
+  </body>
+</html>

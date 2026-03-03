@@ -590,10 +590,41 @@ body {
       }
       
   /* End Of Details Job Page */
+  /* Start Of Add new job */
+.customer-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
 
-  /* Start Of Companies Page */
-  
-  /* End Of Companies Page */
+.customer-search-wrapper {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+#customerSearch {
+  width: 100%;
+}
+
+.search-results {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1000;
+}
+
+.btn-add {
+  white-space: nowrap;
+}
+
+/* End Of Add new job */
 
 
 /* Responsive */
@@ -614,7 +645,6 @@ body {
 
 }
 
-  /* End OF Add New Job Page */
 
 /* ================= RESPONSIVE DESIGN (FIXES) ================= */
 @media (max-width: 768px) {
