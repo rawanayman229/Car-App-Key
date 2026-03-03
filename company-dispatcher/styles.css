@@ -1115,6 +1115,62 @@ body.sidebar-open .sidebar-overlay {
   gap: 6px;
 }
 
+/* End Of Chat Page */
+
+/* Start Of MAp Page */
+.map-container {
+  height: 600px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-card {
+  position: absolute;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  font-size: 14px;
+}
+
+.layers-card {
+  top: 20px;
+  left: 20px;
+}
+
+.legend-card {
+  bottom: 20px;
+  left: 20px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.bg-orange {
+  background: orange;
+}
+
+.info-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+/* End Of Map Page */
+
+
+
 /* Mobile Responsiveness */
 @media (max-width: 991px) {
   .chat-layout { height: calc(100vh - 80px); flex-direction: column; }

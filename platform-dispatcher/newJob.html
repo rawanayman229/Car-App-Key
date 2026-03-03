@@ -1,6 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
+    <!doctype html>
+    <html lang="en">
+    <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create New Job</title>
@@ -9,9 +9,14 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="../assets/css/all.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <!-- Select2 CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
   </head>
 
-  <body>
+    <body>
     <!-- NAVBAR -->
     <nav class="navbar">
       <div class="logo"><span>LS</span> LockSmith Platform</div>
@@ -87,7 +92,8 @@
                 type="button"
                 class="btn-add"
                 data-bs-toggle="modal"
-                data-bs-target="#addCustomerModal">
+                data-bs-target="#addCustomerModal"
+              >
                 <i class="fa fa-plus"></i> Add New
               </button>
             </div>
@@ -183,7 +189,8 @@
       class="modal fade"
       id="addCustomerModal"
       tabindex="-1"
-      aria-hidden="true">
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <!-- Header -->
@@ -193,7 +200,8 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"></button>
+              aria-label="Close"
+            ></button>
           </div>
 
           <!-- Body -->
@@ -201,31 +209,39 @@
             <p class="text-muted mb-3">Enter the customer's details below.</p>
 
             <div class="mb-3">
-              <label for="newCustomerName" class="form-label required">Full Name</label>
+              <label for="newCustomerName" class="form-label required"
+                >Full Name</label
+              >
               <input
                 type="text"
                 class="form-control"
                 id="newCustomerName"
-                placeholder="e.g. John Smith"/>
+                placeholder="e.g. John Smith"
+              />
             </div>
 
             <div class="mb-3">
               <label for="newCustomerPhone" class="form-label required"
-                >Phone Number</label>
+                >Phone Number</label
+              >
               <input
                 type="tel"
                 class="form-control"
                 id="newCustomerPhone"
-                placeholder="e.g. 555-0123"/>
+                placeholder="e.g. 555-0123"
+              />
             </div>
 
             <div class="mb-3">
-              <label for="newCustomerAddress" class="form-label required">Address</label>
+              <label for="newCustomerAddress" class="form-label required"
+                >Address</label
+              >
               <input
                 type="text"
                 class="form-control"
                 id="newCustomerAddress"
-                placeholder="e.g. 123 Market St, San Francisco"/>
+                placeholder="e.g. 123 Market St, San Francisco"
+              />
             </div>
           </div>
 
@@ -234,7 +250,8 @@
             <button
               type="button"
               class="btn btn-light border"
-              data-bs-dismiss="modal">
+              data-bs-dismiss="modal"
+            >
               Cancel
             </button>
             <button type="button" id="saveCustomerBtn" class="btn btn-primary">
@@ -246,9 +263,14 @@
     </div>
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <!-- jQuery (Required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-      <!-- Internal Js -->
-      <script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Internal Js -->
+    <script>
       document.addEventListener("DOMContentLoaded", function () {
         /* ================= Elements ================= */
         const form = document.getElementById("newJobForm");
@@ -266,10 +288,36 @@
         const newCustomerName = document.getElementById("newCustomerName");
         const newCustomerPhone = document.getElementById("newCustomerPhone");
         const newCustomerAddress =
-        document.getElementById("newCustomerAddress");
+          document.getElementById("newCustomerAddress");
         const addCustomerModalEl = document.getElementById("addCustomerModal");
 
         const addCustomerModal = new bootstrap.Modal(addCustomerModalEl);
+
+        /* ================= Dummy Customers ================= */
+
+        const dummyCustomers = [
+          { name: "John Smith", phone: "555-0123" },
+          { name: "Emily Johnson", phone: "555-0456" },
+          { name: "Michael Brown", phone: "555-0789" },
+          { name: "Sarah Davis", phone: "555-1011" },
+          { name: "David Wilson", phone: "555-2022" },
+          { name: "Olivia Martinez", phone: "555-3033" },
+        ];
+
+        dummyCustomers.forEach((customer) => {
+          const option = document.createElement("option");
+          option.value = customer.phone;
+          option.textContent = `${customer.name} (${customer.phone})`;
+          customerSelect.appendChild(option);
+        });
+
+        /* ================= Initialize Select2 ================= */
+
+        $("#customerSelect").select2({
+          placeholder: "Search customer by name or phone",
+          allowClear: true,
+          width: "100%",
+        });
 
         /* ================= Navigation ================= */
 
@@ -277,12 +325,12 @@
           window.location.href = "dashboard.html";
         });
 
-    createBtn.addEventListener("click", () => {
-    if (!validateForm()) return;
-     // Show success alert
-    alert("Job added successfully");
-    window.location.href = "jobHistory.html";
-    });
+        createBtn.addEventListener("click", () => {
+          if (!validateForm()) return;
+          alert("Job added successfully");
+          window.location.href = "jobHistory.html";
+        });
+
         /* ================= Add Customer Logic ================= */
 
         saveCustomerBtn.addEventListener("click", () => {
@@ -295,9 +343,9 @@
             return;
           }
 
-          // Prevent duplicates by phone
-          const exists = [...customerSelect.options].some((opt) =>
-            opt.textContent.includes(phone),
+          // Prevent duplicates
+          const exists = [...customerSelect.options].some(
+            (opt) => opt.value === phone,
           );
 
           if (exists) {
@@ -305,29 +353,27 @@
             return;
           }
 
-          // Create option
-          const option = document.createElement("option");
-          option.value = phone;
-          option.textContent = `${name} (${phone})`;
-
+          // Create new option
+          const option = new Option(`${name} (${phone})`, phone, true, true);
           customerSelect.appendChild(option);
-          customerSelect.value = phone;
 
-          // Reset inputs
+          // Refresh Select2 properly
+          $("#customerSelect").trigger("change");
+
+          // Reset modal inputs
           newCustomerName.value = "";
           newCustomerPhone.value = "";
           newCustomerAddress.value = "";
 
-          // Close modal
           addCustomerModal.hide();
         });
 
-        // Autofocus first input when modal opens
+        // Autofocus first input
         addCustomerModalEl.addEventListener("shown.bs.modal", () => {
           newCustomerName.focus();
         });
 
-        /* ================= Validation System ================= */
+        /* ================= Validation ================= */
 
         const requiredFields = [
           { el: customerSelect, name: "Customer" },
@@ -402,5 +448,5 @@
         });
       });
     </script>
-  </body>
-</html>
+    </body>
+    </html>
