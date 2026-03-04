@@ -116,36 +116,57 @@
   </head>
 
   <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-      <div class="logo"><span>LS</span> LockSmith Platform</div>
+    <!-- Sidebar -->
+    <aside class="sidebar d-flex flex-column" id="sidebar">
+  <!-- Logo for desktop -->
+  <div class="logo d-none d-lg-block p-3">
+    <h4>LockSmith Platform</h4>
+  </div>
 
-      <div class="nav-links">
-        <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
-        <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
-        <a href="jobHistory.html" href="#"><i class="fa-solid fa-list-ul"></i> Job History</a>
-        <a href="dispatcherCompanies.html" ><i class="fa-regular fa-map"></i> Companies</a>
-        <a href="customers.html" >Customers</a>
-    </div>
+  <!-- Mobile header with title + close button -->
+  <div class="sidebar-header d-lg-none d-flex justify-content-between align-items-center p-3">
+    <h4 class="m-0">LockSmith Platform</h4>
+    <button class="btn text-muted" id="closeSidebar">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
 
-      <div class="profile"><i class="fa fa-user"></i> Dispatcher</div>
+  <ul class="menu flex-grow-1">
+    <li><a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a></li>
+    <li><a href="newJob.html"><i class="fa fa-plus"></i> New Job</a></li>
+    <li><a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a></li>
+    <li><a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a></li>
+    <li><a href="customers.html"><i class="fa-solid fa-user-group"></i> Customers</a></li>
+  </ul>
+    </aside>
+    <!-- Top Navbar -->
+    <nav class="top-navbar d-flex align-items-center justify-content-between">
+  <div class="d-flex align-items-center">
+    <!-- Mobile toggle button -->
+    <button class="btn btn-light d-lg-none me-3" id="toggleSidebar">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
 
-      <div class="toggle-sidebar" id="toggleSidebar">
-        <i class="fa fa-bars"></i>
+
+  <div class="navbar-right d-flex align-items-center gap-4">
+    <a href="../platform-admin/notifications.html" class="notification-btn" title="View Notifications">
+      <i class="far fa-bell"></i>
+      <span class="notification-badge">4</span>
+    </a>
+
+    <div class="user-profile d-flex align-items-center gap-3">
+      <div class="user-initials">AD</div>
+      <div class="user-info d-none d-md-block">
+        <h6 class="m-0">Alex Dispatcher</h6>
+        <small class="text-muted">Dispatcher</small>
       </div>
+    </div>
+  </div>
     </nav>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-      <a href="dashboard.html"><i class="fa fa-house"></i> Dashboard</a>
-      <a href="newJob.html"><i class="fa fa-plus"></i> New Job</a>
-      <a href="jobHistory.html"><i class="fa-solid fa-list-ul"></i> Job History</a>
-      <a href="dispatcherCompanies.html"><i class="fa-regular fa-map"></i> Companies</a>
-      <a href="customers.html" >Customers</a>
-    </aside>
-
-    <!-- MAIN CONTENT-->
-    <main class="mainContent" id="mainContent">
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="main-wrapper" id="mainContent">
       <!-- Filters -->
       <div class="search-filter-wrapper">
         <div class="search-box">

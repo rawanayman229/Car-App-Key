@@ -1,37 +1,43 @@
-const toggleSidebar = document.getElementById("toggleSidebar");
-const sidebar = document.getElementById("sidebar");
-const mainContent = document.getElementById("mainContent");
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleBtn = document.getElementById("toggleSidebar");
+  const closeBtn = document.getElementById("closeSidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+  const body = document.body;
 
-// 1. Toggle Sidebar
-toggleSidebar.addEventListener("click", (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle("show");
-    mainContent.classList.toggle("shift");
-});
+    /* ===== Active Link Logic ===== */
+  const currentPage = window.location.pathname.split("/").pop();
 
-// 2. Close Sidebar 
-mainContent.addEventListener("click", () => {
-    if (sidebar.classList.contains("show")) {
-        sidebar.classList.remove("show");
-        mainContent.classList.remove("shift");
+  document.querySelectorAll(".menu li a").forEach((link) => {
+    const linkPage = link.getAttribute("href");
+
+    if (linkPage === currentPage) {
+      link.parentElement.classList.add("active");
+    } else {
+      link.parentElement.classList.remove("active");
     }
-});
+  });
+  // Open sidebar
+  const openSidebar = () => body.classList.add("sidebar-open");
 
-// 3. Highlight Active Link & Close sidebar on selection
-const links = document.querySelectorAll(".sidebar a, .nav-links a");
-const currentPage = window.location.pathname.split("/").pop();
+  // Close sidebar
+  const closeSidebar = () => body.classList.remove("sidebar-open");
 
-links.forEach(link => {
-    // Highlight
-    if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
-    }
-
-    // Close on click (for mobile)
-    link.addEventListener("click", () => {
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove("show");
-            mainContent.classList.remove("shift");
-        }
+  // Toggle button (bars)
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openSidebar();
     });
+  }
+
+  // Close button (X)
+  if (closeBtn) closeBtn.addEventListener("click", closeSidebar);
+
+  // Overlay click
+  if (overlay) overlay.addEventListener("click", closeSidebar);
+
+  // Close on resize to desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 992) closeSidebar();
+  });
 });
